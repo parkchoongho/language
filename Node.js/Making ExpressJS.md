@@ -24,7 +24,7 @@ Server란 컴퓨터다. 인터넷에 연결된 컴퓨터.
 
 # 3. What is npm?
 
-Node Package Manager의 줄임말로 어떤 파일이나 변경사항이 있을때 서버도 변경해야하는 <br>번거로움을 해결해주는 일종의 패키지월드(모든 node.js관련 패키지가 모여있는 node.js 월드라 생각하면 됨.)
+Node Package Manager의 줄임말로 어떤 파일이나 변경사항이 있을때 서버도 변경해야 하는 번거로움을 <br>해결해주는 일종의 패키지모음(Node.js관련 패키지가 모두 모여있는 Node.js 패키지 총 집합이라 생각하면 됨.)
 
 npm을 실행할 때는 반드시 package.json 파일이 있는 폴더에서 명령을 내려야 한다.
 
@@ -93,33 +93,35 @@ found 0 vulnerabilities
 
 ### 		1. GET
 
-url을 브라우저에 입력하면 브라우저가 GET method를 실행한다. 이러한 방식으로 브라우저는 웹페이지를 읽어온다. GET request는 그에 대한 response이 있어야한다.  request object, response object는 매우 다른 것이다.
+url을 브라우저에 입력하면 브라우저가 GET method를 실행한다. 이러한 방식으로 브라우저는 웹페이지를 읽어온다. GET request는 그에 상응하는 GET response가 있어야 한다.  그래야만 request가 종료된다.
 
 
 
 ### 		2. POST
 
-웹사이트에 로그인을 할 시에는 POST를 통하게 된다. 브라우저가 POST라는 method를 통해 웹사이트에 정보를 전달하는 것이라 이해하면 됨.
+브라우저가 POST라는 method를 통해 웹사이트에 정보를 전달하는 것이라 이해하면 됨. 
 
-=>  이것이 결과론적으로 http가 작동하는 방식!!
+예를 들어, 웹사이트에 로그인을 할 시에 POST를 통하게 된다.
+
+=>  이것이 http가 작동하는 방식!!
 
 
 
 ### 	MiddleWare
 
-처리가 끝날때까지 연결되어 있는 것?
+처리가 끝날때까지 연결되어 있는 함수.
 
 
 
-#### 	연결이 어떻게 시작되는가
+#### 	연결이 동작하는 방식
 
-시작은 브라우저 => 웹사이트에 접속하려고 하면 그때부터 시작이다.
+시작은 브라우저에서 웹사이트에 접속하려 하면 연결이 동작하기 시작.
 
-웹사이트에 접속하면  그에 해당하는 JS파일을 실행할 것이고 route가 존재하는지 살핀다. 그리고 그 route에 있는 함수를 실행하고 그 함수에 적혀있는 응답코드를 실행하는 구조.
+웹사이트에 접속하면  그에 해당하는 JS파일을 실행하고 route가 존재하는지 살핀다. 그리고 그 route에 존재하는<br>함수를 실행하고 그 함수에 적혀있는 코드를 실행하는 구조.
 
-=> but, 응답은 쉽게 이루어지지 않는다. 중간 연결자가 존재.(더 자세히는 유저와 마지막 응답사이에 존재)
+=> But, 응답은 쉽게 이루어지지 않는다. 중간 연결자가 존재. (더 자세히는 유저와 응답사이에 존재)
 
-이걸 **MiddleWare**라 부른다. 따라서 MiddleWare를 기준으로 계층을 형성할 수 있다. (이 사이트에 로그인 되는 사람의 상태를 확인한다거나 등등에 사용가능)
+이걸 **MiddleWare**라 칭한다. 따라서 MiddleWare를 기준으로 계층을 형성할 수 있다. (이 사이트에 로그인 하는 유저의 상태를 확인한다거나 권한을 확인하는 등등에 활용)
 
 
 
@@ -160,7 +162,7 @@ app.get("/profile", handleProfile);
 
 이렇게 코드를 짜면 "/", "/profile" route 모두 betweenHome함수를 MiddleWare로 사용한다. (이렇게 코드를 짜는 걸 전역적이라한다.)
 
-=> 만일 app.use(betweenHome) 이 코드를 profile route 뒤에 두면 2개 route 모두에서 betweenHome MiddleWare가 실행이 안된다. 코드는 위에서 부터 아래로 실행되므로 순서를 항상 염두에 두고 있어야 한다.
+=> 만일 app.use(betweenHome) 이 코드를 profile route 뒤에 두면 2개 route 모두에서 betweenHome MiddleWare가 실행이 안된다. 코드는 위에서 부터 아래로 실행되므로 순서를 항상 염두에 두고 있자.
 
 
 
@@ -200,7 +202,7 @@ Cookie와 Body를 다룰 수 있게 도와주는 MiddleWare.
 
 누군가 form을 채워 넣고 나에게 전송한다면 그 form은 서버에 의해서 받아져야한다. (서버를 거쳐야 한다는 뜻 같다.)
 
-ex) 만약 아이디와 비밀번호를 입력을 했다면 특정한 형태로 변환 후 서버에게 받아져야한다.
+ex) 만약 아이디와 비밀번호를 입력했다면 특정 형태로 변환 후 서버에게 전송된다.
 
 만약 form을 받았다면 그 데이터는 request object가 가지고 있다. 또 서버에서 request object에 접근할 수 있어야 한다. 
 
@@ -218,7 +220,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 Cookie에 유저정보를 저장하고 Session을 다루기 위해서 사용.
 
-사용 방식은 Helmet MiddleWare와 똑같다.
+사용 방식은 둘 다 Helmet MiddleWare와 똑같다.
 
 
 
@@ -294,7 +296,7 @@ export default app;
 
 => 이 말은 만일 다른 파일에서 이 파일을 부른다면 app object를 준다는 말이다.
 
-이러면 같은 폴더에 위치한 파일에서 이렇게 불러올 수 있다.
+이러면 같은 폴더에 위치한 파일에서는 이렇게 불러올 수 있다.
 
 ```javascript
 import app from "./app";
@@ -337,7 +339,7 @@ package.json 파일을 보면 "dependencies" 키값이 존재한다.
 
 ### 	dependency란 프로젝트가 실행될 때 필요한 것을 말한다.
 
-만약에 dependency에 포함되지 않는 (상관없는? 프로젝트를 실행하는데 필요한게 아닌)  것을 설치하고 싶다면 뒤에 -D를 추가하면 된다. 
+만약에 dependency에 포함되지 않는 (프로젝트를 실행하는데 필요한게 아닌)  것을 설치하고 싶다면 뒤에 -D를 추가하면 된다. 
 
 ```powershell
 PS C:\Users\user\Desktop\Project\wetube> npm install nodemon -D
