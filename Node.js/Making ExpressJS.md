@@ -272,17 +272,25 @@ Babel을 설치하고 .babelrc 파일을 만든 후, 밑에 코드를 추가한�
 
 ```javascript
 function handleListening (){
-	console.log("Hi");
+	return true;
 }
 ```
 
 이 코드를
 
 ```javascript
-const handleListening = () => console.log("Hi");
+const handleListening = () => true;
 ```
 
 이렇게 표현할 수 있고 밑에 형식을 Arrow Function이라 칭한다.
+
+Arrow Function에는 Implicit Return(암시적 리턴)이라는 것이 있다. 만일 대괄호를 적는다면 암시적 성격을 잃게 되며 그 때는 return을 적어야 한다.
+
+```javascript
+const handleListening = () => {
+    return true;
+}
+```
 
 
 
@@ -309,6 +317,8 @@ import { app } from "./app";
 ```
 
 ### Default로 Export한 것과 아닌것의 차이점은 무엇일까?
+
+Default로 export한것은 파일채로 export하는 것이다.
 
 
 
