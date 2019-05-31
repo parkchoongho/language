@@ -69,6 +69,18 @@ html
 
 block content 이 부분에 다른 화면들의 내용들이 들어간다.
 
+```html
+.social-login
+    button
+        span
+            i.fab.fa-github
+        |Continue with Github
+```
+
+그냥 Continue with Github로 치면 Continue를 Tag로 인식한다. 그래서 앞에 |를 붙여 Continue with Github를 Text로 인식하게끔 만들어준다.
+
+
+
 
 
 ### How to put javascript code in pug?
@@ -127,3 +139,65 @@ export const home = (req, res) => res.render("home", { pageTitle: "Home" });
 ### 컨트롤러도 query에 접근하려면 method가 get이어야 한다.
 
 get method가 url에 정보를 추가해주기 때문이다.
+
+
+
+### routes에서 주의할 사항
+
+```javascript
+// Global
+const HOME = "/";
+const JOIN = "/join";
+const LOGIN = "/login";
+const LOGOUT = "/logout";
+const SEARCH = "/search";
+
+// Users
+const USERS = "/users";
+const USER_DETAIL = "/:id";
+const EDIT_PROFILE = "/edit-profile";
+const CHANGE_PASSWORD = "/change-password";
+
+// Videos
+const VIDEOS = "/videos";
+const UPLOAD = "/upload";
+const VIDEO_DETAIL = "/:id";
+const EDIT_VIDEO = "/:id/edit";
+const DELETE_VIDEO = "/:id/delete";
+
+const routes = {
+    home: HOME,
+    join: JOIN,
+    login: LOGIN,
+    logout: LOGOUT,
+    search: SEARCH,
+    users: USERS,
+    userDetail: USER_DETAIL,
+    editProfile: EDIT_PROFILE,
+    changePassword: CHANGE_PASSWORD,
+    videos: VIDEOS,
+    upload: UPLOAD,
+    videoDetail: VIDEO_DETAIL,
+    editVideo: EDIT_VIDEO,
+    deleteVideo: DELETE_VIDEO
+};
+
+export default routes;
+```
+
+```javascript
+import express from "express";
+import routes from "../routes";
+import { users, userDetail, editProfile, changePassword } from "../controllers/userController";
+
+const userRouter = express.Router();
+
+userRouter.get(routes.users, users);
+userRouter.get(routes.editProfile, editProfile);
+userRouter.get(routes.userDetail, userDetail);
+userRouter.get(routes.changePassword, changePassword);
+
+export default userRouter;
+```
+
+여기서 /edit-profile url에 접근할 때,  이를 userDetail의 url인 /:id:로 인식할 수 있다. 그 이유는 router에서 userDetail이 editProfile보다 먼저 선언되어 있었기 때문이다. 브라우저가 /edit-profile을 /:id:로 인식하지 않게 하려면 router에서 editProfile을 먼저 선언해주면 된다.
