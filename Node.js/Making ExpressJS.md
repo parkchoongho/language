@@ -324,6 +324,34 @@ Default로 export한것은 파일채로 export하는 것이다.
 
 
 
+### 3) 쿼리에서 정보를 가져오는 방식
+
+```javascript
+const searchingBy = req.query.term;
+```
+
+이 코드를 ES6에서는
+
+```javascript
+const { query: { term:serchingBy } } = req;
+```
+
+이렇게 바꿀 수 있다.
+
+### 이게 더좋은 이유는?
+
+```javascript
+const{abc , def} = Object;
+
+classic) 
+var abc = Object.abc;
+var def  =Object.def;
+```
+
+이렇게 새로운 변수를 추가할 때 입력할 코드가 확 줄어들어서?(확실하지는 않음)
+
+
+
 
 
 # 7. Dependency

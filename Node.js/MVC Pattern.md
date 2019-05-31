@@ -117,3 +117,13 @@ export const home = (req, res) => res.render("home", { pageTitle: "Home" });
 ```
 
 이렇게 전달할 수 있다. 전달하고 싶은 것은 무었이든 전달할 수 있다.
+
+
+
+
+
+# 3. Controller
+
+### 컨트롤러도 query에 접근하려면 method가 get이어야 한다.
+
+get method가 url에 정보를 추가해주기 때문이다.
