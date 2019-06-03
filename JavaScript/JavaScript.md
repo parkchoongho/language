@@ -50,7 +50,83 @@ let b = a - 5;
 a = 4; //에러가 발생하지 않는다. 왜냐하면 let으로 변수를 선언했기 때문에.
 ```
 
+=> 기본적으로 변수 선언은 const로 할 것. 나중에 필요할 때만 let으로 선언.
+
+변수 선언시 Camel case 방식으로 변수를 작성해야 한다.
+
+```javascript
+const dayOfWeek = "월"// 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법이다.
+```
+
 
 
 ### Data Types
+
+String, Number, Boolean, Float
+
+```javascript
+const string = "ABC";
+const number = 9;
+const boolean = true;
+const float = 55.1; // float은 언제나 floating number(떠돌이 소숫점)을 가진다.
+
+```
+
+
+
+
+
+### How to organize data in JavaScript?
+
+1) Array
+
+선언 방법
+
+```javascript
+const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+console.log(daysOfWeek[0]); //특정값에 대해 접근하려면 index로 접근해야한다.
+```
+
+
+
+2) Object
+
+선언방법
+
+```javascript
+const nicoInfo = {
+	name: "Nico",
+    age: 33,
+    gender: "Male",
+    isHandsome: true
+};
+
+console.log(nicoInfo.name);// name에 접근하고 싶으면 이렇게 접근한다.
+
+nicoInfo.gender = "Female"; // 이렇게 const nicoInfo안에 있는 값을 바꿀 수 있다. 하지만 nicoInfo자체는 바꿀 수 없다.
+
+console.log(nicoInfo.name);
+```
+
+Object와 Array의 가장 큰 차이점은 Object는 각 value에 이름을 붙힌다는 점이다.
+
+
+
+Object안에 Array를 넣을 수도 있고 Array안에 Object를 넣을 수도 있다.
+
+```javascript
+const fav = {
+    favMovies: ["Along the Gods", "LOTR", "Oldboy"],
+    favFood:  [
+      {
+        name: "Kimchi",
+        fatty: false
+    },{
+        name: "Cheeseburger", 
+        fatty:true
+    }
+    ]
+}
+```
 
