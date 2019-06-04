@@ -43,13 +43,114 @@ h1{
 
 
 
-최종적으로 css는 이렇게 작성할 수 있다고 보면된다.
+최종적으로 **css**는 이렇게 작성할 수 있다고 보면된다.
 
 ```css
 selector (id, class, tag name){
     property-name: value;
     property-name: value;
     property-name: value;
+}
+```
+
+
+
+
+
+# 2. HTML과 CSS 연결하기
+
+**CSS**를 **HTML**에서 사용하는 방법에는 2가지가 있다.
+
+### (1) inline
+
+```html
+<head>
+    <style>
+        body{
+            background-color: red;
+        }	
+    </style>
+</head>
+<body>
+    
+</body>
+```
+
+이 방법이 좋지 않은 이유는 만일 어떤 프로젝트에서 배경이 빨간색인 파일이 여러개 필요하다고 할 때, 위 **style**코드를 각 **html** 파일에 계속해서 붙여넣어야 하기 때문이다.
+
+
+
+
+
+###  (2) externel하게 연결
+
+```html
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+</body>
+```
+
+```css
+body{
+    background-color: red;
+}
+```
+
+이렇게 하면 <link rel="stylesheet" href="style.css"> 로 각 **html** 파일에서 **css** 파일로 접근할 수 있다.
+
+
+
+
+
+# 3. Box Model
+
+### 								Box는 총 4가지 요소로 구성된다.
+
+![](C:\Users\user\Desktop\Project\language\CSS\images\boxmodel.png)
+
+### (1) Content
+
+**Content**는 말그대로 그 **Box**에 들어가는 내용물이다. 이미지, 영상, 텍스트 등등 다양한 형태의 파일을 가질 수 있다.
+
+### (2) Padding
+
+**Padding**은 **Content**와 **Border**사이의 간격을 의미한다.
+
+### (3) Border
+
+**Border**는 **Box**가 가지는 테두리를 나타낸다.
+
+### (4) Margin
+
+**Margin**은 **Border**로부터 바깥 쪽 요소와의 거리를 나타낸다.**(확실한가?)**
+
+
+
+### Padding Margin 단축키
+
+```css
+h1{
+    padding: 20px; /* 상하좌우 모두 padding을 20px만큼 준다. */
+    padding: 20px 10px; /* 상하는 20px 좌우는 10px */
+    padding: 20px 15px 10px 5px; /* 상부터 시작해서 상 우 하 좌 시계방향으로 적용된다. */
+}
+```
+
+margin에도 똑같이 적용된다.
+
+
+
+### Border
+
+```css
+h1{
+    border-width: 5px;
+    border-color: blue;
+    border-style: dashed; /* 점선을 의미 */
+    border: 5px dashed blue; /* 이렇게 단축해서 표현할 수도 있다. */
 }
 ```
 
