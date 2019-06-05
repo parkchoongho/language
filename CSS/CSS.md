@@ -89,7 +89,7 @@ body {
 
 ### Box는 총 4가지 요소로 구성된다.
 
-![](C:\Users\user\Desktop\Project\language\CSS\images\boxmodel.png)
+![boxmodel](https://user-images.githubusercontent.com/34790763/58922072-5bf13000-8774-11e9-8293-06051be265b4.png)
 
 ### (1) Content
 
@@ -162,7 +162,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-![](C:\Users\user\Desktop\Project\language\CSS\images\block.PNG)
+<img width="161" alt="block" src="https://user-images.githubusercontent.com/34790763/58922106-83e09380-8774-11e9-9d9e-67d40b2db628.PNG">
 
 이렇게 크기와 상관없이 옆으로 다른요소를 허용하지 않는 것을 **Block**이라 칭한다.
 
@@ -196,7 +196,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-![](C:\Users\user\Desktop\Project\language\CSS\images\inlineblock.PNG)
+<img width="472" alt="inlineblock" src="https://user-images.githubusercontent.com/34790763/58922131-a1156200-8774-11e9-80fb-0d2d8916dd8b.PNG">
 
 **Box**는 **Block**과 **Inline-Block**중 하나의 값을 가져야한다. (디폴트 값은 **Block**이다.)
 
@@ -230,7 +230,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-![](C:\Users\user\Desktop\Project\language\CSS\images\inline.PNG)
+<img width="50" alt="inline" src="https://user-images.githubusercontent.com/34790763/58922140-ad99ba80-8774-11e9-90a9-f5e52aad5915.PNG">
 
 **Inline**으로 **Display**를 설정하면 더 이상 **Block**으로 설정되지 않는다. 대신에 위 예시처럼 **Text**로 적용된다.
 
