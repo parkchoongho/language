@@ -154,3 +154,123 @@ h1{
 }
 ```
 
+
+
+
+
+# 4. Display
+
+### (1) Block
+
+Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .box {
+        display: block;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="box"></span>
+    <span class="box"></span>
+    <span class="box"></span>
+  </body>
+</html>
+
+```
+
+![](C:\Users\user\Desktop\Project\language\CSS\images\block.PNG)
+
+
+
+이렇게 크기와 상관없이 옆으로 다른요소를 허용하지 않는 것을 **Block**이라 칭한다.
+
+
+
+### (2) Inline-Block
+
+**Inline-Block**은 옆에 다른 요소가 오는 것을 허용한다.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .box {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="box"></span>
+    <span class="box"></span>
+    <span class="box"></span>
+  </body>
+</html>
+
+```
+
+![](C:\Users\user\Desktop\Project\language\CSS\images\inlineblock.PNG)
+
+**Box**는 **Block**과 **Inline-Block**중 하나의 값을 가져야한다. (디폴트 값은 **Block**이다.)
+
+
+
+### 3) Inline
+
+**Inline**은 박스안의 모든 **Property** 설정값을 지운다.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .box {
+        display: inline;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="box">1</span>
+    <span class="box">1</span>
+    <span class="box">1</span>
+  </body>
+</html>
+
+```
+
+![](C:\Users\user\Desktop\Project\language\CSS\images\inline.PNG)
+
+**Inline**으로 **Display**를 설정하면 더 이상 **Block**으로 설정되지 않는다. 대신에 위 예시처럼 **Text**로 적용된다.
+
+
+
+따라서 만약에 **Inline** 설정값을 유지하는 동시에 **Box**형태를 원한다면 **Inline-Block**을 **Display** 설정값으로 사용하면된다.
