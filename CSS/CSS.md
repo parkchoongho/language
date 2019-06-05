@@ -89,7 +89,7 @@ body {
 
 ### Box는 총 4가지 요소로 구성된다.
 
-![](images\boxmodel.png)
+![](C:\Users\user\Desktop\Project\language\CSS\images\boxmodel.png)
 
 ### (1) Content
 
