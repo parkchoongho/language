@@ -543,3 +543,38 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 1개 이상의 설정값에 적용하고 싶다면 위 코드처럼 transition 애니메이션 이름에 all이라 적으면 된다.
 
 Transition은 어떤 State가 바뀔 떄 적용되는 것이다. (State에는 **hover, active, focus**, visited등이 있다.)  =>  굵게 칠해진 3개에 효과적으로 적용된다.
+
+
+
+
+
+# 7. Transformations
+
+#### HTML 문서 element들을 변경하여 모습이 변하는 효과
+
+```css
+.box {
+    width: 500px;
+    height: 500px;
+    background-color: red;
+    transform: rotate(20deg);
+}
+```
+
+- [CSS Transform Documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/transform)
+
+다양한 Transform을 시도해 볼수 있는 링크
+
+```css
+.box {
+    width: 500px;
+    height: 500px;
+    background-color: red;
+    transition: transform 2s ease-in-out;
+}
+.box:hover {
+    transform: rotate(1turn);
+}
+```
+
+Transition과 연결한 예시
