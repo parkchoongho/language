@@ -489,3 +489,57 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 
 이렇게 관계를 만들어주면 **abs-child** div요소는 이제 그 상위의 부모 요소인 **abs-box**에 상대적으로 움직이게 된다.
+
+
+
+
+
+# 6. Transitions
+
+#### 웹에서의 여러가지 동작 -이동/ 변경 등등- 을 멋지게 보여주는 효과가 트랜지션이다.
+
+
+
+```css
+.box {
+    background-color: green;
+    color: white;
+}
+.box:hover {
+    background-color: blueviolet;
+}
+```
+
+이렇게 hover를 적용하면 변경할때 변화하는 모습(Transitions)효과가 없다. 그 사이에 아무런 애니매이션이 없게된다.
+
+
+
+```css
+.box {
+    background-color: green;
+    color: white;
+    transition: background-color 2s ease-in;
+}
+.box:hover {
+    background-color: blueviolet;
+}
+```
+
+코드에는 이렇게 적용시키면 된다.
+
+
+
+```css
+.box {
+    background-color: green;
+    color: white;
+    transition: all 2s ease-in;
+}
+.box:hover {
+    background-color: blueviolet;
+}
+```
+
+1개 이상의 설정값에 적용하고 싶다면 위 코드처럼 transition 애니메이션 이름에 all이라 적으면 된다.
+
+Transition은 어떤 State가 바뀔 떄 적용되는 것이다. (State에는 **hover, active, focus**, visited등이 있다.)  =>  굵게 칠해진 3개에 효과적으로 적용된다.
