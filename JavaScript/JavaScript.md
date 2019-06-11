@@ -130,3 +130,84 @@ const fav = {
 }
 ```
 
+
+
+### What is function?
+
+함수는 어떤 내용을 수행하는 부분으로서 원하는 만큼 쓸 수 있는 코드로 생각하면 된다.
+
+```javascript
+function sayHello(name) {
+  console.log(`Hello ${name}!`);
+}
+
+sayHello("Park");
+```
+
+
+
+### Argument
+
+```javascript
+function sayHello(name) {
+  console.log(`Hello ${name}!`);
+}
+
+sayHello("Park");
+```
+
+여기서 sayHello() 함수에 전달되는 "Park"을 argument라고 한다. 함수가 정의되어 있을 때 같이 선언되어 있는 name은 parameter라 한다.(이 2개 용어를 혼용해서 사용하기도 한다.)
+
+=> "Park"값을 name에 넣고 이 name을 활용한 코드를 실행한다.
+
+```javascript
+function sayHello(name, age) {
+  console.log(`Hello ${name}! I am ${age} years old!`);
+}
+
+sayHello("Park", 28);
+```
+
+이렇게 argument를 2개로 줄 수도 있고 argument는 갯수에 구애받지 않고 가질 수 있다.
+
+
+
+
+
+### 함수를 활용한 간단한 계산기 객체
+
+```javascript
+const calculator = {
+    plus: function(a, b) {
+        return a + b;
+    },
+    minus: function(a, b) {
+        return a - b;
+    },
+    multiply: function(a, b) {
+        return a * b;
+    },
+    divide: function(a, b) {
+        return a / b;
+    },
+    exponent: function(a, b) {
+        return a ** b;
+    }
+};
+
+const plus = calculator.plus(5, 5);
+const minus = calculator.minus(5, 5);
+const multiply = calculator.multiply(5, 5);
+const divide = calculator.divide(5, 5);
+const exponent = calculator.exponent(5, 5);
+
+console.log(`
+Plus: ${plus}
+Minus: ${minus}
+Multiply: ${multiply}
+Divide: ${divide}
+Exponent: ${exponent}
+`);
+
+```
+
