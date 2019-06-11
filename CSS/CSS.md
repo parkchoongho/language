@@ -561,7 +561,7 @@ Transition은 어떤 State가 바뀔 떄 적용되는 것이다. (State에는 **
 }
 ```
 
-- [CSS Transform Documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/transform)
+[CSS Transform Documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/transform)
 
 다양한 Transform을 시도해 볼수 있는 링크
 
@@ -578,3 +578,79 @@ Transition은 어떤 State가 바뀔 떄 적용되는 것이다. (State에는 **
 ```
 
 Transition과 연결한 예시
+
+
+
+
+
+# 8. Animations
+
+#### 어떠한 효과를 State를 줄 필요 없이 계속 발생하길 원한다면 어떻게 할까?
+
+keyframes은 css로 하여금 animation이 생성되었음을 알려준다.
+
+```css
+.box {
+    width: 500px;
+    height: 500px;
+    background-color: red;
+    animation: 1.5s scaleAndRotateSquare infinite ease-in-out;
+}
+@keyframes scaleAndRotateSquare {
+    from {
+        transform: none;
+    }
+    to {
+        transform: rotate(1turn) scale(0.5, 0.5);
+    }
+}
+```
+
+이렇게  from to로(단계가 2가지만 있는 상황) 어떤 상태에서 다른 상태로 변하는 것을 표현할 수 있다.
+
+```css
+.box {
+    width: 500px;
+    height: 500px;
+    background-color: red;
+    animation: 1.5s scaleAndRotateSquare infinite ease-in-out;
+}
+@keyframes scaleAndRotateSquare {
+    0% {
+        transform: none;
+    }
+    50% {
+        transform: rotate(1turn) scale(0.5, 0.5);
+    }
+    100% {
+        transform: none;
+    }
+}
+```
+
+%로 여러 상태를 동시에 표현하는 것도 가능하다.
+
+
+
+
+
+# 9. Media Queries
+
+#### 디바이스의 종류마다 필요한 화면의 크기가 다르다. 브라우저가 필요한 크기에 따라 제어하는 것이 필요할 때 사용하는 것이 Media Query다.
+
+```css
+body {
+    background-color: green;
+}
+@media screen and (min-width: 320px) and (max-width: 640px) {
+    body {
+        background-color: blueviolet;
+    }
+}
+```
+
+반응형 웹디자인에 유용하다.(모바일-데스크탑 환셩에 따라 반응하기 때문에)
+
+[Using media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
+
+Media Query 관련 링크
