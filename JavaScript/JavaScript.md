@@ -234,13 +234,11 @@ console.dir(title);
 위 코드를 통해 title객체안에 있는 key와 value들을 모두 확인할 수 있다.
 
 ```javascript
-const title = document.querySelector("#title"); // id로 찾는다.
-const title = document.querySelector(".title"); // class로 찾는다.
+const title = document.querySelector("#title"); // id로 찾아 가장 첫번째 노드를 반환.
+const title = document.querySelector(".title"); // class로 찾아 가장 첫번째 노드를 반환.
 ```
 
-querySeletor는 관련 노드 중 첫번 쨰째 노드를 반환한다.
+querySeletor는 관련 노드 중 첫번째 노드를 반환한다.
 
-```javascript
 
-```
 
