@@ -2,7 +2,7 @@
 
 **CSS**는 크게 2가지로 구성되어 있다.
 
-
+<br>
 
 ### (1) Property
 
@@ -10,7 +10,7 @@
 property-name: value; /* 이름에 있어 중간 공백을 허용하지 않고 value 다음에 마지막으로 세미콜론(;)으로 마무리한다. */
 ```
 
-
+<br>
 
 ### (2) Selector
 
@@ -29,7 +29,7 @@ h1 {
 
 이렇게 작성하면 된다.
 
-
+<br>
 
 또 **selector**로 **ID** 또는 **Class**를 사용할 수 있는데 이 때는 그냥 태그와 표기법이 조금 달라진다.
 
@@ -45,7 +45,7 @@ h1 {
 }
 ```
 
-
+<br>
 
 최종적으로 **css**는 이렇게 작성할 수 있다고 보면된다.
 
@@ -57,15 +57,15 @@ selector (id, class, tag name) {
 }
 ```
 
+<br>
 
-
-
+<br>
 
 # 2. HTML과 CSS 연결하기
 
 **CSS**를 **HTML**에서 사용하는 방법에는 2가지가 있다.
 
-
+<br>
 
 ### (1) inline
 
@@ -82,7 +82,7 @@ selector (id, class, tag name) {
 
 이 방법이 좋지 않은 이유는 만일 어떤 프로젝트에서 배경이 빨간색인 파일이 여러개 필요하다고 할 때, 위 **style**코드를 각 **html** 파일에 계속해서 붙여넣어야 하기 때문이다.
 
-
+<br>
 
 ### (2) externel하게 연결
 
@@ -101,9 +101,9 @@ body {
 
 이렇게 하면 <link rel="stylesheet" href="style.css"> 로 각 **html** 파일에서 **css** 파일로 접근할 수 있다.
 
+<br>
 
-
-
+<br>
 
 # 3. Box Model
 
@@ -111,31 +111,31 @@ body {
 
 ![boxmodel](https://user-images.githubusercontent.com/34790763/58922072-5bf13000-8774-11e9-8293-06051be265b4.png)
 
-
+<br>
 
 ### (1) Content
 
 **Content**는 말그대로 그 **Box**에 들어가는 내용물이다. 이미지, 영상, 텍스트 등등 다양한 형태의 파일을 가질 수 있다.
 
-
+<br>
 
 ### (2) Padding
 
 **Padding**은 **Content**와 **Border**사이의 간격을 의미한다.
 
-
+<br>
 
 ### (3) Border
 
 **Border**는 **Box**가 가지는 테두리를 나타낸다.
 
-
+<br>
 
 ### (4) Margin
 
 **Margin**은 **Border**로부터 바깥 쪽 요소와의 거리를 나타낸다.**(확실한가?)**
 
-
+<br>
 
 ### Padding Margin 단축키
 
@@ -149,7 +149,7 @@ h1 {
 
 margin에도 똑같이 적용된다.
 
-
+<br>
 
 ### Border
 
@@ -162,13 +162,13 @@ h1 {
 }
 ```
 
+<br>
 
-
-
+<br>
 
 # 4. Display
 
-
+<br>
 
 ### (1) Block
 
@@ -204,7 +204,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 이렇게 크기와 상관없이 옆으로 다른요소를 허용하지 않는 것을 **Block**이라 칭한다.
 
-
+<br>
 
 ### (2) Inline-Block
 
@@ -240,7 +240,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 **Box**는 **Block**과 **Inline-Block**중 하나의 값을 가져야한다. (디폴트 값은 **Block**이다.)
 
-
+<br>
 
 ### 3) Inline
 
@@ -278,7 +278,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 따라서 만약에 **Inline** 설정값을 유지하는 동시에 **Box**형태를 원한다면 **Inline-Block**을 **Display** 설정값으로 사용하면된다.
 
-
+<br>
 
 # 5. Position
 
@@ -294,11 +294,11 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 이걸 설정하는 이유는 브라우저가 가지고 있는 디폴트 값을 상쇄시키기 위함이다.
 
-
+<br>
 
 ### Position은 4가지가 존재한다.
 
-
+<br>
 
 ### (1) Static
 
@@ -338,7 +338,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-
+<br>
 
 ### (2) Fixed
 
@@ -389,7 +389,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-
+<br>
 
 ### (3) Absolute, Relative
 
@@ -436,11 +436,11 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-
+<br>
 
 이렇게 하면 **abs-child** div가 맨 오른쪽으로 이동한 것을 볼 수있다. 왜냐하면 **abs-child** div가 **html** 상에서 **부모**에 해당하는 요소를 찾지 못했기 때문이다. 다시 말하면, **absolute** **position**이 설정되면 이 요소는 해당 요소와 관계가 있는 (**relative - 부모박스**) 요소를 찾게 되고 이에 따라 위치가 결정된다. 반대로 부모요소를 찾지 못했다면 **body**에 맞춰서 움직이게 된다. 밑에 코드를 보자.
 
-
+<br>
 
 ```html
 <!DOCTYPE html>
@@ -486,17 +486,17 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 ```
 
-
+<br>
 
 이렇게 관계를 만들어주면 **abs-child** div요소는 이제 그 상위의 부모 요소인 **abs-box**에 상대적으로 움직이게 된다.
 
+<br>
 
-
-
+<br>
 
 # 6. Flex
 
-
+<br>
 
 ### (1) 기존 display의 문제점
 
@@ -538,11 +538,11 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 따라서 자동으로 완성되는 **Grid**가 필요!! 
 
-
+<br>
 
 ### (2) Flex 사용법
 
-
+<br>
 
 Flex는 부모 클래스를 만들고 그 안에 적용하고 싶은 박스들을 만든다.
 
@@ -579,7 +579,7 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 
 이렇게 코드를 작성하면 box 클래스에 inline-block으로 display속성을 설정하지 않아도 inline-block처럼 적용된다.
 
-
+<br>
 
 #### justify-content, align-items
 
@@ -665,7 +665,7 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 
 => **이렇게 flex-direction을 column으로 설정(디폴트 값이 row)하면 justify-content가 세로 align-items가 가로가 된다.**
 
-
+<br>
 
 박스가 많아지면 flex가 어떻게 되는지 보자.
 
@@ -714,7 +714,7 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 
 이렇게 설정하면 box width 200px로 인해 inline-block은 자동으로 밑으로 넘어갔지만 flex는 box의 width를 자동으로 줄여준다.
 
-
+<br>
 
 ![](C:\Users\user\Desktop\Project\language\CSS\images\flex.PNG)
 
@@ -722,7 +722,7 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 
 그런데 만약에 박스를 간격에 맞게 밑으로 내리고 싶다면 어떻게 해야할까?
 
-
+<br>
 
 #### flex-wrap
 
@@ -781,9 +781,9 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 ![](C:\Users\user\Desktop\Project\language\CSS\images\flex-wrap.PNG)
 
+<br>
 
-
-
+<br>
 
 # 7. Pseudo-Selector (가상 셀렉터)
 
@@ -826,7 +826,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 이렇게 속성 값으로 접근하는 것을 가상 셀럭터라고 한다.
 
-
+<br>
 
 #### 여러 가상셀렉터
 
@@ -838,7 +838,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 모든 box class를 가진 요소중에 마지막 요소 배경을 green으로 설정하라.
 
-
+<br>
 
 ```css
 .box:first-child {
@@ -848,7 +848,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 모든 boxclass를 가진 요소중에 첫번째 요소 배경을 green으로 설정하라.
 
-
+<br>
 
 ```css
 .box:nth-child(2) {
@@ -858,7 +858,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 모든 box class를 가진 요소중에 두번째 요소 배경을 green으로 설정하라.
 
-
+<br>
 
 #### 직계
 
@@ -870,7 +870,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 않는다.
 
-
+<br>
 
 ```html
 <!DOCTYPE html>
@@ -912,9 +912,9 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 **이렇게 화면이 구성되는데 왜냐하면 child class 박스는 container class의 직계가 아니기 때문에 영향을 받지 않기 때문이다.**
 
+<br>
 
-
-
+<br>
 
 # 8. CSS States
 
@@ -922,7 +922,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 브라우저 요소 검사 창에서 확인 가능
 
-
+<br>
 
 - **Hover**: 해당 요소에 먼가가 올라오면(hover) 실행.
 
@@ -937,7 +937,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 }
 ```
 
-
+<br>
 
 - **Active**: 해당 요소를 클릭하면 실행.
 
@@ -952,7 +952,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 }
 ```
 
-
+<br>
 
 - **Focus**: 해당요소에 focus(해당요소가 선택된 상태)가 되면 실행.
 
@@ -967,7 +967,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 }
 ```
 
-
+<br>
 
 - **Visited**: 해당 요소를 클릭하면 해당 링크가 보여지는 것.
 
@@ -977,9 +977,9 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 }
 ```
 
+<br>
 
-
-
+<br>
 
 # 9. Position
 
@@ -997,7 +997,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 ### Position은 4가지가 존재한다.
 
-
+<br>
 
 ### (1) Static
 
@@ -1037,7 +1037,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 </html>
 ```
 
-
+<br>
 
 ### (2) Fixed
 
@@ -1088,7 +1088,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 </html>
 ```
 
-
+<br>
 
 ### (3) Absolute, Relative
 
@@ -1135,11 +1135,11 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 </html>
 ```
 
-
+<br>
 
 이렇게 하면 **abs-child** div가 맨 오른쪽으로 이동한 것을 볼 수있다. 왜냐하면 **abs-child** div가 **html** 상에서 **부모**에 해당하는 요소를 찾지 못했기 때문이다. 다시 말하면, **absolute** **position**이 설정되면 이 요소는 해당 요소와 관계가 있는 (**relative - 부모박스**) 요소를 찾게 되고 이에 따라 위치가 결정된다. 반대로 부모요소를 찾지 못했다면 **body**에 맞춰서 움직이게 된다. 밑에 코드를 보자.
 
-
+<br>
 
 ```html
 <!DOCTYPE html>
@@ -1185,19 +1185,19 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 ```
 
-
+<br>
 
 이렇게 관계를 만들어주면 **abs-child** div요소는 이제 그 상위의 부모 요소인 **abs-box**에 상대적으로 움직이게 된다.
 
+<br>
 
-
-
+<br>
 
 # 10. Transitions
 
 #### 웹에서의 여러가지 동작 -이동/ 변경 등등- 을 멋지게 보여주는 효과가 트랜지션이다.
 
-
+<br>
 
 ```css
 .box {
@@ -1211,7 +1211,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 이렇게 hover를 적용하면 변경할때 변화하는 모습(Transitions)효과가 없다. 그 사이에 아무런 애니매이션이 없게된다.
 
-
+<br>
 
 ```css
 .box {
@@ -1226,7 +1226,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 코드에는 이렇게 적용시키면 된다.
 
-
+<br>
 
 ```css
 .box {
@@ -1243,9 +1243,9 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 Transition은 어떤 State가 바뀔 떄 적용되는 것이다. (State에는 **hover, active, focus**, visited등이 있다.)  =>  굵게 칠해진 3개에 효과적으로 적용된다.
 
+<br>
 
-
-
+<br>
 
 # 11. Transformations
 
@@ -1278,9 +1278,9 @@ Transition은 어떤 State가 바뀔 떄 적용되는 것이다. (State에는 **
 
 Transition과 연결한 예시
 
+<br>
 
-
-
+<br>
 
 # 12. Animations
 
@@ -1329,9 +1329,9 @@ keyframes은 css로 하여금 animation이 생성되었음을 알려준다.
 
 %로 여러 상태를 동시에 표현하는 것도 가능하다.
 
+<br>
 
-
-
+<br>
 
 # 13. Media Queries
 
@@ -1353,3 +1353,4 @@ body {
 [Using media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
 
 Media Query 관련 링크
+
