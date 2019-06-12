@@ -6,7 +6,9 @@ Backend에는 많은 옵션들이 존재(Python, Ruby, 하스켈, ASP,...etc)
 
 But, Frontend는 바로 JavaScript로 해야한다. 
 
+<br>
 
+<br>
 
 # 2. ES5, ES6 ?
 
@@ -18,7 +20,9 @@ ECMAScript의 준말이며 일종의 Specification이다.
 
 뒤에 붙는 숫자는 ECMAScript의 버전 업데이트를 말하는 것이다. 
 
+<br>
 
+<br>
 
 # 3. Vanilla JavaScript
 
@@ -29,6 +33,8 @@ Vanilla JavaScript는 JavaScript의 일종으로 라이브러리가 없는 JavaS
 JavaScript는 프로그래머가 나쁜 코드를 작성하는 것을 허용한다. 
 
 각각의 Instruction은 다른 줄에 존재한다. (이런 한줄에 존재하는 것을 **Expression**이라 부른다.) <br>Expression은 한줄에 존재해야한다. 한 Expression이 끝났다는 것은 **';'**을 마지막에 붙혀 표현한다.
+
+<br>
 
 ### 변수 사용법
 
@@ -58,7 +64,7 @@ a = 4; //에러가 발생하지 않는다. 왜냐하면 let으로 변수를 선�
 const dayOfWeek = "월"// 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법이다.
 ```
 
-
+<br>
 
 ### Data Types
 
@@ -72,11 +78,11 @@ const float = 55.1; // float은 언제나 floating number(떠돌이 소숫점)�
 
 ```
 
-
-
-
+<br>
 
 ### How to organize data in JavaScript?
+
+<br>
 
 1) Array
 
@@ -88,7 +94,7 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 console.log(daysOfWeek[0]); //특정값에 대해 접근하려면 index로 접근해야한다.
 ```
 
-
+<br>
 
 2) Object
 
@@ -111,7 +117,7 @@ console.log(nicoInfo.name);
 
 Object와 Array의 가장 큰 차이점은 Object는 각 value에 이름을 붙힌다는 점이다.
 
-
+<br>
 
 Object안에 Array를 넣을 수도 있고 Array안에 Object를 넣을 수도 있다.
 
@@ -130,7 +136,7 @@ const fav = {
 }
 ```
 
-
+<br>
 
 ### What is function?
 
@@ -144,7 +150,7 @@ function sayHello(name) {
 sayHello("Park");
 ```
 
-
+<br>
 
 ### Argument
 
@@ -170,9 +176,7 @@ sayHello("Park", 28);
 
 이렇게 argument를 2개로 줄 수도 있고 argument는 갯수에 구애받지 않고 가질 수 있다.
 
-
-
-
+<br>
 
 ### 함수를 활용한 간단한 계산기 객체
 
@@ -208,6 +212,35 @@ Multiply: ${multiply}
 Divide: ${divide}
 Exponent: ${exponent}
 `);
+
+```
+
+<br>
+
+### DOM (Document Object Model)
+
+document는 하나의 객체로서 자바스크립트가 html 파일 요소에 접근할 수 있게 해준다. html 태그를 가져다가 객체로 만든다.
+
+```javascript
+const title = document.getElementById("title");
+console.log(title);
+```
+
+```javascript
+const title = document.getElementById("title");
+console.dir(title);
+```
+
+위 코드를 통해 title객체안에 있는 key와 value들을 모두 확인할 수 있다.
+
+```javascript
+const title = document.querySelector("#title"); // id로 찾는다.
+const title = document.querySelector(".title"); // class로 찾는다.
+```
+
+querySeletor는 관련 노드 중 첫번 쨰째 노드를 반환한다.
+
+```javascript
 
 ```
 
