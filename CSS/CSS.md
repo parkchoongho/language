@@ -716,7 +716,7 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 
 <br>
 
-![](C:\Users\user\Desktop\Project\language\CSS\images\flex.PNG)
+<img width="944" alt="flex" src="https://user-images.githubusercontent.com/34790763/59353387-d49c5180-8d5d-11e9-9138-4ca9da59edda.PNG">
 
 브라우저의 크기를 늘리거나 줄이면 그 화면에 맞게 box들이 자신들의 크기를 조정한다.
 
@@ -779,7 +779,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 (디폴트 값은 no wrap이다.)
 
-![](C:\Users\user\Desktop\Project\language\CSS\images\flex-wrap.PNG)
+<img width="938" alt="flex-wrap" src="https://user-images.githubusercontent.com/34790763/59353467-ff86a580-8d5d-11e9-8b18-6d88f5bb98ba.PNG">
 
 <br>
 
@@ -908,7 +908,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 </html>
 ```
 
-![](C:\Users\user\Desktop\Project\language\CSS\images\directchild.PNG)
+<img width="942" alt="directchild" src="https://user-images.githubusercontent.com/34790763/59353505-16c59300-8d5e-11e9-94ef-bc7bd7838f0c.PNG">
 
 **이렇게 화면이 구성되는데 왜냐하면 child class 박스는 container class의 직계가 아니기 때문에 영향을 받지 않기 때문이다.**
 
