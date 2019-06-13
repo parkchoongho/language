@@ -240,5 +240,52 @@ const title = document.querySelector(".title"); // class로 찾아 가장 첫번
 
 querySeletor는 관련 노드 중 첫번째 노드를 반환한다.
 
+<br>
 
+### Event
+
+이벤트는 웹사이트 상에서 발생할 수 있는 것들을 말한다. (Click, Resize, Submit, Load 등등)
+
+우리는 이러한 이벤트들을 중간에서 가져올 수 있다.
+
+```javascript
+window.addEventListener("resize")
+```
+
+=>  이게 우리가 이벤트를 받기를 기다리는 것이다. (Listen to Event) 위 코드 예시는 자바스크립트가 window가 resize하기를 기다리고 있다는 뜻!!
+
+```javascript
+const title = document.querySelector("#title");
+
+function handleResize() {
+  console.log("I have been resized");
+}
+
+window.addEventListener("resize", handleResize);
+```
+
+window를 resize하면 handleResize 함수를 호출한다.
+
+```javascript
+window.addEventListener("resize", handleResize);
+```
+
+여기서 체킹할  사항
+
+**handleResize()가 아니다.** handleResize); 는 **내가 필요할 때 (윈도우 크기가 변경될 때) handleResize라는 함수를 호출**하는 것이다. **handleResize()는 지금 당장 호출**하는 것이다.
+
+<br>
+
+```javascript
+const title = document.querySelector("#title");
+
+function handleResize(event) {
+  console.log(event);
+  //console.log("I have been resized");
+}
+
+window.addEventListener("resize", handleResize);
+```
+
+=> **이벤트를 다룰 함수를 만들때 마다 자바스크립트는 자동적으로 함수를 객체에 붙힌다.**  **event가 발생할 때** 마다 이 **event 객체가 호출**된다. 
 
