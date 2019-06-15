@@ -409,3 +409,17 @@ function init() {
 init();
 ```
 
+<br>
+
+### 삼항연산자(Ternary Operator)
+
+삼항연산자를 활용해 if문을 string 한줄에 적을 수 있다.
+
+```javascript
+clockTitle.innerText = `${hours < 10 ? `0${hours}` : hours} : ${
+    minutes < 10 ? `0${minutes}` : minutes
+  } : ${seconds < 10 ? `0${seconds}` : seconds}`;
+
+// hours < 10 는 조건문이고 만일 이 조건문이 참이면 : 표시를 기준으로 앞에 있는 값을 리턴하고 거짓을 경우에는 뒤에 있는 값을 리턴한다.
+```
+
