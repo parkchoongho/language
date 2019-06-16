@@ -240,13 +240,21 @@ const title = document.querySelector(".title"); // class로 찾아 가장 첫번
 
 querySeletor는 관련 노드 중 첫번째 노드를 반환한다.
 
+```javascript
+const title = document.querySelectorAll(".title"); // queryselectorAll은 모든 요소들을 가져와서 배열형태로 전달한다.
+```
+
+querySelectorAll은 모든 요소를 가져와 배열형태로 저장.
+
 <br>
 
 ### Event
 
 이벤트는 웹사이트 상에서 발생할 수 있는 것들을 말한다. (Click, Resize, Submit, Load 등등)
 
-우리는 이러한 이벤트들을 중간에서 가져올 수 있다.
+우리는 이러한 이벤트들을 중간에서 가져올 수 있다. 
+
+event가 발생하면 발생했던 그 요소부터 document까지 올라간다.
 
 ```javascript
 window.addEventListener("resize")
@@ -311,6 +319,16 @@ window.addEventListener("online", handleOnline);
 ```
 
 이벤트 예시) 인터넷 연결을 감지할 수 있는 코드
+
+```javascript
+function handleSubmit(event){
+	event.preventDefault(); // event 객체의 preventDefault method를 호출
+}
+
+form.addEventListener("submit", handleSubmit)
+```
+
+또 다른 예시) form 태그의 submit event가 발생할 때 기본 동작을 막는 코드 (이렇게 하면 form 태그 input에 무언가를 입력하고 Enter를 쳐도 입력값이 사라지지 않는다.)
 
 <br>
 
@@ -423,3 +441,17 @@ clockTitle.innerText = `${hours < 10 ? `0${hours}` : hours} : ${
 // hours < 10 는 조건문이고 만일 이 조건문이 참이면 : 표시를 기준으로 앞에 있는 값을 리턴하고 거짓을 경우에는 뒤에 있는 값을 리턴한다.
 ```
 
+<br>
+
+### Local Storage
+
+Local Storage는 작은 정보를 유저 컴퓨터에 저장하는 방법중 하나이다. 
+
+브라우저에서 F12키를 누르고 Application을 선택하면 확인할 수 있다. 
+
+```javascript
+localStorage.setItem("nico", true); // 이렇게 코드를 작성하면 nico라는 키값에 true라는 value값이 설정된다. localStorage에 정보를 생선하는 방법.
+localStorage.getItem("nico"); // localStorage로부터 nico 키값에 해당하는 value값을 가져온다.
+```
+
+Local Storage는 기본적으로 URLs 를 기초로 해서 동작한다. (해당 url의 localStorage에만 접근할 수 있다는 말)
