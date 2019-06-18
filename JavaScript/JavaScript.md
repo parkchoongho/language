@@ -455,3 +455,38 @@ localStorage.getItem("nico"); // localStorage로부터 nico 키값에 해당하�
 ```
 
 Local Storage는 기본적으로 URLs 를 기초로 해서 동작한다. (해당 url의 localStorage에만 접근할 수 있다는 말)
+
+### 자바스크립트 객체 Local Storage에 저장하기
+
+local storage에는 자바스크립트 data를 저장할 수 없다. **local storage**에는 **오직 String형태**만 저정할 수 있다. 따라서 localstorage에 저장할 때는 문자화 시켜 저장해야 한다.
+
+```javascript
+function saveToDos(){
+	localStorage.setItem(TODO_LS, JSON.stringify(toDos)); // toDos is array	
+}
+```
+
+이렇게 하면 toDos를 문자화 시켜 localStorage에 저장할 수 있다.
+
+### Local Storage에서 불러온 데이터 파싱하기
+
+local Storage에서 데이터를 불러오면 문자열을 받아오는 것이다. 따라서 이를 자바스크립트 객체로 활용하기 위해서는 파싱을 해야한다.
+
+```javascript
+const loadedToDos = localStorage.getItem(TODO_LS);
+const parseToDos = JSON.parse(loadedToDos); // JSON이란 'JavaScript Object Notation'의 줄임말로 데이터를 전달할 때, 자바스크립트가 다룰 수 있도록 Object로 바꿔주는 기능을 의미한다.
+```
+
+<br>
+
+### 요소생성
+
+document.querySelector나 document.getElementById 등으로 존재하는 요소를 받아오기가 가능하다. 이외에도 다음의 코드를 활용하면 js에서 html요소를 생성할 수 있다.
+
+```javascript
+const li = document.createElement("li");
+const delBtn = document.createElement("button");
+const span = document.createElement("span");
+```
+
+이런 방식으로 html 요소를 생성할 수 있다.
