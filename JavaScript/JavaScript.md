@@ -504,3 +504,15 @@ const cleanToDos = toDos.filter(function(toDo) {
 filter는 forEach처럼 각각의 item에 같은 행동을 취한다. filter가 하는 것은 함수가 true라고 return하는 아이템들이 들어가 있는 array를 return한다.  
 
 => 위 함수는 toDos에 있는 각각의 요소에 대해 toDo.id와 li.id가 같지 않은 요소들을 가지고 있는 array를 cleanToDos에 반환한다.
+
+### Math Module
+
+JavaScript에는 Math라는 모듈이 존재한다. 
+
+```javascript
+Math.random() // 0과 1사이의 숫자를 만든다.(실수 범위)
+Math.random() * 3 // 0과 3사이의 숫자를 생성.(실수 범위)
+Math.floor(Math.random()*3) // 0과 3사이의 정수를 생성. (0포함 3 미포함) 소수점을 버린다.
+Math.ceil(Math.random()*3) // 1과 4사이의 정수를 생성. (1포함 4 미포함) 소수점을 올린다.
+```
+
