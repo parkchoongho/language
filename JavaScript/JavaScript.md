@@ -490,3 +490,17 @@ const span = document.createElement("span");
 ```
 
 이런 방식으로 html 요소를 생성할 수 있다.
+
+<br>
+
+### Filter
+
+```javascript
+const cleanToDos = toDos.filter(function(toDo) {
+    return toDo.id !== parseInt(li.id);
+});
+```
+
+filter는 forEach처럼 각각의 item에 같은 행동을 취한다. filter가 하는 것은 함수가 true라고 return하는 아이템들이 들어가 있는 array를 return한다.  
+
+=> 위 함수는 toDos에 있는 각각의 요소에 대해 toDo.id와 li.id가 같지 않은 요소들을 가지고 있는 array를 cleanToDos에 반환한다.
