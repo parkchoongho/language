@@ -138,6 +138,19 @@ const fav = {
 
 <br>
 
+자바스크립트 객체에 저장할 때 Key 값과 Value 값이 같으면 이렇게 코드를 짤 수 있다.
+
+```javascript
+const lat = position.coords.latitude;
+const lon = position.coords.longitude;
+const coordsObj = {
+    lat,
+    lon // lat: lat, lon: lon과 같은 코드이다.
+};
+```
+
+<br>
+
 ### What is function?
 
 함수는 어떤 내용을 수행하는 부분으로서 원하는 만큼 쓸 수 있는 코드로 생각하면 된다.
