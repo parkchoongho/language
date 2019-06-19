@@ -538,3 +538,132 @@ console.log(nextInLine(testArr, 6)); // Modify this line to test
 console.log("After: " + JSON.stringify(testArr));
 ```
 
+<br>
+
+### Use Conditional Logic with If Statements
+
+`if` 키워드는 자바스크립트가 curly braces 안에 코드를 특정 조건안에 실행한다. ()안에 있는 condition이 `true` 이면 실행하게 된다. `false`이면 실행하지 않는다.
+
+```pseudocode
+if (condition is true) {
+	statement is executed
+}
+```
+
+```javascript
+function test (myCondition) {
+    if (myCondition) {
+        return "It was true";
+    }
+    return "It was false";
+}
+test(true); // returns "It was true"
+test(false); // returns "It was false"
+```
+
+<br>
+
+### Comparison Operator
+
+자바스크립트에는 여러 비교 연산자가 존재한다. 이 연산자들은 모두 `true` 아니면 `false`값을 return한다.
+
+`==` , 이 equality operator는 두 값을 비교해서 둘이 같은면 `true`를 return 하고 다르면 `false`를 return 한다. 
+
+```javascript
+function equalityTest(myVal) {
+    if (myVal == 10) {
+        return "Equal";
+    }
+    return "Not Equal";
+}
+
+equalityTest(10); // return Equal
+```
+
+자바스크립트에서 서로 다른 두 데이터 타입을 비교하려면 두 데이터를 같은 타입으로 만들어 주어야 한다. 이걸 "Type Coercion"이라한다. 
+
+```javascript
+1 == 1 // true
+1 == 2 // false
+1 == '1' // true
+"3" == 3 // true
+```
+
+<br>
+
+### Strict Equality Operator
+
+Strict equality ( `===` ) 는 `==` 연산자와 같은 역할을 수행한다. 하지만 `==`연산자와는 다르게 `===`연산자는 type conversion을 수행하지 않는다.
+
+```javascript
+3 === 3 // true
+3 === '3' // false
+```
+
+Tip: 자바스크립트에서 특정 데이터의 type이 어떻게 되는지 알고 싶으면 `typeof`operator를 사용한다.
+
+```javascript
+typeof 3 // returns 'number'
+typeof '3' // returns 'string'
+```
+
+<br>
+
+### Inequality Operator
+
+inequality operator(`!=`)는 `==`와 반대되는 개념이다. 비교되는 두값이 다르면 `true` 같으면 `false`를 return 한다. `!=` 연산자도 `==`와 마찬가지로 비교 실행시, data type을 변경한다.
+
+```javascript
+1 != 2 // true
+1 != "1" // false
+1 != '1' // false
+1 != true // false
+0 != false // false
+```
+
+`!==` Strict Inequality Operator는 `===`과 반대되는 개념이다. `===`와 마찬가지로 비교 실행시, data type을 변경하지 않는다.
+
+```javascript
+3 !== 3 // false
+3 !== '3' // true
+4 !== 3 // true
+```
+
+### Greater Than Or Equal To Operator
+
+`>` operator는 두 값을 비교해 왼쪽 값이 더크면 `true` 아니면 `false`를 return 한다. `==`연산자처럼 `>` 연산자도 type conversion을 수행한다.
+
+```javascript
+5 > 3 // true
+7 > '3' // true
+2 > 3 // false
+'1' > 9 // false
+```
+
+`greater than or equal to` 연산자 (`>=`) 는 2개 값을 비교해 왼쪽 값이 크거나 같으면 `true` 아니면 `false`를 리턴한다. `==` 연산자처럼 `>=` 연산자도 type conversion을 수행한다.
+
+```javascript
+6 >= 6 // true
+7 >= '3' // true
+2 >= 3 // false
+'7' >= 9 // false
+```
+
+`less than or equal to` 연산자 (`<` `<=`)도 똑같이 작동한다. 
+
+```javascript
+2 < 5 // true
+'3' < 7 // true
+5 < 5 // false
+3 < 2 // false
+'8' < 4 // false
+
+4 <= 5 // true
+'7' <= 7 // true
+5 <= 5 // true
+3 <= 2 // false
+'8' <= 4 // false
+```
+
+ 
+
