@@ -211,3 +211,93 @@ console.log(myStr);
 // => "My name is Park Choong Ho and I am well!"
 ```
 
+<br>
+
+### Find the Length of a String
+
+String변수나 String lieral뒤에 `.length` 을 붙여서 그 문자열의 길이를 받아올 수 있다.
+
+```javascript
+var firstName = "Choong Ho";
+console.log(firstName.length); // 9
+```
+
+<br>
+
+### Use Bracket Notation to Find the Character in a String
+
+`Bracket notation`은 문자열로부터 특정 문자에 `index`를 통해 접근할 수 있게 하는 방법이다.
+
+대부분의 프로그래밍 언어들은 사람과 다르게 0부터 숫자를 세기 시작한다. 이를 두고 *Zero-based* indexing이라한다.
+
+```javascript
+var firstName = "Charles";
+console.log(firstName[0]); // C
+console.log(firstName[4]); // l
+```
+
+string의 마지막 문자를 받아오고 싶으면 string.length - 1 index에 접근하면된다.
+
+```javascript
+var firstName = "Choong Ho";
+firstName[firstName.length - 1]; // o
+```
+
+마찬가지로 뒤에서 n번째 문자를 받아오고 싶으면 string.length - n index로 접근한다.
+
+```javascript
+var firstName = "Choong Ho";
+firstName[firstName.length - 4]; // g
+```
+
+<br>
+
+## String Immutability
+
+자바스크립트에서 `String` values는 immutable하다. (한번 생성되면 바뀔 수 없다는 뜻)
+
+```javascript
+var myStr = "Bob";
+myStr[0] = "J";
+console.log(myStr[0]); // "B"
+```
+
+`myStr` 변수를 "Job"으로 바꿀 수 없다. 왜내하면 `myStr`의 문자 값들은 바뀔 수 없기 때문이다. 그렇다고 `myStr` 변수 자체가 변할 수 없다는 것은 아니다. (다만 *string literal*의 개별 문자들은 변할 수 없다.)
+
+```javaScript
+var myStr = "Bob";
+myStr = "Job";
+```
+
+이렇게 `myStr` 변수를 바꿀 수 있다.
+
+<br>
+
+### Store Multiple Values in one Variable using JavaScript Arrays
+
+자바스크립트 `array`변수를 활용해 여러개의 데이터를 한곳에 모아서 저장할 수 있다.
+
+```javascript
+var sandwich = ["peanut butter", "jelly", "bread"];
+```
+
+또한 array안에 또 다른 array를 nest 할 수 있다. (`[["Bulls", 23], ["White Sox", 45]]`)
+
+이걸 또한 *Multi-dimensional Array*라 부른다.
+
+```javascript
+var myArray = [["the universe", 42], ["everything", 101010]];
+```
+
+### Access Array Data with Indexes
+
+array안에 있는 데이터에 `index`를 통해 접근할 수 있다. 이를 통해 특정 array안에 있는 특정 enrty에 접근할 수 있다. string과 마찬가지로 *zero-based* indexing을 사용한다. 따라서 첫번째 요소의 index는 0이다.
+
+```javascript
+var array = [50,60,70];
+array[0]; // equals 50
+var data = array[1]; // equals 60
+```
+
+Tip: array 변수명과 square brackets 사이에는 공백이 없어야 한다. 자바스크립트 코드가 이를 실행할 수는 있으나 다른 프로그래머가 코드를 읽는데 있어 가독성을 떨어트릴 수 있다.
+
