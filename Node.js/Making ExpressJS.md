@@ -4,31 +4,39 @@ Server란 컴퓨터다. 인터넷에 연결된 컴퓨터.
 
 #### 소프트웨어적 서버 => 인터넷에 연결된 한 덩어리의 코드
 
+종합해서 Server란 접속을 받고 접속을 계속해서 기다리는 Something이다.
 
+<br>
 
-
+<br>
 
 # 2. What is Express.JS?
 
 ##### Node.js 프레임워크(몇 줄 코드 입력으로 서버를 만들 수 있다.)
 
-##### 프레임워크 => 이미 완성되어있는 형태로서 원하는걸 더 빨리 만들 수 있게하는 장치
+##### 프레임워크 => 이미 완성되어있는 형태로서 원하는걸 더 빨리 만들 수 있게하는 장치, 이미 많은 코드로 작성되어있어 우리가 가져다 쓸 수 있는 장치
 
 ##### 매우 안정적임(완성도가 높아 버전업이 많지가 않다.)
 
+<br>
 
-
-
-
-
+<br>
 
 # 3. What is npm?
 
-Node Package Manager의 줄임말로 어떤 파일이나 변경사항이 있을때 서버도 변경해야 하는 번거로움을 <br>해결해주는 일종의 패키지모음(Node.js관련 패키지가 모두 모여있는 Node.js 패키지 총 집합이라 생각하면 됨.)
+**Node Package Manager**의 줄임말로 번거로움을 해결해주는 일종의 **패키지모음** 
 
-npm을 실행할 때는 반드시 package.json 파일이 있는 폴더에서 명령을 내려야 한다.
+예를 들어, 만일 Express.JS 버전을 다운받아서 그 파일을 내 코드에 적용시켜 서버를 만들었다고 하자. 그랬을때, 만약 Express 버전이 업그레이드 됐다면 우리는 이걸 다시 다운받아서 내 코드에 다시 적용시키는 번거로움을 겪어야한다. 이런 번거로움을 덜어주는 것이 바로 **npm**이다. 
 
+(Node.js관련 패키지가 모두 모여있는 Node.js 패키지 총 집합이라 생각하면 됨.)
 
+Node.js를 다운받을 때, 자동으로 npm도 다운로드된다.
+
+**npm을 실행할 때는 반드시 package.json 파일이 있는 폴더에서 명령을 내려야 한다.**
+
+만일 그 파일이 없는 곳에서 실행하면,  package.json 파일을 읽어오지 못해 그 폴더에 다시 package.json 파일을 생성한다.
+
+<br>
 
 ### npm 설치 코드
 
@@ -74,6 +82,12 @@ About to write to C:\Users\user\Desktop\Project\wetube\package.json:
 
 
 Is this OK? (yes) y
+=> 여기까지 진행하면 package.json 파일이 생성된다. 파일 안에는 위 JSON 파일이 담겨 있다. 여기서 
+"scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1"
+}
+이 부분은 지우던데 이유가 멀까?
+==========================================
 PS C:\Users\user\Desktop\Project\wetube> npm install express
 npm notice created a lockfile as package-lock.json. You should commit this file.
 npm WARN wetube@1.0.0 No repository field.
@@ -81,21 +95,25 @@ npm WARN wetube@1.0.0 No repository field.
 + express@4.17.0
 added 50 packages from 37 contributors and audited 126 packages in 18.158s
 found 0 vulnerabilities
+=> 여기까지하면 package-lock.json 파일이 생성된다.(package.json파일과는 다른 파일이다.) 그리고 node_modules라는 이름의 폴더가 생성된다. 그리고 package.json 파일에 "dependencies"라는 키 값과 그에 대해 {"express":"^4.16.4"}라는 값이 할당된 코드가 추가된다.
+==========================================
 ```
 
+Tip: 만약 누군가와 해당 프로젝트를 가지고 협업을 한다면, package-lock.json 파일과node_modules라는 폴더까지 모두 다 줄 필요는 없다. 왜냐하면 상대방에게 package.json파일만 건네면 상대방이 `npm install` 명령어를 통해 설치할 수 되기 때문이다. package.json 파일의 `"dependencies"` 키값에 할당된 값들을 확인해 해당 프로젝트에 필요한 프레임워크나 라이브러리를 설치해준다. 
 
+<br>
 
-
+<br>
 
 # 4. Handling Routes with Express
 
-
+<br>
 
 ### 		1. GET
 
 url을 브라우저에 입력하면 브라우저가 GET method를 실행한다. 이러한 방식으로 브라우저는 웹페이지를 읽어온다. GET request는 그에 상응하는 GET response가 있어야 한다.  그래야만 request가 종료된다.
 
-
+<br>
 
 ### 		2. POST
 
@@ -105,25 +123,25 @@ url을 브라우저에 입력하면 브라우저가 GET method를 실행한다. 
 
 =>  이것이 http가 작동하는 방식!!
 
-
+<br>
 
 ### 	MiddleWare
 
 처리가 끝날때까지 연결되어 있는 함수.
 
-
+<br>
 
 #### 	연결이 동작하는 방식
 
 시작은 브라우저에서 웹사이트에 접속하려 하면 연결이 동작하기 시작.
 
-웹사이트에 접속하면  그에 해당하는 JS파일을 실행하고 route가 존재하는지 살핀다. 그리고 그 route에 존재하는<br>함수를 실행하고 그 함수에 적혀있는 코드를 실행하는 구조.
+웹사이트에 접속하면  그에 해당하는 JS파일을 실행하고 route가 존재하는지 살핀다. 그리고 그 route에 존재하는 함수를 실행하고 그 함수에 적혀있는 코드를 실행하는 구조.
 
 => But, 응답은 쉽게 이루어지지 않는다. 중간 연결자가 존재. (더 자세히는 유저와 응답사이에 존재)
 
 이걸 **MiddleWare**라 칭한다. 따라서 MiddleWare를 기준으로 계층을 형성할 수 있다. (이 사이트에 로그인 하는 유저의 상태를 확인한다거나 권한을 확인하는 등등에 활용)
 
-
+<br>
 
 #### 	Express에서의 모든함수는 MiddleWare가 될 수 있다.
 
@@ -135,7 +153,7 @@ app.get("/", betweenHome, handleHome);
 
 위처럼 코드를 작성하고 브라우저에 주소를 입력하면 계속 로딩되는 상태에서 다음으로 넘어가지 않는다.
 
-
+<br>
 
 #### 	Expreess에서 route를 포함한 모든 connection을 다루는 것들은 req, res, next를 가지고 있다. 
 
@@ -164,7 +182,7 @@ app.get("/profile", handleProfile);
 
 => 만일 app.use(betweenHome) 이 코드를 profile route 뒤에 두면 2개 route 모두에서 betweenHome MiddleWare가 실행이 안된다. 코드는 위에서 부터 아래로 실행되므로 순서를 항상 염두에 두고 있자.
 
-
+<br>
 
 ### Morgan 
 
@@ -179,7 +197,7 @@ app.use(morgan("tiny"));
 
 이렇게 사용 가능. "tiny"를 대신해 다른 옵션들이 들어갈 수있다.
 
-
+<br>
 
 ### Helmet
 
@@ -192,7 +210,7 @@ app.use(helmet());
 
 위 코드를 추가해주면 된다. (Morgan에서 Helmet으로 바뀐것 빼고 코드가 똑같다.)
 
-
+<br>
 
 ### Cookie Parser, Body Parser
 
@@ -224,13 +242,11 @@ Cookie에 유저정보를 저장하고 Session을 다루기 위해서 사용.
 
 사용 방식은 둘 다 Helmet MiddleWare와 똑같다.
 
-
-
-
+<br>
 
 ### MiddleWare제어를 통해 통신을 끊을 수 있다. => 기억하고 있을 것.
 
-
+<br>
 
 ```javascript
 const middleware = (req, res, next) => {
@@ -242,7 +258,9 @@ app.get("/", middleware, handleHome);
 
 이렇게 사용 가능
 
+<br>
 
+<br>
 
 # 5. What is Babel?
 
@@ -262,9 +280,9 @@ Babel을 설치하고 .babelrc 파일을 만든 후, 밑에 코드를 추가한�
 }
 ```
 
+<br>
 
-
-
+<br>
 
 # 6. ES6
 
@@ -294,7 +312,7 @@ const handleListening = () => {
 }
 ```
 
-
+<br>
 
 ### 2) Module
 
@@ -322,7 +340,7 @@ import { app } from "./app";
 
 Default로 export한것은 파일채로 export하는 것이다.
 
-
+<br>
 
 ### 3) 쿼리에서 정보를 가져오는 방식
 
@@ -350,9 +368,9 @@ var def  =Object.def;
 
 이렇게 새로운 변수를 추가할 때 입력할 코드가 확 줄어들어서?(확실하지는 않음)
 
+<br>
 
-
-
+<br>
 
 # 7. Dependency
 
@@ -399,9 +417,9 @@ PS C:\Users\user\Desktop\Project\wetube> npm install nodemon -D
 
 nodemon은 서버를 죽이지않고 내 코드의 변경사항을 반영할 수 있게 해준다. (내 코드를 저장하면 변경사항을 파악해 이를 반영한 서버를 다시 실행한다.)
 
+<br>
 
-
-
+<br>
 
 # 8. Router
 
