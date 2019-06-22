@@ -103,6 +103,51 @@ Tip: 만약 누군가와 해당 프로젝트를 가지고 협업을 한다면, p
 
 <br>
 
+### .gitignore
+
+node_modules에 설치된 파일들을 보면 정말 많은 파일들이 존재한다. GIthub에 이 프로젝트를 업로드한다고 치면 이 파일들이 업로드 되면 너무 무거워지고 실질적으로 내가 적은 프로젝트 코드들이 아니므로 업로드에 제외하는 것이 좋은데 이럴때 필요한 것이 바로 **.gitignore** 파일이다.
+
+(nodeJS gitignore이라 검색하면 ignore이 권장되는 파일 목록을 가지고 있는 .gitignore 파일이 있다. 여기서 코드를 긁어서 node 프로젝트에 활용하면 굉장히 유용하다.) 여기에 더해 **package-lock.json** 파일도 포함시켜주면 좋다. 왜냐하면 package-lock.json 파일은 package security 관련 파일이기에 실질적인 프로젝트 파일이 아니기 때문이다.
+
+### require, listen
+
+require 명령어는 node module을 어딘가에서 가져올 때 쓰는 명령어이다.
+
+```javascript
+const express = require('express'); // express module을 가져와 express 변수에 할당한다. 우선은 express라는 폴더를 현재 위치에 있는 파일들에서 찾고 거기서 못 찾으면 그 다음 node_modules 폴더에서 찾는다. (여기거는) node_modules 폴더에서 가져온 것.
+const app = express(); // app 변수에 express를 실행한 후 담은 것.
+app.listen(3000); // express 서버가 포트번호 3000번을 통해 오는 요청을 listen 한다.
+```
+
+### package.json scripts
+
+package.json 파일에 scripts 키값에 명령어를 축약해서 내릴 수 있게끔 명령어를 저장할 수 있다.
+
+```javascript
+{
+    "scripts": {
+        "start": "node index.js"
+    }
+} // 이렇게 하면 "npm start"만 console에 입력해도 "node indexx.js"가 입력되는 것과 같은 결과가 된다. 
+```
+
+### Basic Server
+
+```javascript
+const express = require('express');
+const app = express();
+
+const PORT = 3000;
+
+function handleListening() {
+  console.log(`Listening on: http://localhost:${PORT}`);
+}
+
+app.listen(PORT, handleListening); // PORT 3000번을 듣는 것이(Listening) 끝나면(시작하면? => 이거 확실하게 알아볼 것.) handleListening을 콜백함수로 불러라.
+```
+
+<br>
+
 <br>
 
 # 4. Handling Routes with Express
@@ -111,7 +156,7 @@ Tip: 만약 누군가와 해당 프로젝트를 가지고 협업을 한다면, p
 
 ### 		1. GET
 
-url을 브라우저에 입력하면 브라우저가 GET method를 실행한다. 이러한 방식으로 브라우저는 웹페이지를 읽어온다. GET request는 그에 상응하는 GET response가 있어야 한다.  그래야만 request가 종료된다.
+브라우저에 url을 입력하면 브라우저가 GET method를 실행한다. 이러한 방식으로 브라우저는 웹페이지를 읽어온다. `GET request`는 그에 상응하는 `GET response`가 있어야 한다.  그래야만 request가 종료된다. (GET method로는 정보를 전달할 수 없다.) 
 
 <br>
 
@@ -122,6 +167,12 @@ url을 브라우저에 입력하면 브라우저가 GET method를 실행한다. 
 예를 들어, 웹사이트에 로그인을 할 시에 POST를 통하게 된다.
 
 =>  이것이 http가 작동하는 방식!!
+
+<br>
+
+### req, res object
+
+`req object`는 서버에서 어떤 요청이 들어왔는지 (예를 들어, 누가 URL에 들어오겠다는 요청을 했거나 아니면 웹페이지에 데이터를 보내는등)를 알고 싶으면 활용하는 객체이다. `res object`는 그에 대한 응답에 활용할 수 있는 객체. 
 
 <br>
 
@@ -158,6 +209,8 @@ app.get("/", betweenHome, handleHome);
 #### 	Expreess에서 route를 포함한 모든 connection을 다루는 것들은 req, res, next를 가지고 있다. 
 
 ```javascript
+const handleHome = (req, res) => res.send(`Hi, here is your home!`);
+// handleHome은 next가 없는 이유는 handleHome이 마지막 함수이기 때문이다.
 const betweenHome = (req, res, next) => {
     console.log("Between!");
     next();
@@ -190,12 +243,22 @@ Logging에 도움을 주는 MiddleWare
 
 Logging은 기본적으로 무슨일이 언제 일어났는지 기록하는 것.
 
-```javascript
-import morgan from "morgan";
-app.use(morgan("tiny"));
+```powershell
+PS C:\Users\user\Desktop\revieWetube> npm install morgan
 ```
 
-이렇게 사용 가능. "tiny"를 대신해 다른 옵션들이 들어갈 수있다.
+```javascript
+import morgan from "morgan";
+app.use(morgan("tiny"));// 이렇게 사용 가능. "tiny"를 대신해 다른 옵션들이 들어갈 수있다. 여기서는 dev를 사용 dev는 tiny에 색깔을 조금 더 입힌 것이다.
+```
+
+console에 이런 값을 찍어준다.
+
+```powershell
+GET / 304 - - 6.134 ms
+GET /profile 304 - - 0.954 ms
+# morgan MiddleWare를 통해 우리는 어떤 요청이고 어디에 접속하려고 하고 Status Code까지 알 수 있다.
+```
 
 <br>
 
@@ -203,9 +266,13 @@ app.use(morgan("tiny"));
 
 NodeJS의 보안에 도움을 주는 MiddleWare이다.
 
+```powershell
+PS C:\Users\user\Desktop\revieWetube> npm install helmet
+```
+
 ```javascript
 import helmet from "helmet";
-app.use(helmet());
+app.use(helmet()); // 왜 여기에서는 helmet()을 사용할까? app.use(betweenHome)과의 차이점?
 ```
 
 위 코드를 추가해주면 된다. (Morgan에서 Helmet으로 바뀐것 빼고 코드가 똑같다.)
@@ -219,6 +286,8 @@ Cookie와 Body를 다룰 수 있게 도와주는 MiddleWare.
 **Body Parser**
 
 사용자가 웹사이트로 전달하는 정보를 검사하는 미들웨어
+
+html body로부터 정보를 받을 수 있게 해주는 미들웨어
 
 누군가 form을 채워 넣고 나에게 전송한다면 그 form은 서버에 의해서 받아져야한다. (서버를 거쳐야 한다는 뜻 같다.)
 
@@ -250,7 +319,7 @@ Cookie에 유저정보를 저장하고 Session을 다루기 위해서 사용.
 
 ```javascript
 const middleware = (req, res, next) => {
-    res.send("Not Happening");
+    res.send("What the hell?");
 }
 
 app.get("/", middleware, handleHome);
@@ -266,18 +335,57 @@ app.get("/", middleware, handleHome);
 
 ### 		Babel
 
-Babel은 자바스크립트 컴파일러로 최신의 자바스크립트를 무난한 예전의 자바스크립트로 변환시켜준다. <br>Babel Node란 NodeJS에서 Babel을 사용하는 것이다.
+Babel은 자바스크립트 컴파일러로 최신의 자바스크립트를 예전 자바스크립트로 변환시켜준다. Babel Node란 NodeJS에서 Babel을 사용하는 것이다.
 
 ```powershell
 PS C:\Users\user\Desktop\Project\wetube> npm install @babel/node
+PS C:\Users\user\Desktop\revieWetube> npm install @babel/preset-env
 ```
 
-Babel을 설치하고 .babelrc 파일을 만든 후, 밑에 코드를 추가한다.
+Babel을 설치하고 .babelrc 파일을 만든 후, 밑에 코드를 추가한다. (.babelrc는 babel을 설정하는 파일이다.)
 
 ```json
 {
-  "presets": ["@babel/preset-env"]
+    "presets": ["@babel/preset-env"]
 }
+```
+
+이렇게 설정한 후에는 **package.json** 파일에서 `"scripts"` 키 값에 설정한 명령어 `"start":"node index.js"`를 `"start":"babel-node index.js"` 로 바꿀 수 있다. 바꾼 코드의 의미는 babel이 최신의 코드를 예전의 표준 코드로 바꾸고 그 다음 node가 이를 실행한다는 의미.
+
+```javascript
+"scripts": {
+    "start": "babel-node index.js"
+}
+```
+
+```javascript
+const express = require('express');
+
+function handleProfile(req, res) {
+
+    res.send("You are beautiful");
+}
+```
+
+이렇게 설정하고 나면 위 코드를 아래와 같은 최신 코드로 변경할 수 있다.
+
+```javascript
+import express from "express";
+
+const handleProfile = (req, res) => res.send("You are beautiful");
+//위 코드와 이 코드는 결국 같은 코드이다.
+```
+
+그런데 npm start를 하면 에러가 발생한다. 
+
+```powershell
+Error: Cannot find module '@babel/core'
+```
+
+이 에러를 보면 @bael/core 파일을 설치해주면 된다. (=> 에러를 보고 이를 해결하는 것도 프로그래머의 자격중 하나!)
+
+```powershell
+PS C:\Users\user\Desktop\revieWetube> npm install @babel/core
 ```
 
 <br>
@@ -395,7 +503,7 @@ package.json 파일을 보면 "dependencies" 키값이 존재한다.
 }
 ```
 
-### 	dependency란 프로젝트가 실행될 때 필요한 것을 말한다.
+### 	dependency란 프로젝트가 실행될 때 필요한 것을 일컫는다.
 
 만약에 dependency에 포함되지 않는 (프로젝트를 실행하는데 필요한게 아닌)  것을 설치하고 싶다면 뒤에 -D를 추가하면 된다. 
 
@@ -415,7 +523,15 @@ PS C:\Users\user\Desktop\Project\wetube> npm install nodemon -D
 
  devDependencies의 의미는 이것은 개발자에게 필요한 것이지, 프로젝트에 필요한 것이 아니라는 의미이다.
 
-nodemon은 서버를 죽이지않고 내 코드의 변경사항을 반영할 수 있게 해준다. (내 코드를 저장하면 변경사항을 파악해 이를 반영한 서버를 다시 실행한다.)
+그전까지는 새로 작성한 코드를 서버에 반영하려면 서버를 끄고 다시 실행시켰어야 했는데, nodemon은 서버를 죽이지않고 내 코드의 변경사항을 반영할 수 있게 해준다. (내 코드를 저장하면 변경사항을 파악해 이를 반영한 서버를 다시 실행한다.)
+
+그리고 package.json의 scripts 부분을 고쳐준다.
+
+```javascript
+"scripts": {
+    "start": "nodemon --exec babel-node index.js"
+}
+```
 
 <br>
 
