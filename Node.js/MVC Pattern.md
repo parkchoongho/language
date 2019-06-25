@@ -87,6 +87,36 @@ block content
 	p Hello <!-- block부분을 Hello p태그로 채우겠다.-->
 ```
 
+### Partials
+
+Pug는 document를 부분으로 나누어 레고 조립하듯이 사용할 수 있다.
+
+```html
+footer.footer
+    .footer__icon
+        i.fab.fa-youtube
+    span.footer__text &copy; #{new Date().getFullYear()} Wetube
+<!-- 이렇게 footer document를 만들고 이걸 다른 document footer에 사용가능하다. javascript를 pug에서 사용하고 싶으면 #{}안에 자바스크립트 코드를 작성하면 된다. -->
+```
+
+사용방법
+
+```html
+doctype html
+html
+    head
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.5.0/css/all.css", integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU", crossorigin="anonymous")
+        title Wetube
+    body
+        header
+            h1 Wetube
+        main
+            block content
+        include ../partials/footer <!-- 이렇게 footer을 불러와서 main에 적용시킬 수 있다. -->
+```
+
+<br>
+
 ```html
 .social-login
     button
