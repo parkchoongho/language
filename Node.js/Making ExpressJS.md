@@ -551,7 +551,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import { userRouter } from "./router";
+import { userRouter } from "./router"; // router 파일에서 export한 userRouter만 import하겠다.
 
 const app = express(); // call express
 
@@ -577,20 +577,20 @@ app.get("/", handleHome);
 
 app.get("/profile", handleProfile);
 
-app.use("/user", userRouter);
+app.use("/user", userRouter); // use의 의미: 누군가 /user 경로로 접근하면 userRouter를 전체를 사용하겠다는 뜻.
 
 export default app;
 ```
 
-route.js 
+router.js 
 
 ```javascript
 import express from "express";
 
-export const userRouter = express.Router();
+export const userRouter = express.Router(); //이 user Router 변수를 export한다.
 
-userRouter.get("/", (req, res) => res.send("user index"))
+userRouter.get("/", (req, res) => res.send("user index")) 
 userRouter.get("/edit", (req, res) => res.send("user edit"))
 userRouter.get("/password", (req, res) => res.send("user password"))
+// => app.js 코드를 보면 /user에 들어오면 userRouter를 사용한다. 바로 위 세줄의 코드는 따라서 /user 일 경우, res.send("user index")를 실행한다는 뜻이고 user/edit이면 res.send("user edit"), user/password는 res.send("user password")를 실행한다는 의미이다. 여기 설정되어 있는 Callback 함수가 Controller의 일종.
 ```
-
