@@ -146,23 +146,47 @@ footer.footer
 
 <br>
 
-### 전역적으로(글로벌) 사용할 변수 추가방법
+### Controller에 있는 정보를 Pug에 추가하는 방법
+
+전역적으로(글로벌) 사용할 변수 추가방법 
+
+local 변수를 global 변수로 사용할 수 있도록 만들어 주는 것.
 
 ```javascript
+// middlewares.js 파일에 들어가는 코드
 import routes from "./routes";
 
 export const localsMiddleWare = (req, res, next) => {
     res.locals.siteName = "WeTube";
     res.locals.routes = routes;
-    next();
+    next(); // middleware 특징 다음 함수로 넘어가야됨.
 };
+// locals는 로컬 변수 응답을 포함하는 객체입니다. (다양한 변수를 설정할 수 있다.) res.locals로 시작하는 2줄 코드를 통해 routes와 siteName을 모든 템플릿, 뷰에서 사용할 수 있다.
+```
+
+middlewares.js 파일을 만들어  Controller정보를 활용할 수 있게한다.
+
+```html
+doctype html
+html
+    head
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.5.0/css/all.css", integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU", crossorigin="anonymous")
+        title #{siteName} <!-- 위 코드 덕분에 이렇게 siteName을 pug에서 사용할 수 있게 되었다. -->
+    body
+        include ../partials/header
+        main
+            block content
+        include ../partials/footer
 ```
 
 <br>
 
 ### 템플릿마다 할당되는 변수를 다르게 설정하는 방법
 
+위처럼 모든 템플릿에서 locals 변수에 접근하게도 할 수 있지만 특정 템플릿에서만 접근하게 하는 것도 가능하다.
+
 ```javascript
+// videoController 코드 일부
 export const home = (req, res) => res.render("home");
 // view-engine을 pug로 설정해놓았기 때문에 render함수가 자동으로 views 폴더에서 home.pug을 찾는다.
 ```
