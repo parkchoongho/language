@@ -757,3 +757,62 @@ if (condition1) {
 }
 ```
 
+<br>
+
+### Selecting from Many Options with Switch Statements
+
+많은 options 중에서 하나를 골라야 할 때 `switch` statement를 사용합니다. `switch` 문은 많은 `case` statement를 가질 수 있습니다. 가장 먼저 matched된 `case` value를 만날때까지 `switch`문은 실행됩니다.
+
+```pseudocode
+switch(num) {
+  case value1:
+    statement1;
+    break;
+  case value2:
+    statement2;
+    break;
+...
+  case valueN:
+    statementN;
+    break;
+}
+```
+
+`case` value들은 `===` 로 test됩니다. `break`를 만나면 코드 실행을 중단하고 빠져나오게 됩니다.
+
+만일 여러 input에 대해서 같은 output을 내고 싶다면 이렇게 코드를 짤 수도 있습니다.
+
+```pseudocode
+switch(val) {
+  case 1:
+  case 2:
+  case 3:
+    result = "1, 2, or 3";
+    break;
+  case 4:
+    result = "4 alone";
+}
+// 이 경우 1,2,3 case 모두 같은 output을 낸다. 
+```
+
+<br>
+
+### Adding a Default Option in Switch Statements
+
+`switch` 문 안에서 match된 `case` value를 못 만날 수도 있습니다. 이경우 `default`문을 추가하면 `default`문 안에 있는 코드를 실행합니다. (`if/else`에서 마지막 `else`와 비슷한 기능을 합니다.) 
+
+```pseudocode
+switch (num) {
+  case value1:
+    statement1;
+    break;
+  case value2:
+    statement2;
+    break;
+...
+  default:
+    defaultStatement;
+    break;
+}
+```
+
