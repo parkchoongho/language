@@ -629,6 +629,8 @@ inequality operator(`!=`)는 `==`와 반대되는 개념이다. 비교되는 두
 4 !== 3 // true
 ```
 
+<br>
+
 ### Greater Than Or Equal To Operator
 
 `>` operator는 두 값을 비교해 왼쪽 값이 더크면 `true` 아니면 `false`를 return 한다. `==`연산자처럼 `>` 연산자도 type conversion을 수행한다.
@@ -665,5 +667,93 @@ inequality operator(`!=`)는 `==`와 반대되는 개념이다. 비교되는 두
 '8' <= 4 // false
 ```
 
- 
+ <br>
+
+### Logical Operator
+
+`&&` operator는 연산자 기준 왼쪽과 오른쪽이 모두 `true` 이면 `true`를 리턴합니다.
+
+```javascript
+if (num > 5) {
+    if (num < 10) {
+        return "Yes";
+    }
+}
+return "No";
+```
+
+`&&` 연산자를 사용하면 위 코드를 이렇게 바꿀 수 있습니다.
+
+```javascript
+if (num > 5 && num < 10) {
+    return "Yes";
+}
+return "No";
+```
+
+`||` operator는 연산자 기준 왼쪽 혹은 오른쪽이 `true` 이면 `true`를 리턴합니다.
+
+```javascript
+if (num > 10) {
+    return "No";
+}
+if (num < 5) {
+    return "No";
+}
+return "Yes";
+```
+
+`||`연산자를 사용하면 위 코드를 이렇게 바꿀 수 있습니다.
+
+```javascript
+if (num > 10 || num < 5) {
+    return "No";
+}
+return "Yes";
+```
+
+<br>
+
+### Else Statements
+
+만일 `if` statement 가 true면, 안쪽에 있는 코드가 실행되게 됩니다. 만약 false이면 아무일도 일어나지 않지만 `else` statement가 존재하면 그 안에있는 코드를 실행합니다.
+
+```javascript
+if (num > 10) {
+    return "Bigger than 10";
+} else {
+    return "10 or Less";
+}
+```
+
+<br>
+
+### Else If Statements
+
+다뤄야할 조건이 많을 경우에 `else if` 구문을 활용할 수 있습니다.
+
+```javascript
+if (num > 15) {
+    return "Bigger than 15";
+} else if (num < 5) {
+    return "Smaller than 5";
+} else {
+    return "Between 5 and 15";
+}
+```
+
+복잡한 logic을 `if/else` 문을 활용하여 제어할 수 있습니다.
+
+```pseudocode
+if (condition1) {
+	statement1
+} else if (condition2) {
+	statement2
+} else if (condition3) {
+	statement3
+. . .
+} else {
+	statementN
+}
+```
 
