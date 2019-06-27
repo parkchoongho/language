@@ -792,7 +792,7 @@ switch(val) {
   case 4:
     result = "4 alone";
 }
-// 이 경우 1,2,3 case 모두 같은 output을 낸다. 
+// 이 경우 1,2,3 case 모두 같은 "1, 2, or 3"라는 output을 낸다. 
 ```
 
 <br>
@@ -815,4 +815,45 @@ switch (num) {
     break;
 }
 ```
+
+<br>
+
+### Returning Boolean Values from Functions
+
+함수에서 if, else문을 사용하여 `true`나 `false`같은 boolean 값을 리턴할 수 있습니다.
+
+```javascript
+function isEqual(a,b) {
+    if (a === b) {
+        return true;
+    } else {
+        return false;
+    }
+}
+```
+
+위 코드를 아래와 같이 간소화해서 표현할 수 있습니다.
+
+```javascript
+function isEqual(a,b) {
+    return a === b;
+}
+```
+
+<br>
+
+### Return Early Pattern for Functions
+
+함수 내부에서 `return`문을 만나면 현 함수 실행은 중단되며, 그 함수가 호출되었던 위치로 다시 돌아갑니다.
+
+```javascript
+function myFun() {
+    console.log("Hello");
+    return "World";
+    console.log("byebye")
+}
+myFun();
+```
+
+위 결과는 "Hello"를 console에 출력하고 "World" 문자열을 return합니다. "byebye"는 출력되지 않습니다. 출력하기전에 return문을 만나기 때문입니다.
 
