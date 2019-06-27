@@ -270,3 +270,52 @@ export default userRouter;
 ```
 
 여기서 /edit-profile url에 접근할 때,  이를 userDetail의 url인 /:id:로 인식할 수 있다. 그 이유는 router에서 userDetail이 editProfile보다 먼저 선언되어 있었기 때문이다. 브라우저가 /edit-profile을 /:id:로 인식하지 않게 하려면 router에서 editProfile을 먼저 선언해주면 된다.
+
+<br>
+
+### Search Controller
+
+header.pug에 input 폼을 추가한다.
+
+```html
+header.header
+    .header__column
+        a(href=routes.home)
+            i.fab.fa-youtube
+    .header__column
+        form(action=routes.search, method="get")
+            input(type="text", placeholder= "Search By Term", name="term")
+<!-- name을 설정해야 url에 표시가 된다., 컨트롤러가 쿼리에 접근하려면 method가 get이어야 한다. 왜냐하면 get 방식이 url에 정보를 추가하기 때문이다.-->
+    .header__column
+        ul  
+            li
+                a(href=routes.join) Join
+            li
+                a(href=routes.login) Log In
+```
+
+search.pug도 들어온 input값을 반영할 수 있도록 수정한다.
+
+```html
+extends layouts/main
+
+block content
+    .search__header 
+        h3 Searching By #{searchingBy}
+```
+
+아직 searchingBy 변수에 값을 넣지 않아서 화면에 이를 반영할 수 없다. 따라서 컨트롤러를 수정해 searchingBy값을 설정하도록 한다.
+
+videoController로 가서 Search Controller를 수정한다.
+
+```javascript
+export const search = (req, res) => {
+  //const searchingBy = req.query.term;
+  const {
+    query: { term: searchingBy }
+  } = req;
+  // es6에서는 이렇게 값을 설정해서 변수에 할당할 수 있다.
+  res.render("search", { pageTitle: "Search", searchingBy });
+};
+```
+
