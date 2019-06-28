@@ -370,3 +370,93 @@ export const search = (req, res) => {
 };
 ```
 
+<br>
+
+### Home Controller
+
+가짜 데이터베이스를 생성하고 이를 Home화면에 적용하는 코드.
+
+1. db.js를 작성
+
+```javascript
+export const videoList = [
+  {
+    id: 324393,
+    title: "Video awesome",
+    description: "This is something I love",
+    views: 24,
+    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    creator: {
+      id: 121212,
+      name: "Nicolas",
+      email: "nico@las.com"
+    }
+  },
+  {
+    id: 1212121,
+    title: "Video super",
+    description: "This is something I love",
+    views: 24,
+    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    creator: {
+      id: 121212,
+      name: "Nicolas",
+      email: "nico@las.com"
+    }
+  },
+  {
+    id: 55555,
+    title: "Video nice",
+    description: "This is something I love",
+    views: 24,
+    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    creator: {
+      id: 121212,
+      name: "Nicolas",
+      email: "nico@las.com"
+    }
+  },
+  {
+    id: 11111,
+    title: "Video perfect",
+    description: "This is something I love",
+    views: 24,
+    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    creator: {
+      id: 121212,
+      name: "Nicolas",
+      email: "nico@las.com"
+    }
+  }
+];
+```
+
+2. videoController.js에서 db.js로부터 videoList를 받아와 home 화면  렌더링할 때 videosList 보내기
+
+```javascript
+import { videoList } from "../db";
+
+export const home = (req, res) => {
+  res.render("home", { pageTitle: "Home", videoList });
+};
+```
+
+3. home.pug에서 받아온 videoList를 받아와 화면에 뿌리기
+
+```html
+extends layouts/main
+
+block content
+    .videos
+        each item in videoList <!--이 each 코드 기억하고 있기-->
+            h1= item.title
+            p= item.description
+```
+
+<br>
+
+<br>
+
+# 4. Model
+
+#### 실제 데이터베이스와 연동하기 전에 가짜 데이터베이스를 만들어서 적용시켜보는 것은 좋은 방법이다.
