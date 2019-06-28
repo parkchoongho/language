@@ -252,6 +252,38 @@ block content
 
 <br>
 
+### Mixins
+
+웹사이트에서 계속되어 반복되는 코드를 복사/붙혀넣기 하지 않고, 재활용하는 방법을 **`mixin`**이라한다. **`mixin`**은 pug 함수의 일종이다. 
+
+```html
+mixin videoBlock(video = {})
+    .videoBlock
+        video.videoBlock__thumbnail(src=video.videoFile, controls=true)
+        h4.videoBlock__title= video.title
+        h6.videoBlock__views= video.views
+<!--이 코드의 의미는 mixin에 인자가 입력되면, 그 객체의 이름을 video라한다.-->
+```
+
+home.pug도 이에 맞게 수정한다.
+
+```html
+extends layouts/main
+include mixins/videoBlock
+
+block content
+    .videos
+        each item in videoList
+            +videoBlock({
+                videoFile: item.videoFile,
+                title: item.title,
+                views: item.views 
+            })
+<!-- 각각 다른 정보를 기지지만 같은 구조를 가진 데이터를 표시화기 위해 코드를 캡슐화 시킴. mixin을 사용하는 가장 큰 이유(다른 정보, 같은 구조) -->
+```
+
+<br>
+
 <br>
 
 # 3. Controller
