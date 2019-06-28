@@ -492,3 +492,44 @@ block content
 # 4. Model
 
 #### 실제 데이터베이스와 연동하기 전에 가짜 데이터베이스를 만들어서 적용시켜보는 것은 좋은 방법이다.
+
+
+
+
+
+
+
+
+
+# 5. 통신 상태
+
+### Status Code
+
+상태 코드란, 인터넷이 어떻게 상호작용하는지 표시하는 것을  의미한다.
+
+많은 상태코그가 존재하고 브라우저는 이를 인식할 수 있다.
+
+https://developer.mozilla.org/ko/docs/Web/HTTP/Status
+
+**위 링크 참조**
+
+```javascript
+// userController 코드
+export const postJoin = (req, res) => {
+  // console.log(req.body);
+  const {
+    body: { name, email, password, veriPassword }
+  } = req;
+
+  if (password !== veriPassword) {
+    res.status(400);
+    res.render("join", { pageTitle: "Join" });
+  } else {
+    //Todo: Register user
+    //Todo: Log user in
+    res.redirect(routes.home);
+  }
+};
+//이렇게 error status를 담아서 에러를 전달하는 방법이 있다.
+```
+
