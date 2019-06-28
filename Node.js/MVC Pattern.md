@@ -125,7 +125,7 @@ html
         |Continue with Github
 ```
 
-그냥 Continue with Github로 치면 Continue를 Tag로 인식한다. 그래서 앞에 |를 붙여 Continue with Github를 Text로 인식하게끔 만들어준다.
+그냥 Continue with Github로 치면 Continue를 Tag로 인식한다. 그래서 앞에 |를 붙여 Continue with Github를 Text로 인식하게끔 만들어준다. (Pug 기능인 듯?)
 
 <br>
 
@@ -198,6 +198,57 @@ export const home = (req, res) => res.render("home", { pageTitle: "Home" });
 ```
 
 이렇게 전달할 수 있다. 전달하고 싶은 것은 무엇이든 전달할 수 있다.
+
+<br>
+
+### BEM
+
+CSS 방법론으로 html 요소에  클래스나 id를 설정할 때 특정한 규칙에 따라 설정하는 것을 말한다.
+
+```html
+<!-- join.pug -->
+extends layouts/main
+
+block content
+    .form-container
+        form(action=routes.join method="post")
+            input(type="text", name="name" placeholder="Full Name")
+            input(type="email" name="email" placeholder="Email")
+            input(type="password" name="password" placeholder="Password")
+            input(type="password", name="veriPassword", placeholder="Verify Password")
+            input(type="submit" value="Join Now")
+        include partials/socialLogin
+```
+
+```html
+<!-- login.pug -->
+extends layouts/main
+
+block content
+    .form-container
+        form(action=routes.login method="post")
+            input(type="email", name="email", placeholder="Email")
+            input(type="password", name="password", placeholder="Password")
+            input(type="submit", value="Login")
+        include partials/socialLogin
+```
+
+```html
+<!-- socialLogin.pug -->
+.social-login
+    button.social-login--github
+        span
+            i.fab.fa-github
+        |Continue with Github
+    button.social-login--facebook
+        span
+            i.fab.fa-facebook
+        |Continue with Facebook
+```
+
+이 링크 참조
+
+- [https://medium.com/witinweb/css-%EB%B0%A9%EB%B2%95%EB%A1%A0-1-bem-block-element-modifier-1c03034e65a1](https://medium.com/witinweb/css-방법론-1-bem-block-element-modifier-1c03034e65a1)
 
 <br>
 
