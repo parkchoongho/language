@@ -906,4 +906,67 @@ var a = parseInt("007");
 
 `parseInt()` 함수는 두번째 argument로 radix를 받습니다. 
 
+```javascript
+parseInt(string, radix);
+```
+
 (radix는 진수를 나타냅니다. 2와 36사이의 값)
+
+```javascript
+var a = parseInt("11", 2);
+// radix가 2로 설정되어 있기 때문에 11을 2진법으로 해석합니다. 따라서 a에는 integer 3이 저장됩니다.
+```
+
+<br>
+
+### Use the Conditional (Ternary) Operator
+
+*tenary operator* (삼항연산자)는 if/else 구문을 한줄로 표현하는 것을 가능하게 합니다.
+
+```pseudocode
+condition ? statement-if-true : statement-if-false;
+```
+
+```javascript
+function findGreater(a, b) {
+    if(a > b) {
+        return "a is greater";
+    }
+    else {
+        return "b is greater";
+    }
+}
+```
+
+위 코드를 삼항연산자를 활용하면 이렇게 표현할 수 있습니다.
+
+```javascript
+function findGreater(a, b) {
+    return a > b ? "a is greater" : "b is greater";
+}
+```
+
+여러개의 조건문이 있을 때에도 삼항연산자는 유용하게 활용됩니다.
+
+```javascript
+function findGreaterOrEqual(a, b) {
+    if(a === b) {
+        return "a and b are equal";
+    }
+    else if(a > b) {
+        return "a is greater";
+    }
+    else {
+        return "b is greater";
+    }
+}
+```
+
+위 코드를 삼항연산자를 활용하면 이렇게 표현할 수 있습니다.
+
+```javascript
+function findGreaterOrEqual(a, b) {
+    return (a === b) ? "a and b are equal" : (a > b) ? "a is greater" : "b is greater";
+}
+```
+
