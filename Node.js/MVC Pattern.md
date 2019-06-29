@@ -487,6 +487,105 @@ block content
 
 <br>
 
+### 로그인 상태에 따라 header.pug 화면 바꾸기
+
+```html
+header.header
+    .header__column
+        a(href=routes.home)
+            i.fab.fa-youtube
+    .header__column
+        form(action=routes.search, method="get")
+            input(type="text", placeholder= "Search By Term....", name="term")
+    .header__column
+        ul 
+            if !user.isAuthenticated
+                li
+                    a(href=routes.join) Join
+                li
+                    a(href=routes.login) Log In
+            else 
+                li
+                    a(href=routes.upload) Upload
+                li
+                    a(href=routes.userDetail(user.id)) Profile
+                li
+                    a(href=routes.logout) Log Out
+```
+
+user라는 가짜 데이터를 집어넣고 동작하는지를 본다. (데이터는 Middleware에서 locals로 넣는다.)
+
+```javascript
+import routes from "./routes";
+
+export const localsMiddleware = (req, res, next) => {
+    res.locals.siteName = "Wetube";
+    res.locals.routes = routes;
+    res.locals.user = {
+        isAuthenticated: true,
+        id: 1
+    };
+    next();
+};
+```
+
+이렇게 하면 `isAuthenticated` 값을 바꿈으로서 header 파일을 제어할 수 있다. (실제 데이터를 통해 로그인 되었을때는 true이고 아니면 false를 전달.) 그 다음 id 데이터를 통해 user 정보화면 나타낼 수 있다.
+
+```javascript
+const routes = {
+    home: HOME,
+    join: JOIN,
+    login: LOGIN,
+    logout: LOGOUT,
+    search: SEARCH,
+    users: USERS,
+    userDetail: id => {
+        if (id) {
+            return `/users/${id}`;
+        } else {
+            return USER_DETAIL;
+        }
+    },
+    editProfile: EDIT_PROFILE,
+    changePassword: CHANGE_PASSWORD,
+    videos: VIDEOS,
+    upload: UPLOAD,
+    videoDetail: id => {
+        if (id) {
+            return `/videos/${id}`;
+        } else {
+            return VIDEO_DETAIL;
+        }
+    },
+    editVideo: EDIT_VIDEO,
+    deleteVideo: DELETE_VIDEO
+};
+```
+
+ `routes.js` 파일에서 routes 값을 id인자에 따라 변하는 함수를 줌으로써 id에 따라 User 화면이 바뀌는 것을 구현. (Video도 마찬가지)
+
+```javascript
+import express from "express";
+import routes from "../routes";
+import {
+    users,
+    userDetail,
+    editProfile,
+    changePassword
+} from "../controllers/userController";
+
+const userRouter = express.Router();
+
+userRouter.get(routes.users, users);
+userRouter.get(routes.editProfile, editProfile);
+userRouter.get(routes.changePassword, changePassword);
+userRouter.get(routes.userDetail(), userDetail);
+
+export default userRouter;
+```
+
+`routes.userDetail`을 `routes.userDetail()`로 바꿔준다. (함수로 바꾸었기 때문에.) 
+
 <br>
 
 # 4. Model
