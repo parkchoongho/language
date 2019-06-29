@@ -857,3 +857,53 @@ myFun();
 
 위 결과는 "Hello"를 console에 출력하고 "World" 문자열을 return합니다. "byebye"는 출력되지 않습니다. 출력하기전에 return문을 만나기 때문입니다.
 
+<br>
+
+### Generate Random Fractions with JavaScript
+
+Random numbers are useful for creating random behavior.
+
+JavaScript has a `Math.random()`function that generates a random decimal number between `0`(inclusive) and not quite up to `1`(exclusive). Thus `Math.random()`can return a `0`but never quite return a `1`.
+
+It's great that we can generate random decimal numbers, but it's even more useful if we use it to generate random whole numbers.
+
+1. random decimal숫자를 생성하기 위해 `Math.random()`를 사용합니다.
+2. 그 숫자에 20을 곱합니다.
+3. `Math.floor()` 을 사용해 소숫점 이하를 버려 정수로 만듭니다.
+
+```javascript
+var randomNumberBetween0and19 = Math.floor(Math.random() * 20);
+
+function randomWholeNum() {
+    return Math.floor(Math.random()*10);
+}
+```
+
+<br>
+
+### Generate Random Whole Numbers within a Range
+
+특정 숫자 범위 예를 들어 2와 10사이의 숫자 범위를 설정할 수도 있습니다. 따라서 범위 설정에서 작은 숫자를 `min`으로 두고 큰 숫자는 `max`로 두겠습니다.
+
+```javascript
+Math.floor(Math.random() * (max - min + 1)) + min
+```
+
+위 코드를 통해 우리는 min과 max사이에 숫자를 random하게 받을 수 있습니다.
+
+<br>
+
+### Use the parseInt Function
+
+`parseInt()` 함수는 문자열을 parsing후 integer로 리턴합니다.
+
+```javascript
+var a = parseInt("007");
+// a는 integer 7 값을 가진다.
+```
+
+만약 문자열의 첫번째 문자가 숫자로 변환될 수 없으면 `NaN`을 리턴합니다.
+
+`parseInt()` 함수는 두번째 argument로 radix를 받습니다. 
+
+(radix는 진수를 나타냅니다. 2와 36사이의 값)
