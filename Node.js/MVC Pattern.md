@@ -588,17 +588,99 @@ export default userRouter;
 
 <br>
 
+<br>
+
 # 4. Model
 
 #### 실제 데이터베이스와 연동하기 전에 가짜 데이터베이스를 만들어서 적용시켜보는 것은 좋은 방법이다.
 
+<br>
 
+### MongoDB
 
+많은 데이터베이스들이 존재하는데, 크게 SQL과 NoSQL로 구분된다. 
 
+MongoDB는 NoSQL 기반이며 더 적은 규칙과 절차로 작업이 가능한 데이터베이스이다. 
 
+(예를 들어, 실시간 채팅을 만드는데 있어 MongoDB는 적합한 DataBase라 할 수 있다.)
 
+MongfoDB를 설치한 후에는 MongoDB를 JavaScript와 연결하는데 이를 위해서는 Adapter를 통해야 한다. 이것을 실행해주는 Adapter가 바로 Mongoose이다. 
 
+<br>
 
+### Mongoose
+
+Mongoose는 NodeJS를 위한 Object Modeling이다. 
+
+```powershell
+PS C:\Users\user\Desktop\revieWetube> npm install mongoose
+```
+
+MongoDB와 Mongoose를 설치한 후에는, db.js에 저장되어있는 가짜 데이터베이스를 지우고 MongoDB와 연결한다.
+
+<br>
+
+### Dotenv
+
+```powershell
+PS C:\Users\user\Desktop\revieWetube> npm install dotenv
+```
+
+dotenv는 어떤부분을 숨기고 싶을 때 사용한다. (예를 들어, Open Source 프로젝트를 하고 있을 때, 데이터베이스를 숨기고 싶은 경우.)
+
+dotenv 설정
+
+1. 프로젝트 폴더 밑에 `.env` 파일 생성
+
+```
+MONGO_URL="mongodb://localhost:27017/wetube"
+PORT=3000
+```
+
+2.  `db.js`에 아래와 같이 코드 입력
+
+```javascript
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useFindAndModify: false
+});
+
+const db = mongoose.connection;
+
+const handleOpen = () => console.log("✅ Connected to DB");
+const handleError = err => console.log(`❌ Error on DB Connection: ${err}`);
+
+db.once("open", handleOpen);
+db.on("error", handleError);
+```
+
+3. `init.js`에도 코드 입력
+
+```javascript
+import "./db";
+import app from "./app";
+import dotenv from "dotenv";
+dotenv.config();
+
+const PORT = process.env.PORT || 3000;
+
+const handleListening = () =>
+  console.log(`✅ Listening on port: http://localhost:${PORT}`);
+
+app.listen(PORT, handleListening);
+```
+
+4. 이후,  `.gitignore` 파일에 .env를 파일을 추가. (.gitignore 파일을 생성하면 .env 파일이 이미 추가되어있음. 혹시 없다면 .env 파일을 추가하여 github에서 .env파일을 확인할 수 없게 한다.)
+
+위 작업을 통해 내 데이터베이스 URL을 숨길 수 있다.
+
+<br>
+
+<br>
 
 # 5. 통신 상태
 
