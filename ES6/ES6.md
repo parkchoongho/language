@@ -309,15 +309,75 @@ console.log(a); // should be 6
 console.log(b); // should be 8
 ```
 
+<br>
 
+### Use Destructuring Assignment with the Rest Operator to Reassign Array Elements
 
+array destructing을 할 때, 나머지 요소들을 하나의 array로 모으고 싶을 때 `destructing`과 `rest operator`를 같이 사용할 수 있습니다.
 
+```javascript
+const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+console.log(a, b); // 1, 2
+console.log(arr); // [3, 4, 5, 7]
+```
 
+```javascript
+const source = [1,2,3,4,5,6,7,8,9,10];
+function removeFirstTwo(list) {
+  "use strict";
+  const [a,b,...arr] = list; // change this
 
+  return arr;
+}
+const arr = removeFirstTwo(source);
+console.log(arr); // should be [3,4,5,6,7,8,9,10]
+console.log(source); // should be [1,2,3,4,5,6,7,8,9,10];
+```
 
+<br>
 
+### Use Destructuring Assignment to Pass an Object as a Function's Parameters
 
+object를 function argument로 destructure하는 경우가 있습니다.
 
+```javascript
+const profileUpdate = (profileData) => {
+    const { name, age, nationality, location } = profileData;
+    // do something with these variables
+}
+```
+
+위 코드를 더 간단히 아래와 같은 코드로 바꿀 수 있습니다.
+
+```javascript
+const profileUpdate = ({ name, age, nationality, location }) => {
+    /* do something with these fields */
+}
+```
+
+아래 코드는 더 간결하다는 장점 외에도, 객체 전체를 조작하지 않는다는 장점을 가집니다. (오직 필요한 부분만 복사되어 함수에 전달됩니다.)
+
+```javascript
+const stats = {
+  max: 56.78,
+  standard_deviation: 4.34,
+  median: 34.54,
+  mode: 23.87,
+  min: -0.75,
+  average: 35.85
+};
+const half = (function() {
+  "use strict";
+  return function half({max, min}) {
+  // use function argument destructuring
+  return (max + min) / 2.0;
+  };
+ 
+
+})();
+console.log(stats); // should be object
+console.log(half(stats)); // should be 28.015
+```
 
 
 
