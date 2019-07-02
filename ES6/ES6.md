@@ -47,3 +47,35 @@ console.log(i);
 ```
 
 이렇게 선언하면 `i` 변수는 global하기 때문에 `i` 변수는 계속 남아있는다. 만일 다른 loop를 만들고 거기에 다시 `i` 변수를 선언한다면 문제가 발생할 것이다. 왜냐하면 그 loop는 그전에 updated된 global한 `i` 변수를 불러올 것이기 때문이다.
+
+<br>
+
+### Declare a Read-Only Variable with the const Keyword
+
+`let` 키워드만이 새로운 변수 선언법은 아닙니다. ES6, 에서는 `const` 키워드를 사용해 변수를 선언할 수 있습니다. `const` 는 모든 `let`의 특징들을 가지며 이에 더해, **read-only**라는 특징을 가집니다. 이 말은 `const`로 변수를 선언하면 재할당될 수 없다는 것을 의미합니다.
+
+```javascript
+"use strict"
+const FAV_PET = "Cats";
+FAV_PET = "Dogs"; // returns error
+```
+
+`const` 키워드로 변수에 이름을 줄때는 대문자로 하고 밑줄로 단어를 구분하는 것이 좋습니다.
+
+<br>
+
+###  Mutate an Array Declared with const
+
+`const` 키워드는 많은 부분에서 유용하게 사용됩니다. 몇몇 개발자들은 일단 `const` 키워드로 변수를 선언하고 만일 그 변수가 변할 필요가 있다면, 그때가서 `let` 키워드로 바꾸는 방식을 사용합니다. 
+
+그런데  const` 변수를 가지는 objects (including arrays and functions)  ` 들은 여전히 변할 수 있습니다. `const` 변수 선언은 variable idendifier의 재할당을 방지할 뿐입니다. 아래 코드를 봅시다.
+
+```javascript
+"use strict";
+const s = [5, 6, 7];
+s = [1, 2, 3]; // throws error, trying to assign a const
+s[2] = 45; // works just as it would with an array declared with var or let
+console.log(s); // returns [5, 6, 45]
+```
+
+  
