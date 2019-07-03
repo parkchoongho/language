@@ -379,7 +379,73 @@ console.log(stats); // should be object
 console.log(half(stats)); // should be 28.015
 ```
 
+<br>
 
+### Create Strings using Template Literals
 
+ES6의 또 다른 특징은 *template literal*입니다. 새로운 종류의 문자열로 복잡한 문자열을 다룰 때 유용하게 활용됩니다. 
 
+```javascript
+const person = {
+    name: "Zodiac Hasbro",
+    age: 56
+};
+
+// Template literal with multi-line and string interpolation
+const greeting = `Hello, my name is ${person.name}!
+I am ${person.age} years old.`;
+
+console.log(greeting); // prints
+// Hello, my name is Zodiac Hasbro!
+// I am 56 years old.
+```
+
+`template literal`은 문자열을 감싸는데 backticks(\`) 을 사용합니다. 그리고 input과 output 모두 멀티라인이므로 \n문자를 입력하지 않아도 됩니다. 그리고 `${variable}` syntax는 placeholder입니다. 이제 변수를 문자열에 사용하고 싶으면 `${}` 안에 그 변수를 입력하면 됩니다. 
+
+<br>
+
+### Write Concise Object Literal Declarations Using Simple Fields
+
+ES6는 object를 정의하는데 유용한 몇가지를 제공합니다.
+
+```javascript
+const getMousePosition = (x, y) => ({
+    x: x,
+    y: y
+});
+```
+
+`getMousePosition` 은 2개의  field를 가지고 있는 객체를 리턴하는 간단한 함수입니다. 
+
+ES6는 `x: x` 라 써야되는 중복을 줄이고 `x` 하나만 쓰는 것을 가능케합니다. 위 코드는 따라서 아래와 같이 작성이 가능합니다.
+
+```javascript
+const getMousePosition = (x, y) => ({ x, y });
+```
+
+<br>
+
+### Write Concise Declarative Functions with ES6
+
+ES5에서 객체안에 함수를 정의할 때는 반드시 `function` 라는 키워드를 사용해야 했습니다.
+
+```javascript
+const person = {
+    name: "Taylor",
+    sayHello: function() {
+        return `Hello! My name is ${this.name}.`;
+    }
+};
+```
+
+ES6에서는 `function` 키워드와 `:` 을 제거하고 객체안에 함수를 정의할 수 있습니다.
+
+```javascript
+const person = {
+    name: "Taylor",
+    sayHello() {
+        return `Hello! My name is ${this.name}.`;
+    }
+};
+```
 
