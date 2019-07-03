@@ -698,7 +698,7 @@ const VideoSchema = new mongoose.Schema({
     type: String,
     required: "Title is required"
   },
-  description: String,
+  description: String, // configuration이 필요하면 (다른 옵션을 줘야하면 object로 생성) 위 처럼 객체로 작성하고 필요 없으면 이렇게 한줄로 작성. 
   views: {
     type: Number,
     default: 0
@@ -723,6 +723,76 @@ mongoose documentation schema section에서 모든 option을 확인가능하다.
 ```javascript
 import "./models/Video";
 ```
+
+<br>
+
+### Data Relationship
+
+Data간의 관계를 설정하는 것은 매우 중요한 작업이다. (예를 들어, Video에 Comment를 달때, Comment Model과 Video Model을 어떻게 연관시킬 것인가)
+
+=> 크게 2가지 방법이 있다.
+
+1. Comment 모델은 그대로 두고 Video 모델에 해당 비디오에 소속되어 있는 Comment ID가 담긴 array를 추가하는 방법.
+
+```javascript
+import mongoose from "mongoose";
+// model은 document 이름이자 실제 data이고 schema는 형태를 의미한다.
+
+const VideoSchema = new mongoose.Schema({
+  fileUrl: {
+    // 영상 파일 자체를 Database에 저장하면 너무 무거워지므로 Url을 참조하는 방식을 사용. 영상의 주소를 저장.
+    type: String,
+    required: "File URL is required" // fileUrl 값이 없으면 이 "File URL is required"를 값으로 취한다.
+  },
+  title: {
+    type: String,
+    required: "Title is required"
+  },
+  description: String,
+  views: {
+    type: Number,
+    default: 0
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }]
+});
+
+// 위에서 작성한 Schema를 통해 Model 작성
+
+const model = mongoose.model("Video", VideoSchema);
+export default model;
+// 여기까지 작성하면 Database와 연결은 되어있지만 거기에 model이 있다는 것은 DB가 인지 못하는 상태.
+```
+
+2. Commet 모델에 해당 Video에 아이디를 주는 방법.
+
+```javascript
+import mongoose from "mongoose";
+
+const commentSchema = new mongoose.Schema({
+  text: {
+    type: String,
+    required: "Text is required"
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  video: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Video"
+  }
+});
+
+const model = mongoose.model("Comment", commentSchema);
+
+export default model;
+```
+
+둘다 각각에 연결된 모델 객체의 ID만을 저장한다. (수업에서는 첫 번째 방법을 사용)
 
 <br>
 
