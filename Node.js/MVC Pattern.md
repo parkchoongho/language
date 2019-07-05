@@ -796,6 +796,12 @@ export default model;
 
 <br>
 
+### 컨트롤러에 연결하기
+
+
+
+<br>
+
 <br>
 
 # 5. 통신 상태
