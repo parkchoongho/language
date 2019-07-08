@@ -397,3 +397,118 @@ Tip: HTML 요소 상에서 선언되는 순서는 아무 상관이 없습니다.
 
 `<h1 class="pink-text blue-text">Hello World!</h1>`와 `<h1 class="blue-text pink-text">Hello World!</h1>` 는 완전히 똑같습니다.
 
+<br>
+
+### Override Class Declarations by Styling ID Attributes
+
+브라우저는 CSS를 위에서부터 아래로 읽어내려갑니다. 따라서 스타일 충돌이 일어날 때, 브라우저는 가장 나중에 선언된 스타일을 적용합니다. 
+
+그에 반해 `id`는 어디에 선언되든, 항상 클래스보다 우선됩니다.
+
+```html
+<style>
+    #orange-text{
+        color: orange;
+    }
+    .blue-text {
+        color: blue;
+    }
+
+</style>
+<h1 id="orange-text" class="blue-text">Hello World!</h1>
+```
+
+이렇게 코드를 짜면 h1의 text 색깔은 orange가 됩니다.
+
+Tip: It doesn't matter whether you declare this CSS above or below pink-text class, since id attribute will always take precedence.	
+
+<br>
+
+### Override Class Declarations with Inline Styles
+
+`inline style`은 id, class에 우선되어 나타납니다.
+
+```html
+<style>
+    #orange-text {
+        color: orange;
+    }
+    .pink-text {
+        color: pink;
+    }
+    .blue-text {
+        color: blue;
+    }
+</style>
+<h1 style="color:white;" id="orange-text" class="pink-text blue-text">Hello World!</h1>
+```
+
+위 코드에서 h1 text 색깔은 하얀색으로 나타납니다.
+
+<br>
+
+### Override All Other Styles by using Important
+
+CSS 라이브러리(부트스트랩 같은)를 사용하면 우연찮게 그 전에 작성해 놓은 CSS를 override하는 경우가 있습니다. 따라서 이 경우, 다시 되돌리기 위해 `!important`를 사용할 수 있습니다.
+
+```html
+<style>
+    #orange-text {
+        color: orange;
+    }
+    .pink-text {
+        color: pink !important;
+    }
+    .blue-text {
+        color: blue;
+    }
+</style>
+<h1 id="orange-text" class="pink-text blue-text" style="color: white">Hello World!</h1>
+```
+
+이렇게 하면 h1의 색깔은 pink 색으로 나타납니다.
+
+<br>
+
+### Use Hex Code for Specific Colors
+
+CSS에서는 hexadecimal code (줄여서 `hex code`) 를 통해 색깔을 나타냅니다. `Hexadeciaml`(or `hex`) 는 16진법을 기반으로 하는 수를 의미합니다. 0~9, A~F를 사용하여 하나의 자릿수를 표현합니다. (0~F는 0~15를 의미합니다.)
+
+CSS에서 우리는 6,자리의 hexadecimal 숫자를 사용합니다. 2자리씩 끊어서 각각이 red(R), green(G), blue(B)를 나타냅니다.
+
+```css
+body{
+    color: #000000;
+}
+```
+
+From these three pure colors (red, green, and blue), we can vary the amounts of each to create over 16 million other colors!
+
+The digit `0`is the lowest number in hex code, and represents a complete absence of color.
+
+The digit `F`is the highest number in hex code, and represents the maximum possible brightness.
+
+<br>
+
+### Use Abbreviated Hex Code
+
+color red의 경우 `#FF0000`으로 나타냅니다. 이것을 `#F00`으로 줄여서 나타낼 수 있습니다.(여기서 각각 1자리 숫자씩 red, green, blue를 나타냅니다.) 이렇게 함으로써 가능한 색깔을 약 4000개를 줄일 수 있습니다.
+
+```css
+body{
+    color: #F00
+}
+```
+
+<br>
+
+### Use RGB values to Color Elements
+
+CSS에서 색깔을 나타내는 또 다른 방법은 `RGB`입니다. RGB에서 검은색은 `rgb(0, 0, 0)` 으로 나타내고 하얀색은 `rgb(255, 255, 255)`로 나타냅니다. `RGB`안에 있는 세개의 숫자는 `hex code`에서 사용되는 숫자 2자리와 동일하게 대응합니다.
+
+```css
+body {
+    background-color: rgb(255, 165, 0) == #FFA500
+}
+```
+
