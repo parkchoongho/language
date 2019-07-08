@@ -211,7 +211,7 @@ class 처럼 또한, `id`에도 CSS를 활용해 style을 입힐 수 있습니�
 
 `padding`은 요소 content와 `border` 사이의 공간을 제어합니다. 
 
-![]("https://user-images.githubusercontent.com/34790763/60810861-f35cff00-a1c8-11e9-89ca-e3e1e55fc065.PNG")
+ (사진)
 
 여기서 빨간 box가 파란 box 보다 더 많은 padding을 가지고 있습니다. 파란 박스의 padding 값을 늘리면 border와 text사이의 거리(`padding`)가 늘어납니다.
 
@@ -221,7 +221,7 @@ class 처럼 또한, `id`에도 CSS를 활용해 style을 입힐 수 있습니�
 
 `margin` 은 요소의 `border`와 그 요소를 감싸고 있는 요소사이의 거리를 나타냅니다.
 
-![](src="https://user-images.githubusercontent.com/34790763/60811046-6bc3c000-a1c9-11e9-8d73-193c975592ed.PNG")
+ (사진)
 
 이 그림에서 빨간box가 파란 box보다 더 큰 `margin` 을 가진다는 것을 알 수 있습니다. 파란 box의 `margin` 크기를 늘리면 그 border와 이를 감싸고 있는 요소 사이의 거리(`margin`)가 늘어납니다.
 
@@ -231,7 +231,7 @@ class 처럼 또한, `id`에도 CSS를 활용해 style을 입힐 수 있습니�
 
 `margin` 에 음수값을 주면, 그 요소는 점점 커지게 됩니다.
 
-![]("https://user-images.githubusercontent.com/34790763/60811093-8b5ae880-a1c9-11e9-9cf1-83e8fdee64d3.PNG")
+ (사진)
 
 <br>
 
@@ -250,7 +250,7 @@ class 처럼 또한, `id`에도 CSS를 활용해 style을 입힐 수 있습니�
 }
 ```
 
-![]("https://user-images.githubusercontent.com/34790763/60811133-a168a900-a1c9-11e9-975b-069a5f4e0ce7.PNG")
+ (사진)
 
 `padding-top`, `padding-right`, `padding-bottom`, and `padding-left` properties 각각에 값을 주는 대신 이를 한줄로 나타낼 수 있습니다.
 
@@ -281,7 +281,7 @@ class 처럼 또한, `id`에도 CSS를 활용해 style을 입힐 수 있습니�
 }
 ```
 
- ![]("https://user-images.githubusercontent.com/34790763/60811179-b34a4c00-a1c9-11e9-86f9-5d530b178b78.PNG")
+ (사진)
 
 `margin-top`, `margin-right`, `margin-bottom`, and `margin-left` properties 각각에 값을 주는 대신 이를 한줄에 나타낼 수 있습니다.
 
