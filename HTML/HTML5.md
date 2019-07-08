@@ -173,3 +173,81 @@ It is considered best practice to set a `for`attribute on the `label`element, wi
 </label>
 ```
 
+<br>
+
+### Create a Set of Checkboxes
+
+Forms는 한개 이상의 답을 얻어올때 `checkboxes`를 사용합니다. Checkboxes는 `input`의 한 종류입니다. 각각의 checkbox는 자신의 `label` 태그안에 nested될 수 있습니다. `input` 태그를 `label` 태그로 감쌈으로서 check box input과 label 태그를 연관 시킬 수 있습니다.
+
+모든 연관된 checkbox들은 다 같은 `name` 속성을 가져야 합니다. `label` 태그에 `for` 속성을 통해 명시적으로 `input`과 `label`의 관계를 보여주는 것이 좋습니다. (`input`의 id 속성과 `label`의 for 속성 연관 짓기)
+
+```html
+<label for="loving"><input id="loving" type="checkbox" name="personality"> Loving</label>
+```
+
+`checked` 속성을 통해 특정 checkbox가 선택되어 있는 것처럼 설정할 수 있습니다.
+
+```html
+<input type="radio" name="test-name" checked>
+```
+
+<br>
+
+### Nest Many Elements within a Single div Element
+
+`div` 태그는 다른 태그들을 포함하기 위한 목적을 가진 태그입니다. `div` 태그는 non-self-closing 태그로써 `<div>` 로 연후에는 반드시 `</div>` 로 닫아주어야 합니다.
+
+```html
+<div>
+    <p>Things cats love:</p>
+    <ul>
+        <li>cat nip</li>
+        <li>laser pointers</li>
+        <li>lasagna</li>
+    </ul>
+    <p>Top 3 things cats hate:</p>
+    <ol>
+        <li>flea treatment</li>
+        <li>thunder</li>
+        <li>other cats</li>
+    </ol>
+</div>
+```
+
+<br>
+
+### Declare the Doctype of an HTML Document
+
+html 문서를 작성할시, 이 문서가 어떤 버전의 HTML 페이지인지 브라우저에게 알려주어야 합니다. HTML은 계속 업데이트 되고 있습니다. 대부분의 메인 브라우저들은 가장 최신의 HTML 버전 (HTML 5)을 지원하고 있습니다. 
+
+`<!DOCTYPE...>` 을 html 파일 첫줄에 입력함으로써 브라우저에게 이 파일의 html 버전을 알릴 수 있습니다.   (`...` 부분은 HTML 버전을 입력하는 부분입니다.  HTML5의 경우 `<!DOCTYPE html>` 입니다.) !와 DOCTYPE(반드시 대문자로 입력)은 중요하며 특히 오래된 브라우저에게 중요합니다. 뒤에 `html` 부분은 case sensitive하지 않습니다. 
+
+그 다음, HTML code의 다른 부분은 `html` 태그안으로 들어와야합니다. `<html>` 태그는 `<!DOCTYPE html>` 바로 밑에 줄에 오고 `</html>` 은 파일 마지막 줄에 오게 됩니다.
+
+```html
+<!DOCTYPE html>
+<html>
+  <!-- Your HTML code goes here -->
+</html>
+```
+
+<br>
+
+### Define the Head and Body of an HTML Document
+
+`html` 태그안에 `head`, `body`와 같은 다른 요소를 포함시킬 수 있습니다. 만든 페이지 관련된 모든 정보 markup들은 `head` 태그안에 들어갑니다. 그리고 유저에게 보여지는 content markup은 `body` 태그안에 들어갑니다. 
+
+`link`, `meta`, `title` and `style` 과 같은 Metadata 요소들은 `head` 태그안에 들어갑니다.
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- metadata elements -->
+    </head>
+    <body>
+        <!-- page contents -->
+    </body>
+</html>
+```
+
