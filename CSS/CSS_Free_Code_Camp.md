@@ -297,3 +297,103 @@ class 처럼 또한, `id`에도 CSS를 활용해 style을 입힐 수 있습니�
 
 <br>
 
+### Use Attribute Selectors to Style Elements
+
+`[attr=value]`attribute selector를 활용해 요소에 style을 입힐 수 있습니다. 
+
+```css
+[type='radio'] {
+    margin: 20px 0px 20px 0px;
+}
+```
+
+위 코드는 `type` 이 `radio` 인 모든 요소의 margin 값을 코드대로 설정합니다.
+
+<br>
+
+### Understand Absolute versus Relative Units
+
+지금까지 px 단위를 사용해왔습니다. px말고도 CSS는 다양한 단위를 가지고 있습니다. 가장 흔히 사용되는 단위는 absolute와 relative입니다. absolute unit은 물리적인 단위와 연관되어 있습니다. 예를 들어, `in` 과 `mm` 은 각각 inches와 millimeters를 뜻합니다. Absolute 단위는 화면상에서의 실제 크기등을 나타냅니다. 
+
+Relative한 단위 (예를 들어, `em` 또는 `rem`) 들은 화면에 따라 다른 단위를 나타냅니다. 예를 들어, `em` 은 요소의 font 크기를 결정할 수 도 있습니다. 만일 `font-size: 1.5em;` 이렇게 설정했다면, 상위 요소(부모요소)의 1.5배 크기의 font 크기를 가집니다. 
+
+```css
+.red-box {
+    background-color: red;
+    margin: 20px 40px 20px 40px;
+    padding: 1.5em;
+}
+```
+
+Tip: There are several relative unit options that are tied to the size of the viewport. They are covered in the Responsive Web Design Principles section.
+
+<br>
+
+###  Inherit Styles from the Body Element
+
+모든 요소들은 `body` 태그의 스타일을 inherit합니다.
+
+```html
+<style>
+    body {
+        background-color: black;
+        color: green;
+        font-family: monospace;
+    }
+
+</style>
+
+<h1>Hello World</h1>
+```
+
+`h1` 태그는 초록색, monospace 글씨체를 가지게 됩니다.
+
+<br>
+
+### Prioritize One Style Over Another
+
+종종 HTML 요소들은 충돌되는 여러개의 스타일을 받게 됩니다. 예를 들어, `h1` 태그는 green이면서 동시에 pink 색일 수 없습니다. 
+
+```html
+<style>
+    body {
+        background-color: black;
+        font-family: monospace;
+        color: green;
+    }
+
+    .pink-text{
+        color:pink;
+    }
+</style>
+<h1 class="pink-text">Hello World!</h1>
+```
+
+이렇게 하면 `.pink-text`에 설정해 놓은 pink가 `body`에 설정해 놓은 green을 override합니다.
+
+```html
+<style>
+    body {
+        background-color: black;
+        font-family: monospace;
+        color: green;
+    }
+
+
+    .pink-text {
+        color: pink;
+    }
+    .blue-text{
+        color: blue;
+    }
+
+</style>
+<h1 class="pink-text blue-text">Hello World!</h1>
+```
+
+.blue-text에 설정된 blue값이 .pink-text에 설정된 pink 값을 override합니다.(뒤에 선언된 값이 앞에 선언된 값을 override합니다.) `style` 안에서 선언된 값들은 순서가 중요합니다.
+
+Tip: HTML 요소 상에서 선언되는 순서는 아무 상관이 없습니다.
+
+`<h1 class="pink-text blue-text">Hello World!</h1>`와 `<h1 class="blue-text pink-text">Hello World!</h1>` 는 완전히 똑같습니다.
+
