@@ -512,3 +512,115 @@ body {
 }
 ```
 
+<br>
+
+### Use CSS Variables to change several elements at once
+
+CSS *Variables* 은 많은 CSS properties를 하나의 value만 바꿔서 바꿀 수 있는 매우 powerful한 방법입니다.
+
+CSS Variable을 생성하기 위해, `two dashes` 를 `name` 앞에 붙이고 `value`를 할당합니다. 
+
+```css
+--penguin-skin: gray;
+```
+
+`--penguin-skin` 변수를 만들고 여기에 `gray`라는 값을 할당했습니다. 이제 어떤 요소를 gray로 만들기 위해 이 변수를 가져가 CSS 어디에서든 사용할 수 있습니다.
+
+<br>
+
+### Use a custom CSS Variable
+
+변수를 생성하고 이를 CSS의 다른 properties에 할당해서 사용할 수 있습니다. (by referencing the name you gave it.)
+
+```css
+background: var(--penguin-skin);
+```
+
+이렇게 하면 `--penguin-skin` 변수의 value 값을 background 값으로 가지게 됩니다.
+
+```css
+.penguin-top {
+    top: 10%;
+    left: 25%;
+
+    /* change code below */
+    background: var(--penguin-skin);
+    /* change code above */
+
+    width: 50%;
+    height: 45%;
+    border-radius: 70% 70% 60% 60%;
+}
+```
+
+<br>
+
+### Attach a Fallback value to a CSS Variable
+
+CSS에서 브라우저가 주어진 변수가 유효하지 않을 때를 대비해서 가져올 `fallback` value를 줄 수 있습니다.
+
+Tip: This fallback is not used to increase browser compatibilty, and it will not work on IE browsers. Rather, it is used so that the browser has a color to display if it cannot find your variable.
+
+```css
+background: var(--penguin-skin, black);
+```
+
+fallback을 줌으로써 디버깅할 때 도움을 받을 수 있습니다.
+
+<br>
+
+### Improve Compatibility with Browser Fallbacks
+
+When working with CSS you will likely run into browser compatibility issues at some point. This is why it's important to provide browser fallbacks to avoid potential problems.
+
+When your browser parses the CSS of a webpage, it ignores any properties that it doesn't recognize or support. For example, if you use a CSS variable to assign a background color on a site, Internet Explorer will ignore the background color because it does not support CSS variables. In that case, the browser will use whatever value it has for that property. If it can't find any other value set for that property, it will revert to the default value, which is typically not ideal.
+
+This means that if you do want to provide a browser fallback, it's as easy as providing another more widely supported value immediately before your declaration. That way an older browser will have something to fall back on, while a newer browser will just interpret whatever declaration comes later in the cascade.
+
+<br>
+
+###  Cascading CSS variables
+
+변수를 만들면 변수가 적용된 요소 안에 nested 되어있는 요소에도 적용할 수 있습니다. 이러한 것을 `cascading`이라 합니다. 
+
+이러한 특징 때문에, CSS 변수들은  *:root* 요소 안에 정의되어집니다. `:root` 요소는 HTML document 전체를 담고 있는 container입니다. (`html` 요소가 `body` 요소를 담고 있는 것과 같은 의미입니다.) 변수들을 `:root` 안에 생성하면, 이 변수들은 웹페이지 전체에서 사용가능해집니다.
+
+```css
+:root {
+
+    /* add code below */
+    --penguin-belly: pink;
+    /* add code above */
+}
+
+body {
+    background: var(--penguin-belly, #c6faf1);
+}
+```
+
+<br>
+
+### Use a media query to change a variable
+
+CSS Variables는 media queries를 사용하는 방식을 간편하게 만들어 줍니다. (For instance, when your screen is smaller or larger than your media query break point, you can change the value of a variable, and it will apply its style wherever it is used.)
+
+```css
+:root {
+    --penguin-size: 300px;
+    --penguin-skin: gray;
+    --penguin-belly: white;
+    --penguin-beak: orange;
+}
+
+@media (max-width: 350px) {
+    :root {
+
+        /* add code below */
+        --penguin-size: 200px;
+        --penguin-skin: black;
+        /* add code above */
+
+    }
+}
+```
+
