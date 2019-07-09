@@ -449,3 +449,195 @@ const person = {
 };
 ```
 
+<br>
+
+### Use class Syntax to Define a Constructor Function
+
+ES6는 객체를 생성할 때, keyword *class* 를 사용하여 만드는 새로운 문법을 제공합니다. 여기서 `class` syntax는 단지 syntax일뿐이며, Java나 Python에서 제공하는 객체기반 full-fledged class와는 거리가 있습니다. 
+
+ES5에서는 생성자 함수를 정의 하고 `new` 키워드를 사용해 객체를 인스턴스화 했습니다.
+
+```javascript
+var SpaceShuttle = function(targetPlanet){
+    this.targetPlanet = targetPlanet;
+}
+var zeus = new SpaceShuttle('Jupiter');
+```
+
+class syntax는 생성자 함수를 대체합니다.
+
+```javascript
+class SpaceShuttle {
+    constructor(targetPlanet){
+        this.targetPlanet = targetPlanet;
+    }
+}
+const zeus = new SpaceShuttle('Jupiter');
+```
+
+`class` 키워드는 새로운 함수를 선언하고 생성자를 더합니다. 생성자는 `new` 키워드를 사용해 객체를 생성할 때 불려집니다.
+
+<br>
+
+### Use getters and setters to Control Access to an Object
+
+객체로 부터 값들을 받아올 수 있으며 동시에 객체 property에 값을 설정할 수도 있습니다.
+
+이를 `getters`와 `setters`라 합니다. 
+
+Getter 함수는 유저가 private variables에 바로 접근하는 것 없이 객체의 private variables 값을 유저에게 return하는 것을 의미합니다.
+
+Setter 함수는 setter 함수안에 값을 넣음으로써 객체의 private variable의 값을 설정하는 것을 의미합니다. 이런 설정은 계산이나, 전에 있던 값을 overwrite하는 것을 포함합니다.
+
+```javascript
+class Book {
+    constructor(author) {
+        this._author = author;
+    }
+    // getter
+    get writer(){
+        return this._author;
+    }
+    // setter
+    set writer(updatedAuthor){
+        this._author = updatedAuthor;
+    }
+}
+const lol = new Book('anonymous');
+console.log(lol.writer);  // anonymous
+lol.writer = 'wut';
+console.log(lol.writer);  // wut
+```
+
+여기서 getter, setter를 호출하기 위해 사용하는 syntax는 함수가 아닌것 처럼 보입니다. **Getters와 setters는 내부 실행의 세부사항을 숨기기 때문에 매우 중요합니다.**
+
+```javascript
+function makeClass() {
+    "use strict";
+    class Thermostat {
+        constructor(Fahrenheit){
+            this.Fahrenheit =Fahrenheit;
+        }
+        get temperature(){
+            return 5/9*(this.Fahrenheit-32)
+        }
+        set temperature(Cel){
+            this.Fahrenheit = Cel*9.0/5+32;
+        }
+    }
+    return Thermostat;
+}
+const Thermostat = makeClass();
+const thermos = new Thermostat(76); // setting in Fahrenheit scale
+let temp = thermos.temperature; // 24.44 in C
+thermos.temperature = 26;
+temp = thermos.temperature; // 26 in C
+```
+
+**Tip**: When you implement this, you would be tracking the temperature inside the class in one scale - either Fahrenheit or Celsius.
+
+This is the power of getter or setter - you are creating an API for another user, who would get the correct result, no matter which one you track.
+
+In other words, you are abstracting implementation details from the consumer.
+
+<br>
+
+### Understand the Differences Between import and require
+
+외부 파일이나 모듈에서 코드나 함수를 가져오기 위해 `require()` 함수를 사용했습니다. 편리하지만 이 방법은 문제점을 가지고 있었습니다: 몇몇 파일들이나 모듈들은 너무 방대해서, 거기서 특정 코드만을 따오는 것이 필요했습니다.
+
+ES6는 `import`라는 편리한 툴을 제공합니다. 이를 사용해, 모듈이나 파일에서 우리가 원하는 특정 부분을 가져와 주어진 파일에서 활용할 수 있습니다.
+
+아래 코드에서 `math_array_functions` 파일에서 20개의 함수를 제공한다고 가정해봅시다. 그 중, 우리가 필요한 것은 `countItems` 함수 하나 뿐입니다. `require()` 함수는 20개의 모든 함수를 가져올 수 밖에 없지만, `import` syntax를 활용하면 우리가 원하는 함수만을 가져올 수 있습니다.
+
+```javascript
+import { countItems } from "math_array_functions"
+```
+
+위 코드를 묘사하면
+
+```javascript
+import { function } from "file_path_goes_here"
+// We can also import variables the same way!
+```
+
+`import` 문을 쓰는 여러 방법이 존재하는데, 위 방법이 가장 흔히 사용되는 방법입니다.
+
+**Tip**: function을 curly braces안에 공백을 넣어 작성하는 것이 좋은 방법입니다. => `import`문을 더 쉽게 읽게하는데 도움을 줍니다. 
+
+The lessons in this section handle non-browser features. `import`, and the statements we introduce in the rest of these lessons, won't work on a browser directly. However, we can use various tools to create code out of this to make it work in browser.
+
+In most cases, the file path requires a `./`before it; otherwise, node will look in the `node_modules`directory first trying to load it as a dependency.
+
+<br>
+
+### Use export to Reuse a Code Block
+
+위 exercise에서 처럼, `import`를 사용하기 위해서는 `export` 되어야 합니다. 다른 파일에서 재 사용할 수 있는 코드 - 함수나 변수 같은 - 를 `import`하려면, 반드시 먼저 `export` 해야 합니다. `import` 처럼 `export`는 non-browser feature입니다.
+
+밑에 코드는 *named export*를 보여줍니다. 이것을 활용하면, `import`를 통해 다른 파일에서 `export`한 어떤 코드든 가져올 수 있습니다.
+
+```javascript
+const capitalizeString = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+export { capitalizeString } //How to export functions.
+export const foo = "bar"; //How to export variables.
+```
+
+위 코드에 있는 export 코드를 다음과 같이 한줄로 표현할 수도 있습니다.
+
+```javascript
+const capitalizeString = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+const foo = "bar";
+export { capitalizeString, foo }
+```
+
+<br>
+
+###  Use * to Import Everything from a File
+
+현재 작업하는 파일에 모든 contents를 import 하고 싶은 파일이 있다고 합시다. 이 작업은 `import*` syntax를 통해 할 수 있습니다.
+
+```javascript
+import * as myMathModule from "math_functions";
+myMathModule.add(2,3);
+myMathModule.subtract(5,3);
+```
+
+```javascript
+import * as object_with_name_of_your_choice from "file_path_goes_here"
+object_with_name_of_your_choice.imported_function
+```
+
+You may use any name following the `import * as `portion of the statement. In order to utilize this method, it requires an object that receives the imported values. From here, you will use the dot notation to call your imported values.
+
+<br>
+
+### Create an Export Fallback with export default
+
+`export default` syntax는 오직 한가지 값만 파일에서 export 될때 사용합니다. 또한 fallback value을 만들기 위해서도 사용합니다.
+
+```javascript
+export default function add(x,y) {
+    return x + y;
+}
+```
+
+**Tip**: Since `export default`is used to declare a fallback value for a module or file, you can only have one value be a default export in each module or file. Additionally, you cannot use `export default`with `var`, `let`, or `const`.
+
+<br>
+
+### Import a Default Export
+
+`export default`를 `import`할 때는 조금 다른 `import` syntax를 사용해야합니다. 아래 `코드는 "math_functions"` 파일에서 default export된 `add` 함수를 `import` 하는 방식을 보여줍니다. 
+
+```javascript
+import add from "math_functions";
+add(5,4); //Will return 9
+```
+
+보시다시피 `add`는 curly braces `{}`로 둘러 쌓이지 않습니다. Unlike exported values, the primary method of importing a default export is to simply write the value's name after `import`.
+

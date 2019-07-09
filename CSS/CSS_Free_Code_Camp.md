@@ -524,7 +524,7 @@ CSS Variable을 생성하기 위해, `two dashes` 를 `name` 앞에 붙이고 `v
 --penguin-skin: gray;
 ```
 
-`--penguin-skin` 변수를 만들고 여기에 `gray`라는 값을 할당했습니다. 이제 어떤 요소를 gray로 만들기 위해 이 변수를 가져가 CSS 어디에서든 사용할 수 있습니다.
+`--penguin-skin` 변수를 만들고 여기에 `gray`라는 값을 할당했습니다. 이제 어떤 요소를 gray로 만들기 위해 이 변수를 가져가 CSS에서 사용할 수 있습니다.
 
 <br>
 
@@ -581,7 +581,7 @@ This means that if you do want to provide a browser fallback, it's as easy as pr
 
 ###  Cascading CSS variables
 
-변수를 만들면 변수가 적용된 요소 안에 nested 되어있는 요소에도 적용할 수 있습니다. 이러한 것을 `cascading`이라 합니다. 
+변수를 만들면 변수가 적용된 요소 안에 nested 되어있는 요소에만 적용할 수 있습니다. 이러한 것을 `cascading`이라 합니다. 
 
 이러한 특징 때문에, CSS 변수들은  *:root* 요소 안에 정의되어집니다. `:root` 요소는 HTML document 전체를 담고 있는 container입니다. (`html` 요소가 `body` 요소를 담고 있는 것과 같은 의미입니다.) 변수들을 `:root` 안에 생성하면, 이 변수들은 웹페이지 전체에서 사용가능해집니다.
 
