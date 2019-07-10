@@ -1,6 +1,6 @@
 # Regular Expressions
 
-Regular expressions are special strings that represent a search pattern. Also known as "regex" or "regexes", they help programmers match, search, and replace text. Regular expressions can appear cryptic because a few characters have special meaning. The goal is to combine the symbols and text into a pattern that matches what you want, but only what you want. This section will cover the characters, a few shortcuts, and the common uses for writing regular expressions.
+Regular expressions are special strings that represent a search pattern. Also known as "regex" or "regexp", they help programmers match, search, and replace text. Regular expressions can appear cryptic because a few characters have special meaning. The goal is to combine the symbols and text into a pattern that matches what you want, but only what you want. This section will cover the characters, a few shortcuts, and the common uses for writing regular expressions.
 
 <br>
 
@@ -187,4 +187,76 @@ jennyStr.match(myRegex);
 <br>
 
 ### Match Single Characters Not Specified
+
+So far, you have created a set of characters that you want to match, but you could also create a set of characters that you do not want to match. These types of character sets are called `negated character sets`.
+
+To create a `negated character set`, you place a `caret`character (`^`) after the opening bracket and before the characters you do not want to match.
+
+For example, `/[^aeiou]/gi`matches all characters that are not a vowel. Note that characters like `.`, `!`, `[`, `@`, `/`and white space are matched - the negated vowel character set only excludes the vowel characters.
+
+```javascript
+let quoteSample = "3 blind mice.";
+let myRegex = /[^0-9aeiou]/gi;
+let result = quoteSample.match(myRegex);
+```
+
+<br>
+
+### Match Characters that Occur One or More Times
+
+Sometimes, you need to match a character (or group of characters) that appears one or more times in a row. This means it occurs at least once, and may be repeated.
+
+You can use the `+`character to check if that is the case. Remember, the character or pattern has to be present consecutively. That is, the character has to repeat one after the other.
+
+For example, `/a+/g`would find one match in `"abc"`and return `["a"]`. Because of the `+`, it would also find a single match in `"aabc"`and return `["aa"]`.
+
+If it were instead checking the string `"abab"`, it would find two matches and return `["a", "a"]`because the `a`characters are not in a row - there is a `b`between them. Finally, since there is no `"a"`in the string `"bcd"`, it wouldn't find a match.
+
+```javascript
+let difficultSpelling = "Mississippi";
+let myRegex = /s+/gi;
+let result = difficultSpelling.match(myRegex);
+```
+
+<br>
+
+### Match Characters that Occur Zero or More Times
+
+The last challenge used the plus `+`sign to look for characters that occur one or more times. There's also an option that matches characters that occur zero or more times.
+
+The character to do this is the `asterisk`or `star`: `*`.
+
+```javascript
+let soccerWord = "gooooooooal!";
+let gPhrase = "gut feeling";
+let oPhrase = "over the moon";
+let goRegex = /go*/;
+soccerWord.match(goRegex); // Returns ["goooooooo"]
+gPhrase.match(goRegex); // Returns ["g"]
+oPhrase.match(goRegex); // Returns null
+```
+
+```javascript
+let chewieQuote = "Aaaaaaaaaaaaaaaarrrgh!";
+let chewieRegex = /Aa*/;
+let result = chewieQuote.match(chewieRegex);
+```
+
+<br>
+
+### Find Characters with Lazy Matching
+
+In regular expressions, a `greedy`match finds the longest possible part of a string that fits the regex pattern and returns it as a match. The alternative is called a `lazy`match, which finds the smallest possible part of the string that satisfies the regex pattern.
+
+You can apply the regex `/t[a-z]*i/`to the string `"titanic"`. This regex is basically a pattern that starts with `t`, ends with `i`, and has some letters in between.
+
+Regular expressions are by default `greedy`, so the match would return `["titani"]`. It finds the largest sub-string possible to fit the pattern.
+
+However, you can use the `?`character to change it to `lazy`matching. `"titanic"`matched against the adjusted regex of `/t[a-z]*?i/`returns `["ti"]`.
+
+```javascript
+let text = "<h1>Winter is coming</h1>";
+let myRegex = /<h[a-z]*?1>/;
+let result = text.match(myRegex);
+```
 
