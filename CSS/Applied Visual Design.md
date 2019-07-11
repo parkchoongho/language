@@ -85,3 +85,53 @@ text를 strikethrough하고 싶으면 (취소선 긋기), `s` 태그를 사용�
 ### Create a Horizontal Line Using the hr Element
 
 `hr` 태그를 활용해 태그를 포함하는 부모 요소에 해당하는 수평선을 만들 수 있습니다. 이는 보통 주제를 바꾸거나 content를 시각적으로 그룹별로 구분할 때 사용됩니다.
+
+```html
+<h4><s>Google</s>Alphabet</h4>
+<hr>
+<p><em>Google was founded by Larry Page and Sergey Brin while they were <u>Ph.D. students</u> at <strong>Stanford University</strong>.</em></p>
+```
+
+**Tip**: `hr`은 self-closing tag이므로 따로 closing tag가 필요하지 않습니다.
+
+<br>
+
+### Adjust the background-color Property of Text
+
+Instead of adjusting your overall background or the color of the text to make the foreground easily readable, you can add a `background-color`to the element holding the text you want to emphasize. This challenge uses `rgba()`instead of `hex`codes or normal `rgb()`.
+
+```pseudocode
+rgba stands for:
+  r = red
+  g = green
+  b = blue
+  a = alpha/level of opacity
+```
+
+The RGB values can range from 0 to 255. The alpha value can range from 1, which is fully opaque or a solid color, to 0, which is fully transparent or clear. `rgba()`is great to use in this case, as it allows you to adjust the opacity. This means you don't have to completely block out the background.
+
+You'll use `background-color: rgba(45, 45, 45, 0.1)`for this challenge. It produces a dark gray color that is nearly transparent given the low opacity value of 0.1.
+
+```css
+h4 {
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(45, 45, 45, 0.1);
+}
+```
+
+<br>
+
+### Adjust the Size of a Header Versus a Paragraph Tag
+
+The font size of header tags (`h1`through `h6`) should generally be larger than the font size of paragraph tags. This makes it easier for the user to visually understand the layout and level of importance of everything on the page. You use the `font-size`property to adjust the size of the text in an element.
+
+```css
+h4 {
+    text-align: center;
+    background-color: rgba(45, 45, 45, 0.1);
+    padding: 10px;
+    font-size: 27px;
+}
+```
+
