@@ -135,3 +135,273 @@ h4 {
 }
 ```
 
+<br>
+
+### Add a box-shadow to a Card-like Element
+
+`box-shadow` property는 요소에 하나 이상의 그림자를 적용할 수 있습니다. 
+
+The `box-shadow`property takes values for `offset-x`(how far to push the shadow horizontally from the element), `offset-y`(how far to push the shadow vertically from the element), `blur-radius`, `spread-radius`and a color value, in that order. The `blur-radius`and `spread-radius`values are optional.
+
+```css
+box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+```
+
+<br>
+
+### Decrease the Opacity of an Element
+
+`opacity` property는 CSS에서 요소의 transparency를 조정하는데 사용됩니다.
+
+```pseudocode
+A value of 1 is opaque, which isn't transparent at all.
+A value of 0.5 is half see-through.
+A value of 0 is completely transparent.
+```
+
+The value given will apply to the entire element, whether that's an image with some transparency, or the foreground and background colors for a block of text.
+
+<br>
+
+### Use the text-transform Property to Make Text Uppercase
+
+ `text-transform` property는 text의 모습을 조정하는데 사용됩니다. 
+
+It's a convenient way to make sure text on a webpage appears consistently, without having to change the text content of the actual HTML elements.
+
+The following table shows how the different `text-transform`values change the example text "Transform me".
+
+| Value        | Result                                                |
+| :----------- | :---------------------------------------------------- |
+| `lowercase`  | "transform me"                                        |
+| `uppercase`  | "TRANSFORM ME"                                        |
+| `capitalize` | "Transform Me"                                        |
+| `initial`    | Use the default value                                 |
+| `inherit`    | Use the `text-transform`value from the parent element |
+| `none`       | **Default:** Use the original text                    |
+
+```css
+h4 {
+    text-align: center;
+    background-color: rgba(45, 45, 45, 0.1);
+    padding: 10px;
+    font-size: 27px;
+    text-transform: uppercase;
+}
+```
+
+<br>
+
+### Set the line-height of Paragraphs
+
+`line-height` property는 블록 각각의 줄에 존재하는 text의 높이를 조정할 수 있습니다. As the name suggests, it changes the amount of vertical space that each line of text gets.
+
+```css
+p {
+    font-size: 16px;
+    line-heightL 25px;
+}
+```
+
+<br>
+
+### Adjust the Hover State of an Anchor Tag
+
+This challenge will touch on the usage of pseudo-classes. A pseudo-class is a keyword that can be added to selectors, in order to select a specific state of the element.
+
+For example, the styling of an anchor tag can be changed for its hover state using the `:hover`pseudo-class selector. Here's the CSS to change the `color`of the anchor tag to red during its hover state:
+
+```css
+a:hover {
+    color: red;
+}
+```
+
+<br>
+
+### Change an Element's Relative Position
+
+CSS treats each HTML element as its own box, which is usually referred to as the `CSS Box Model`. Block-level items automatically start on a new line (think headings, paragraphs, and divs) while inline items sit within surrounding content (like images or spans). The default layout of elements in this way is called the `normal flow`of a document, but CSS offers the position property to override it.
+
+When the position of an element is set to `relative`, it allows you to specify how CSS should move it *relative* to its current position in the normal flow of the page. It pairs with the CSS offset properties of `left`or `right`, and `top`or `bottom`. These say how many pixels, percentages, or ems to move the item *away* from where it is normally positioned. The following example moves the paragraph 10 pixels away from the bottom:
+
+```css
+p {
+  position: relative;
+  bottom: 10px;
+}
+```
+
+Changing an element's position to relative does not remove it from the normal flow - other elements around it still behave as if that item were in its default position.
+
+**Tip**: Positioning gives you a lot of flexibility and power over the visual layout of a page. It's good to remember that no matter the position of elements, the underlying HTML markup should be organized and make sense when read from top to bottom. This is how users with visual impairments (who rely on assistive devices like screen readers) access your content.
+
+<br>
+
+###  Move a Relatively Positioned Element with CSS Offsets
+
+The CSS offsets of `top`or `bottom`, and `left`or `right`tell the browser how far to offset an item relative to where it would sit in the normal flow of the document. You're offsetting an element away from a given spot, which moves the element away from the referenced side (effectively, the opposite direction). As you saw in the last challenge, using the top offset moved the `h2`downwards. Likewise, using a left offset moves an item to the right.
+
+```html
+<head>
+    <style>
+        h2 {
+            position: relative;
+            left: 15px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>On Being Well-Positioned</h1>
+    <h2>Move me!</h2>
+    <p>I still think the h2 is where it normally sits.</p>
+</body>
+```
+
+### Lock an Element to its Parent with Absolute Positioning
+
+The next option for the CSS `position`property is `absolute`, which locks the element in place relative to its parent container. Unlike the `relative`position, this removes the element from the normal flow of the document, so surrounding items ignore it. The CSS offset properties (top or bottom and left or right) are used to adjust the position.
+
+One nuance with absolute positioning is that it will be locked relative to its closest *positioned* ancestor. If you forget to add a position rule to the parent item, (this is typically done using `position: relative;`), the browser will keep looking up the chain and ultimately default to the body tag.
+
+```html
+<style>
+    #searchbar {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+    }
+    section {
+        position: relative;
+    }
+</style>
+<body>
+    <h1>Welcome!</h1>
+    <section>
+        <form id="searchbar">
+            <label for="search">Search:</label>
+            <input type="search" id="search" name="search">
+            <input type="submit" name="submit" value="Go!">
+        </form>
+    </section>
+</body>
+```
+
+<br>
+
+### Lock an Element to the Browser Window with Fixed Positioning
+
+The next layout scheme that CSS offers is the `fixed`position, which is a type of absolute positioning that locks an element relative to the browser window. Similar to absolute positioning, it's used with the CSS offset properties and also removes the element from the normal flow of the document. Other items no longer "realize" where it is positioned, which may require some layout adjustments elsewhere.
+
+One key difference between the `fixed`and `absolute`positions is that an element with a fixed position won't move when the user scrolls.
+
+```html
+<style>
+    #navbar {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+
+
+        width: 100%;
+        background-color: #767676;
+    }
+    nav ul {
+        margin: 0px;
+        padding: 5px 0px 5px 30px;
+    }
+    nav li {
+        display: inline;
+        margin-right: 20px;
+    }
+    a {
+        text-decoration: none;
+    }
+</style>
+<body>
+    <header>
+        <h1>Welcome!</h1>
+        <nav id="navbar">
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <p>I shift up when the #navbar is fixed to the browser window.</p>
+</body>
+```
+
+The navigation bar in the code is labeled with an id of `navbar`. Change its `position`to `fixed`, and offset it 0 pixels from the `top`and 0 pixels from the `left`. Notice the (lack of) impact to the `h1`position, it hasn't been pushed down to accommodate the navigation bar and would need to be adjusted separately.
+
+<br>
+
+### Push Elements Left or Right with the float Property
+
+The next positioning tool does not actually use `position`, but sets the `float`property of an element. Floating elements are removed from the normal flow of a document and pushed to either the `left`or `right`of their containing parent element. It's commonly used with the `width`property to specify how much horizontal space the floated element requires.
+
+```html
+<head>
+    <style>
+        #left {
+            float: left;
+            width: 50%;
+        }
+        #right {
+            float: right;
+            width: 40%;
+        }
+        aside, section {
+            padding: 2px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome!</h1>
+    </header>
+    <section id="left">
+        <h2>Content</h2>
+        <p>Good stuff</p>
+    </section>
+    <aside id="right">
+        <h2>Sidebar</h2>
+        <p>Links</p>
+    </aside>
+</body>
+```
+
+<br>
+
+### Change the Position of Overlapping Elements with the z-index Property
+
+When elements are positioned to overlap, the element coming later in the HTML markup will, by default, appear on the top of the other elements. However, the `z-index`property can specify the order of how elements are stacked on top of one another. It must be an integer (i.e. a whole number and not a decimal), and higher values for the `z-index`property of an element move it higher in the stack than those with lower values.
+
+```html
+<style>
+    div {
+        width: 60%;
+        height: 200px;
+        margin-top: 20px;
+    }
+
+    .first {
+        background-color: red;
+        position: absolute;
+        z-index: 2;
+    }
+    .second {
+        background-color: blue;
+        position: absolute;
+        left: 40px;
+        top: 50px;
+        z-index: 1;
+    }
+</style>
+
+<div class="first"></div>
+<div class="second"></div>
+```
+
