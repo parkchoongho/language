@@ -439,3 +439,398 @@ green (#00FF00) and magenta (#FF00FF)
 blue (#0000FF) and yellow (#FFFF00)
 ```
 
+This is different than the outdated RYB color model that many of us were taught in school, which has different primary and complementary colors. Modern color theory uses the additive RGB model (like on a computer screen) and the subtractive CMY(K) model (like in printing). Read [here](https://en.wikipedia.org/wiki/Color_model) for more information on this complex subject.
+
+There are many color picking tools available online that have an option to find the complement of a color.
+
+**Tip**: For all color challenges: Using color can be a powerful way to add visual interest to a page. However, color alone should not be used as the only way to convey important information because users with visual impairments may not understand that content. This issue will be covered in more detail in the Applied Accessibility challenges.
+
+<br>
+
+### Learn about Tertiary Colors
+
+Computer monitors and device screens create different colors by combining amounts of red, green, and blue light. This is known as the RGB additive color model in modern color theory. Red (R), green (G), and blue (B) are called primary colors. Mixing two primary colors creates the secondary colors cyan (G + B), magenta (R + B) and yellow (R + G). You saw these colors in the Complementary Colors challenge. These secondary colors happen to be the complement to the primary color not used in their creation, and are opposite to that primary color on the color wheel. For example, magenta is made with red and blue, and is the complement to green.
+
+Tertiary colors are the result of combining a primary color with one of its secondary color neighbors. For example, red (primary) and yellow (secondary) make orange. This adds six more colors to a simple color wheel for a total of twelve.
+
+There are various methods of selecting different colors that result in a harmonious combination in design. One example that can use tertiary colors is called the split-complementary color scheme. This scheme starts with a base color, then pairs it with the two colors that are adjacent to its complement. The three colors provide strong visual contrast in a design, but are more subtle than using two complementary colors.
+
+Here are three colors created using the split-complement scheme:
+
+| Color     | Hex Code |
+| :-------- | :------- |
+| orange    | #FF7D00  |
+| cyan      | #00FFFF  |
+| raspberry | #FF007D  |
+
+<br>
+
+### Adjust the Color of Various Elements to Complementary Colors
+
+The Complementary Colors challenge showed that opposite colors on the color wheel can make each other appear more vibrant when placed side-by-side. However, the strong visual contrast can be jarring if it's overused on a website, and can sometimes make text harder to read if it's placed on a complementary-colored background. In practice, one of the colors is usually dominant and the complement is used to bring visual attention to certain content on the page.
+
+<br>
+
+### Adjust the Hue of a Color
+
+Colors have several characteristics including hue, saturation, and lightness. CSS3 introduced the `hsl()`property as an alternative way to pick a color by directly stating these characteristics.
+
+**Hue** is what people generally think of as 'color'. If you picture a spectrum of colors starting with red on the left, moving through green in the middle, and blue on right, the hue is where a color fits along this line. In `hsl()`, hue uses a color wheel concept instead of the spectrum, where the angle of the color on the circle is given as a value between 0 and 360.
+
+**Saturation** is the amount of gray in a color. A fully saturated color has no gray in it, and a minimally saturated color is almost completely gray. This is given as a percentage with 100% being fully saturated.
+
+**Lightness** is the amount of white or black in a color. A percentage is given ranging from 0% (black) to 100% (white), where 50% is the normal color.
+
+Here are a few examples of using `hsl()`with fully-saturated, normal lightness colors:
+
+| Color   | HSL                 |
+| :------ | :------------------ |
+| red     | hsl(0, 100%, 50%)   |
+| yellow  | hsl(60, 100%, 50%)  |
+| green   | hsl(120, 100%, 50%) |
+| cyan    | hsl(180, 100%, 50%) |
+| blue    | hsl(240, 100%, 50%) |
+| magenta | hsl(300, 100%, 50%) |
+
+<br>
+
+### Adjust the Tone of a Color
+
+The `hsl()`option in CSS also makes it easy to adjust the tone of a color. Mixing white with a pure hue creates a tint of that color, and adding black will make a shade. Alternatively, a tone is produced by adding gray or by both tinting and shading. Recall that the 's' and 'l' of `hsl()`stand for saturation and lightness, respectively. The saturation percent changes the amount of gray and the lightness percent determines how much white or black is in the color. This is useful when you have a base hue you like, but need different variations of it.
+
+```html
+<style>
+    header {
+        background-color: hsl(180, 90%, 35%);
+        color: #FFFFFF;
+    }
+
+    nav {
+        background-color: hsl(180, 80%, 25%);
+    }
+
+    h1 {
+        text-indent: 10px;
+        padding-top: 10px;
+    }
+
+    nav ul {
+        margin: 0px;
+        padding: 5px 0px 5px 30px;
+    }
+
+    nav li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
+
+<header>
+    <h1>Cooking with FCC!</h1>
+    <nav>
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Classes</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+```
+
+<br>
+
+### Create a Gradual CSS Linear Gradient
+
+Applying a color on HTML elements is not limited to one flat hue. CSS provides the ability to use color transitions, otherwise known as gradients, on elements. This is accessed through the `background`property's `linear-gradient()`function. Here is the general syntax:
+
+```pseudocode
+background: linear-gradient(gradient_direction, color 1, color 2, color 3, ...);
+```
+
+The first argument specifies the direction from which color transition starts - it can be stated as a degree, where 90deg makes a vertical gradient and 45deg is angled like a backslash. The following arguments specify the order of colors used in the gradient.
+
+Example:
+
+```pseudocode
+background: linear-gradient(90deg, red, yellow, rgb(204, 204, 255));
+```
+
+```html
+<style>
+
+    div{ 
+        border-radius: 20px;
+        width: 70%;
+        height: 400px;
+        margin: 50px auto;
+        background: linear-gradient(35deg, #CCFFFF, #FFCCCC)
+    }
+
+</style>
+
+<div></div>
+```
+
+**Tip**: While there are other ways to specify a color value, like `rgb()`or `hsl()`, use hex values for this challenge.
+
+<br>
+
+### Use a CSS Linear Gradient to Create a Striped Element
+
+The `repeating-linear-gradient()`function is very similar to `linear-gradient()`with the major difference that it repeats the specified gradient pattern. `repeating-linear-gradient()`accepts a variety of values, but for simplicity, you'll work with an angle value and color stop values in this challenge.
+
+The angle value is the direction of the gradient. Color stops are like width values that mark where a transition takes place, and are given with a percentage or a number of pixels.
+
+In the example demonstrated in the code editor, the gradient starts with the color `yellow`at 0 pixels which blends into the second color `blue`at 40 pixels away from the start. Since the next color stop is also at 40 pixels, the gradient immediately changes to the third color `green`, which itself blends into the fourth color value `red`as that is 80 pixels away from the beginning of the gradient.
+
+For this example, it helps to think about the color stops as pairs where every two colors blend together.
+
+```
+0px [yellow -- blend -- blue] 40px [green -- blend -- red] 80px
+```
+
+If every two color stop values are the same color, the blending isn't noticeable because it's between the same color, followed by a hard transition to the next color, so you end up with stripes.
+
+```html
+<style>
+
+    div{ 
+        border-radius: 20px;
+        width: 70%;
+        height: 400px;
+        margin:  50 auto;
+        background: repeating-linear-gradient(
+            45deg,
+            yellow 0px,
+            yellow 40px,
+            black 40px,
+            black 80px
+        );
+    }
+
+</style>
+
+<div></div>
+```
+
+<br>
+
+### Create Texture by Adding a Subtle Pattern as a Background Image
+
+One way to add texture and interest to a background and have it stand out more is to add a subtle pattern. The key is balance, as you don't want the background to stand out too much, and take away from the foreground. The `background`property supports the `url()`function in order to link to an image of the chosen texture or pattern. The link address is wrapped in quotes inside the parentheses.
+
+```html
+<style>
+    body {
+        background: url(' https://i.imgur.com/MJAkxbh.png');
+    }
+</style>
+```
+
+<br>
+
+### Use the CSS Transform scale Property to Change the Size of an Element
+
+To change the scale of an element, CSS has the `transform`property, along with its `scale()`function. The following code example doubles the size of all the paragraph elements on the page:
+
+```css
+p {
+    transform:scale(2);
+}
+```
+
+<br>
+
+### Use the CSS Transform scale Property to Scale an Element on Hover
+
+The `transform`property has a variety of functions that lets you scale, move, rotate, skew, etc., your elements. When used with pseudo-classes such as `:hover`that specify a certain state of an element, the `transform`property can easily add interactivity to your elements.
+
+Here's an example to scale the paragraph elements to 2.1 times their original size when a user hovers over them:
+
+```css
+p:hover {
+    transform: scale(2.1);
+}
+```
+
+```html
+<style>
+    div { 
+        width: 70%;
+        height: 100px;
+        margin:  50px auto;
+        background: linear-gradient(
+            53deg,
+            #ccfffc,
+            #ffcccf
+        );
+    }
+    div:hover{
+        transform: scale(1.1);
+    }
+
+
+</style>
+
+<div></div>
+```
+
+<br>
+
+### Use the CSS Transform Property skewX to Skew an Element Along the X-Axis
+
+`transform` property에 적용할 수 있는 다른 함수는 `skewX()` 입니다. 이 함수는 선택된 요소를 X축(수평선)을 기준으로 주어진 각도만큼 형태를 변형합니다.
+
+```css
+p {
+    transform: skewX(-32deg);
+}
+```
+
+```html
+<style>
+    div { 
+        width: 70%;
+        height: 100px;
+        margin:  50px auto;
+    }
+    #top {
+        background-color: red;
+    }
+    #bottom {
+        background-color: blue;
+        transform: skewX(24deg);
+    }
+</style>
+
+<div id="top"></div>
+<div id="bottom"></div>
+```
+
+<br>
+
+### Use the CSS Transform Property skewY to Skew an Element Along the Y-Axis
+
+Given that the `skewX()`function skews the selected element along the X-axis by a given degree, it is no surprise that the `skewY()`property skews an element along the Y (vertical) axis.
+
+```html
+<style>
+    div { 
+        width: 70%;
+        height: 100px;
+        margin: 50px auto;
+    }
+    #top {
+        background-color: red;
+        transform: skewY(-10deg);
+    }
+    #bottom {
+        background-color: blue;
+        transform: skewX(24deg);
+    }
+</style>
+
+<div id="top"></div>
+<div id="bottom"></div>
+```
+
+<br>
+
+### Create a Graphic Using CSS
+
+By manipulating different selectors and properties, you can make interesting shapes. One of the easier ones to try is a crescent moon shape. For this challenge you need to work with the `box-shadow`property that sets the shadow of an element, along with the `border-radius`property that controls the roundness of the element's corners.
+
+You will create a round, transparent object with a crisp shadow that is slightly offset to the side - the shadow is actually going to be the moon shape you see.
+
+In order to create a round object, the `border-radius`property should be set to a value of 50%.
+
+You may recall from an earlier challenge that the `box-shadow`property takes values for `offset-x`, `offset-y`, `blur-radius`, `spread-radius`and a color value in that order. The `blur-radius`and `spread-radius`values are optional.
+
+```css
+<style>
+.center
+{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 25px 10px 0px 0px blue; 
+}
+
+</style>
+<div class="center"></div>
+```
+
+<br>
+
+### Create a More Complex Shape Using CSS and HTML
+
+One of the most popular shapes in the world is the heart shape, and in this challenge you'll create one using pure CSS. But first, you need to understand the `::before`and `::after`pseudo-elements. These pseudo-elements are used to add something before or after a selected element. In the following example, a `::before`pseudo-element is used to add a rectangle to an element with the class `heart`:
+
+```css
+.heart::before {
+    content: "";
+    background-color: yellow;
+    border-radius: 25%;
+    position: absolute;
+    height: 50px;
+    width: 70px;
+    top: -50px;
+    left: 5px;
+}
+```
+
+For the `::before`and `::after`pseudo-elements to function properly, they must have a defined `content`property. This property is usually used to add things like a photo or text to the selected element. When the `::before`and `::after`pseudo-elements are used to make shapes, the `content`property is still required, but it's set to an empty string.
+
+In the above example, the element with the class of `heart`has a `::before`pseudo-element that produces a yellow rectangle with `height`and `width`of 50px and 70px, respectively. This rectangle has round corners due to its 25% border radius and is positioned absolutely at 5px from the `left`and 50px above the `top`of the element.
+
+```css
+<style>
+.heart {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: pink;
+    height: 50px;
+    width: 50px;
+    transform: rotate(-45deg);
+}
+.heart::after {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0px;
+    left: 25px;
+}
+.heart::before {
+    content: '';
+    background-color: pink;
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 0px;
+}
+</style>
+<div class = "heart"></div>
+```
+
