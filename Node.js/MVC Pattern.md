@@ -845,6 +845,81 @@ export const home = async (req, res) => {
 //try는 정상적으로 작동할 때, 만약에 실패하면 catch(error가 throw되면 이를 catch하겠다!)안을 실행하게끔 해서 error을 handling한다. 이렇게 코드를 짜면 에러가 발생해도 home 화면을 rendering 해서 유저에게 보여줄 수 있다.(nodeJS가 작동을 멈추지 않는다.)
 ```
 
+### 파일 업로드
+
+ 비디오가 아닌 파일이 들어오지 않게 작업한다.
+
+```pseudocode
+extends layouts/main
+
+block content
+    .form-container
+        form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
+            label(for="file") Video File
+            input(type="file", id="file", name="videoFile", required=true, accept="video/*")
+            input(type="text", placeholder="Title", name="title", required=true)
+            textarea(placeholder="Description", name="description", required=true)
+            input(type="submit", value="Upload Video")
+```
+
+accept 속성을 활용하면 특정 형태의 파일만을 받게끔 제한할 수 있다.
+
+파일을 업로드하고 그 파일 자체를 주는 것이 아닌, 파일의 경로를 데이터에 저장해야 한다. (파일 자체를 저장하면 데이터베이스가 너무 무거워지기 때문이다.) 따라서 파일을 업로드하고 파일 경로(URL)를 반환하는 MiddleWare가 필요하다. 이 MiddleWare를 multer라고 한다. 
+
+우선 위 코드 처럼 전체 form에 `enctype = "multipart/form-data"`를 추가해야한다. (파일을 내보내는 것이기 때문에 form의 encoding 형식이 달라야 한다.)
+
+```powershell
+PS C:\Users\user\Desktop\Project\wetube> npm install multer
+```
+
+multer를 설치하고 middlewares.js 파일에서 multer를 import해 코드를 작성한다.
+
+```javascript
+import multer from "multer";
+import routes from "./routes";
+
+const multerVideo = multer({ dest: "videoList/" });
+
+export const localsMiddleWare = (req, res, next) => {
+  res.locals.siteName = "WeTube";
+  res.locals.routes = routes;
+  res.locals.user = {
+    isAuthenticated: true,
+    id: 1
+  };
+  next();
+};
+
+export const uploadVideo = multerVideo.single("videoFile");
+
+
+// single은 오직 하나의 파일만 업로드 할 수 있다는 것을 의미힌다. single()안에는 html에서 넘어온 input중에서 원하는 input의 name 속성 값을 담으면 된다.
+```
+
+코드 작성 뒤, videoRouter.js 파일로 가서 다음 코드를 추가한다.
+
+```javascript
+import { uploadVideo } from "../middlewares";
+videoRouter.post(routes.upload, uploadVideo, postUpload);
+```
+
+마지막으로 videoController.js 파일에서 postUpload 부분을 다음과 같이 고친다.
+
+```javascript
+export const postUpload = async (req, res) => {
+    const {
+        body: { title, description },
+        file: { path } // file을 찍어보면 file.path에 위치 값이 찍혀서 나온다.
+    } = req;
+    const newVideo = await Video.create({
+        fileUrl: path,
+        title,
+        description
+    });
+    res.redirect(routes.videoDetail(newVideo.id));
+};
+```
+
 <br>
 
 <br>
