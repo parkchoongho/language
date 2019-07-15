@@ -798,7 +798,52 @@ export default model;
 
 ### 컨트롤러에 연결하기
 
+컨트롤러에 모델을 연결하기 위해 아래의 코드 videoController 파일에 추가
 
+```javascript
+import Video from "../models/Video" 
+// 모델을 연결한 것이지, Database의 요소를 연결한 것 아니다. (요소를 받는 통로이지, 요소 자체가 아니다.)=> 꼭 기억할것. 중요한 개념
+```
+
+<br>
+
+### Async
+
+JavaScript는 어떤 명령이 다 끝날때 까지 기다리게 끔 프로그래밍 되어 있지않다. 
+
+=> JavaScript는 한번에 여러가지일을 handling할 수 있게끔 만들어져 있다.
+
+```javascript
+export const home = (req, res) => {
+  res.render("home", { pageTitle: "Home", videoList });
+};
+```
+
+위 코드에서 비디오를 찾으면서 동시에 home 파일을 찾아서 rendering한다. 따라서 여기서 자바스크립트가 video를 다 찾은 다음에 화면을 렌더링하게끔 코드를 변경해야 하는데, 이 때 사용하는 것이 async 키워드이다.
+
+```javascript
+export const home = async (req, res) => {
+    const videoList = await Video.find({}); // 이렇게 하면 Database에 있는 모든 비디오를 가지고 온다.
+    res.render("home", { pageTitle: "Home", videoList });
+};
+//자바스크립트에세 이건 다 기다리고 다음 작업을 수행해야돼! 라고 알리는 것과 같다.await은 다음 과정이 끝날때 까지 잠시 기다려달라는 의미.(await 키워드는 반드시 async 함수 안에서만 사용할 수 있다.) 
+```
+
+성공적으로 끝나는 것을 의미하는 것이 아니라, 끝나면(에러가 발생해도 그 작업은 끝난것) 다음 작업을 실행하는 것. 따라서 발생하는 에러를 잡고 싶으면 위와 같이 코드를 짜서는 안된다.
+
+```javascript
+export const home = async (req, res) => {
+    try {
+        const videoList = await Video.find({});
+        res.render("home", { pageTitle: "Home", videoList });
+    } catch (error) {
+        console.log(error);
+        res.render("home", { pageTitle: "Home", videoList: [] });
+    }
+};
+
+//try는 정상적으로 작동할 때, 만약에 실패하면 catch(error가 throw되면 이를 catch하겠다!)안을 실행하게끔 해서 error을 handling한다. 이렇게 코드를 짜면 에러가 발생해도 home 화면을 rendering 해서 유저에게 보여줄 수 있다.(nodeJS가 작동을 멈추지 않는다.)
+```
 
 <br>
 
