@@ -920,6 +920,12 @@ export const postUpload = async (req, res) => {
 };
 ```
 
+오류 핸들링: app.js에서 다음과 같은 코드를 추가
+
+```javascript
+app.use("/uploads", express.static());// directory에서 파일을 보내주는 미들웨어, 하지만 이렇게 user에 해당하는 파일을 내 server에 저장하는 것은 좋은 방법이 아니다. 왜냐하면 수천명이 웹사이트를 사용한다고 할 때, 이 사용자들의 파일을 모두 server에 저장할 경우 파일이 의도치 않게 삭제되면 어떻게 할 것인가? 따라서 user가 생성한 파일들은 server와 분리되어야한다.
+```
+
 <br>
 
 <br>
