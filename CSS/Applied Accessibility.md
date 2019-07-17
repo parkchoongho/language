@@ -287,3 +287,125 @@ Here's an example:
   </main>
 </body>
 ```
+
+<br>
+
+###  Improve Chart Accessibility with the figure Element
+
+HTML5 introduced the `figure`element, along with the related `figcaption`. Used together, these items wrap a visual representation (like an image, diagram, or chart) along with its caption. This gives a two-fold accessibility boost by both semantically grouping related content, and providing a text alternative that explains the `figure`.
+
+For data visualizations like charts, the caption can be used to briefly note the trends or conclusions for users with visual impairments. Another challenge covers how to move a table version of the chart's data off-screen (using CSS) for screen reader users.
+
+Here's an example - note that the `figcaption`goes inside the `figure`tags and can be combined with other elements:
+
+```html
+<figure>
+    <img src="roundhouseDestruction.jpeg" alt="Photo of Camper Cat executing a roundhouse kick">
+    <br>
+    <figcaption>
+        Master Camper Cat demonstrates proper form of a roundhouse kick.
+    </figcaption>
+</figure>
+```
+
+```html
+<body>
+    <header>
+        <h1>Training</h1>
+        <nav>
+            <ul>
+                <li><a href="#stealth">Stealth &amp; Agility</a></li>
+                <li><a href="#combat">Combat</a></li>
+                <li><a href="#weapons">Weapons</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+
+            <!-- Add your code below this line -->
+            <figure>
+                <!-- Stacked bar chart will go here -->
+                <br>
+                <figcaption>
+                    Breakdown per week of time to spend training in stealth, combat, and weapons.
+                </figcaption>
+
+            </figure>
+            <!-- Add your code above this line -->
+
+        </section>
+        <section id="stealth">
+            <h2>Stealth &amp; Agility Training</h2>
+            <article><h3>Climb foliage quickly using a minimum spanning tree approach</h3></article>
+            <article><h3>No training is NP-complete without parkour</h3></article>
+        </section>
+        <section id="combat">
+            <h2>Combat Training</h2>
+            <article><h3>Dispatch multiple enemies with multithreaded tactics</h3></article>
+            <article><h3>Goodbye world: 5 proven ways to knock out an opponent</h3></article>
+        </section>
+        <section id="weapons">
+            <h2>Weapons Training</h2>
+            <article><h3>Swords: the best tool to literally divide and conquer</h3></article>
+            <article><h3>Breadth-first or depth-first in multi-weapon training?</h3></article>
+        </section>
+    </main>
+    <footer>&copy; 2018 Camper Cat</footer>
+</body>
+```
+
+<br>
+
+### Improve Form Field Accessibility with the label Element
+
+Improving accessibility with semantic HTML markup applies to using both appropriate tag names as well as attributes. The next several challenges cover some important scenarios using attributes in forms.
+
+The `label`tag wraps the text for a specific form control item, usually the name or label for a choice. This ties meaning to the item and makes the form more readable. The `for`attribute on a `label`tag explicitly associates that `label`with the form control and is used by screen readers.
+
+You learned about radio buttons and their labels in a lesson in the Basic HTML section. In that lesson, we wrapped the radio button input element inside a `label`element along with the label text in order to make the text clickable. Another way to achieve this is by using the `for`attribute as explained in this lesson.
+
+The value of the `for`attribute must be the same as the value of the `id`attribute of the form control. Here's an example:
+
+```html
+<form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+</form>
+```
+
+```html
+<body>
+    <header>
+        <h1>Deep Thoughts with Master Camper Cat</h1>
+    </header>
+    <section>
+        <form>
+            <p>Sign up to receive Camper Cat's blog posts by email here!</p>
+
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+
+
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </section>
+    <article>
+        <h2>The Garfield Files: Lasagna as Training Fuel?</h2>
+        <p>The internet is littered with varying opinions on nutritional paradigms, from catnip paleo to hairball cleanses. But let's turn our attention to an often overlooked fitness fuel, and examine the protein-carb-NOM trifecta that is lasagna...</p>
+    </article>
+    <img src="samuraiSwords.jpeg" alt="">
+    <article>
+        <h2>Defeating your Foe: the Red Dot is Ours!</h2>
+        <p>Felines the world over have been waging war on the most persistent of foes. This red nemesis combines both cunning stealth and lightening speed. But chin up, fellow fighters, our time for victory may soon be near...</p>
+    </article>
+    <img src="samuraiSwords.jpeg" alt="">
+    <article>
+        <h2>Is Chuck Norris a Cat Person?</h2>
+        <p>Chuck Norris is widely regarded as the premier martial artist on the planet, and it's a complete coincidence anyone who disagrees with this fact mysteriously disappears soon after. But the real question is, is he a cat person?...</p>
+    </article>
+    <footer>&copy; 2018 Camper Cat</footer>
+</body>
+```
+
