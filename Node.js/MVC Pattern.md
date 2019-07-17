@@ -928,6 +928,14 @@ app.use("/uploads", express.static());// directory에서 파일을 보내주는 
 
 <br>
 
+### Video ID 받아와 Video Detail에 반영하기
+
+우선 videoController.js에서 videoDetail에 해당하는 함수를 수정해 video에 해당하는 id를 받아온다.
+
+controller에 어떤 data를 가지고 있다는 것을 표현하고 싶으면 url에 더블콜론(:)과 이름을 넣으면 된다. (이것이 Url로부터 정보를 가져오는 유일한 방법이다.)
+
+<br>
+
 <br>
 
 # 5. 통신 상태
