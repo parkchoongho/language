@@ -317,3 +317,230 @@ booWho(null);
 <br>
 
 ### Title Case a Sentence
+
+Return the provided string with the first letter of each word capitalized. Make sure the rest of the word is in lower case.
+
+For the purpose of this exercise, you should also capitalize connecting words like "the" and "of".
+
+Remember to use [Read-Search-Ask](http://forum.freecodecamp.org/t/how-to-get-help-when-you-are-stuck/19514) if you get stuck. Write your own code.
+
+```javascript
+function titleCase(str) {
+    let wordContainer = str.split(' ');
+    let copiedStr = [];
+    for(let i = 0; i < wordContainer.length; i++){
+        for(let j = 0; j < wordContainer[i].length; j++){
+            // console.log(wordContainer[i]);
+            if(j==0){
+                copiedStr.push(wordContainer[i][j].toUpperCase());
+            }else{
+                copiedStr.push(wordContainer[i][j].toLowerCase());
+            }
+        }
+        copiedStr.push(' ');
+    }
+    copiedStr.pop();
+    wordContainer = copiedStr.join('');
+    console.log(wordContainer);
+    return wordContainer;
+}
+
+titleCase("I'm a little tea pot");
+```
+
+<br>
+
+### Slice and Splice
+
+You are given two arrays and an index.
+
+Use the array methods `slice`and `splice`to copy each element of the first array into the second array, in order.
+
+Begin inserting elements at index `n`of the second array.
+
+Return the resulting array. The input arrays should remain the same after the function runs.
+
+Remember to use [Read-Search-Ask](http://forum.freecodecamp.org/t/how-to-get-help-when-you-are-stuck/19514) if you get stuck. Write your own code.
+
+```javascript
+function frankenSplice(arr1, arr2, n) {
+    // It's alive. It's alive!
+    let arr3 = [];
+
+    for(let i=0; i < n; i++){
+        arr3.push(arr2[i]);
+    }
+    let arr4 = (arr2.slice(n, arr2.length));
+    for(let i = 0; i < arr1.length; i++){
+        arr3.push(arr1[i]);
+    }
+    for(let i =0;i < arr4.length;i++){
+        arr3.push(arr4[i]);
+    }
+    return arr3;
+}
+
+frankenSplice([1, 2, 3], [4, 5, 6], 1);
+```
+
+```javascript
+function frankenSplice(arr1, arr2, n) {
+    // It's alive. It's alive!
+    let localArray = arr2.slice();
+    for (let i = 0; i < arr1.length; i++) {
+        localArray.splice(n, 0, arr1[i]);
+        n++;
+    }
+    return localArray;
+}
+```
+
+<br>
+
+### Falsy Bouncer
+
+Remove all falsy values from an array.
+
+Falsy values in JavaScript are `false`, `null`, `0`, `""`, `undefined`, and `NaN`.
+
+Hint: Try converting each value to a Boolean.
+
+Remember to use [Read-Search-Ask](http://forum.freecodecamp.org/t/how-to-get-help-when-you-are-stuck/19514) if you get stuck. Write your own code.
+
+```javascript
+function bouncer(arr) {
+    // Don't show a false ID to this bouncer.
+    let newArr = arr.filter((ele)=>{
+        if(ele){
+            return ele;
+        }
+    })
+    console.log(newArr);
+    return newArr;
+}
+
+bouncer([1, null, NaN, 2, undefined]);
+// filter() method는 원 배열을 변형시키지 않는다.
+```
+
+```javascript
+function bouncer(arr) {
+    return arr.filter(Boolean);
+}
+```
+
+<br>
+
+### Where do I Belong
+
+Return the lowest index at which a value (second argument) should be inserted into an array (first argument) once it has been sorted. The returned value should be a number.
+
+For example, `getIndexToIns([1,2,3,4], 1.5)`should return `1`because it is greater than `1`(index 0), but less than `2`(index 1).
+
+Likewise, `getIndexToIns([20,3,5], 19)`should return `2`because once the array has been sorted it will look like `[3,5,20]`and `19`is less than `20`(index 2) and greater than `5`(index 1).
+
+Remember to use [Read-Search-Ask](http://forum.freecodecamp.org/t/how-to-get-help-when-you-are-stuck/19514) if you get stuck. Write your own code.
+
+```javascript
+function CompareForSort(first, second)
+{
+    if (first == second)
+        return 0;
+    if (first < second)
+        return -1;
+    else
+        return 1; 
+}
+
+function getIndexToIns(arr, num) {
+    // Find my place in this sorted array.
+    arr.sort(CompareForSort);
+    console.log(arr);
+    let putIndex = 0;
+    for(let i = 0; i < arr.length; i++){
+        if(num == arr[i]){
+            putIndex = i;
+        }else if(num > arr[i]){
+            putIndex = i+1;
+        }
+    }
+    return putIndex;
+}
+console.log(getIndexToIns([5, 3, 20, 3], 5));
+getIndexToIns([5, 3, 20, 3], 5);
+```
+
+<br>
+
+### Mutations
+
+Return true if the string in the first element of the array contains all of the letters of the string in the second element of the array.
+
+For example, `["hello", "Hello"]`, should return true because all of the letters in the second string are present in the first, ignoring case.
+
+The arguments `["hello", "hey"]`should return false because the string "hello" does not contain a "y".
+
+Lastly, `["Alien", "line"]`, should return true because all of the letters in "line" are present in "Alien".
+
+Remember to use [Read-Search-Ask](http://forum.freecodecamp.org/t/how-to-get-help-when-you-are-stuck/19514) if you get stuck. Write your own code.
+
+```javascript
+function mutation(arr) {
+    arr[0] = arr[0].toLowerCase();
+    arr[1] = arr[1].toLowerCase();
+    console.log(arr[1].split(''));
+    let checkedValue = true;
+    for(let i = 0; i < arr[1].length; i++){
+        if(arr[0].indexOf(arr[1][i]) === -1){
+            checkedValue = false;
+            return checkedValue;
+        }
+    }
+
+    return checkedValue;
+}
+
+mutation(["hello", "Hey"]);
+```
+
+<br>
+
+### Chunky Monkey
+
+Write a function that splits an array (first argument) into groups the length of `size`(second argument) and returns them as a two-dimensional array.
+
+Remember to use [Read-Search-Ask](http://forum.freecodecamp.org/t/how-to-get-help-when-you-are-stuck/19514) if you get stuck. Write your own code.
+
+```javascript
+function chunkArrayInGroups(arr, size) {
+    // Break it up.
+    let wholeArr = [];
+    let countNum = Math.ceil(arr.length/size);
+    console.log(countNum);
+    for(let i = 0; i < countNum; i++){
+        let nestArr = [];
+        nestArr = arr.slice(size*i, size*(i+1))
+        wholeArr.push(nestArr);
+    }
+    console.log(wholeArr);
+    return wholeArr;
+}
+
+chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4);
+```
+
+```javascript
+function chunkArrayInGroups(arr, size) {
+    // Break it up.
+    var newArr = [];
+    var i = 0;
+
+    while (i < arr.length) {
+        newArr.push(arr.slice(i, i+size));
+        i += size;
+    }
+    return newArr;
+}
+chunkArrayInGroups(["a", "b", "c", "d"], 2);
+```
+
