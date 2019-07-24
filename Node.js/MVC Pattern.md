@@ -932,7 +932,42 @@ app.use("/uploads", express.static());// directory에서 파일을 보내주는 
 
 우선 videoController.js에서 videoDetail에 해당하는 함수를 수정해 video에 해당하는 id를 받아온다.
 
-controller에 어떤 data를 가지고 있다는 것을 표현하고 싶으면 url에 더블콜론(:)과 이름을 넣으면 된다. (이것이 Url로부터 정보를 가져오는 유일한 방법이다.)
+controller에 어떤 data를 가지고 있다는 것을 표현하고 싶으면 url에 더블콜론(:)과 이름을 넣으면 된다. (이것이 Url로부터 정보를 가져오는 유일한 방법이다.) 
+
+videoDetail 수정
+
+```javascript
+export const videoDetail = async (req, res) => {
+    const {
+        params: { id }
+    } = req;
+
+    try {
+        const video = await Video.findById(id);
+        console.log(video);
+        res.render("videoDetail", { pageTitle: "Video Detail", video });
+    } catch (error) {
+        console.log(error);
+        res.redirect(routes.home);
+    }
+};
+```
+
+videoDetail.pug 수정하기
+
+```html
+extends layouts/main
+
+block content
+    .video__player
+        video(src=`/${video.fileUrl}`)
+    .video__info
+        a(href=routes.editVideo)
+        h5.video__title=video.title
+        span.video__views=video.views
+        p.video__description=video.description
+<!-- video를 만든사람에게는 edit video를 보이게끔 해야됨. 따라서 코드를 더 작성해야한다. -->
+```
 
 <br>
 
