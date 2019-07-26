@@ -928,7 +928,7 @@ app.use("/uploads", express.static());// directory에서 파일을 보내주는 
 
 <br>
 
-### Video ID 받아와 Video Detail에 반영하기
+### Video ID 받아와 Video Detail에 반영하기 (Edit Video까지)
 
 우선 videoController.js에서 videoDetail에 해당하는 함수를 수정해 video에 해당하는 id를 받아온다.
 
@@ -1036,6 +1036,50 @@ export const postEditVideo = async (req, res) => {
     } catch (error) {
         res.redirect(routes.home);
     }
+};
+```
+
+### Delete Video
+
+delete는 post가 필요없다. 해당 url로 들어간 후 DB에서 비디오를 삭제하기만 하면 되기 때문이다.
+
+routes.js에서 deleteVideo 부분 수정하기
+
+```javascript
+deleteVideo: id => {
+    if (id) {
+        return `/videos/${id}/delete`;
+    } else {
+        return DELETE_VIDEO;
+    }
+}
+```
+
+videoRouter에서 deleteVideo 함수형태로 바꾸기
+
+```javascript
+videoRouter.get(routes.deleteVideo(), deleteVideo);
+```
+
+editVideo에서 a 태그의 href 속성 바꾸기
+
+```html
+a.form-container__link.form-container__link--delete(href=routes.deleteVideo(video.id)) Delete Video
+```
+
+videoController.js에서 deleteVideo Controller 부분 아래와 같이 수정하기
+
+```javascript
+export const deleteVideo = async (req, res) => {
+    const {
+        params: { id }
+    } = req;
+    try {
+        await Video.findOneAndRemove({ _id: id });
+    } catch (error) {
+        console.log(error);
+    }
+    res.redirect(routes.home);
 };
 ```
 
