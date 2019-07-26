@@ -969,6 +969,76 @@ block content
 <!-- video를 만든사람에게는 edit video를 보이게끔 해야됨. 따라서 코드를 더 작성해야한다. -->
 ```
 
+editVideo.pug 수정하기
+
+```html
+extends layouts/main.pug
+
+block content
+    .form-container
+        form(action=routes.editVideo(video.id), method="post")
+            input(type="text", placeholder="Title", name="title", value=video.title)
+            textarea(name="description", placeholder="Description")=video.description
+            input(type="submit", value="Update Video")
+        a.form-container__link.form-container__link--delete(href=`/videos${routes.deleteVideo}`) Delete Video
+```
+
+routes.js 파일 수정
+
+```javascript
+ideoDetail: id => {
+    if (id) {
+        return `/videos/${id}`;
+    } else {
+        return VIDEO_DETAIL;
+    }
+},
+editVideo: id => {
+     if (id) {
+        return `/videos/${id}/edit`;
+     } else {
+        return EDIT_VIDEO;
+     }
+}
+```
+
+videoRouter.js에서 editVideo를 getEditVideo와 postEditVideo로 나누기
+
+```javascript
+videoRouter.get(routes.editVideo(), getEditVideo);
+videoRouter.post(routes.editVideo(), postEditVideo);
+```
+
+videoController.js에서 getEditVideo 컨트롤러와 postEditVideo 컨트롤러를 생성
+
+```javascript
+export const getEditVideo = async (req, res) => {
+    const {
+        params: { id }
+    } = req;
+
+    try {
+        const video = await Video.findById(id);
+        res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    } catch (error) {
+        res.redirect(routes.home);
+    }
+};
+
+export const postEditVideo = async (req, res) => {
+    const {
+        params: { id },
+        body: { title, description }
+    } = req;
+    try {
+        await Video.findOneAndUpdate({ id }, { title, description });
+        res.redirect(routes.videoDetail(id));
+    } catch (error) {
+        res.redirect(routes.home);
+    }
+};
+```
+
 <br>
 
 <br>
