@@ -1083,7 +1083,7 @@ export const deleteVideo = async (req, res) => {
 };
 ```
 
-### Video 정렬
+### Video 정렬 및 검색
 
 현재 Home 화면에서 가장 최근에 올린 영상이 가장 밑에 보이게끔 설정되어 있다. 가장 최근에 올린 영상이 가장 위에 보이게끔 재정렬 시켜보자.
 
@@ -1100,6 +1100,71 @@ export const home = async (req, res) => {
     }
 };
 // sort method 공부할 것.
+```
+
+**정규표현식이란?**
+
+regular expression은 string으로부터 특정 문자열을 가져오는 것을 뜻한다.(정규 표현식은 languate/ES6/Regular Expression.md 파일에 정리되어 있으므로 확인해 볼것.)
+
+영상 검색을 할 수 있도록 regular expression을 활용해 search controller를 작성
+
+videoController.js 파일 수정
+
+```javascript
+export const search = async (req, res) => {
+    const {
+        query: { term: searchingBy }
+    } = req;
+    let videoList = [];
+
+    try {
+        videoList = await Video.find({
+            title: { $regex: searchingBy, $options: "i" }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    res.render("search", { pageTitle: "Search", searchingBy, videoList });
+};
+```
+
+그리고 search.pug와 videoDetail.pug도 수정.
+
+```jade
+extends layouts/main
+include mixins/videoBlock
+
+block content
+    .search__header 
+        h3 Searching for #{searchingBy}
+    .search__videos
+        if videoList.length === 0
+            h5 No Videos Found
+        each item in videoList
+            +videoBlock({
+                videoFile: item.videoFile,
+                title: item.title,
+                views: item.views,
+                id: item.id
+            })
+```
+
+```jade
+extends layouts/main
+
+block content
+    .video__player
+        video(src=`/${video.fileUrl}`)
+    .video__info
+        a(href=routes.editVideo(video.id)) Edit Video
+        h5.video__title=video.title
+        span.video__views=video.views
+        p.video__description=video.description
+    .video__comments
+        if video.comments.length == 1
+            span.video__comment-number 1 comment
+        else
+            span.video__comment-numer #{video.comments.length} comments
 ```
 
 ### ESLint 설치
