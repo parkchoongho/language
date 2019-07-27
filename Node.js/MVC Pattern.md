@@ -1083,6 +1083,40 @@ export const deleteVideo = async (req, res) => {
 };
 ```
 
+### Video 정렬
+
+현재 Home 화면에서 가장 최근에 올린 영상이 가장 밑에 보이게끔 설정되어 있다. 가장 최근에 올린 영상이 가장 위에 보이게끔 재정렬 시켜보자.
+
+videoController 코드 수정
+
+```javascript
+export const home = async (req, res) => {
+    try {
+        const videoList = await Video.find({}).sort({ _id: -1 });
+        res.render("home", { pageTitle: "Home", videoList });
+    } catch (error) {
+        console.log(error);
+        res.render("home", { pageTitle: "Home", videoList: [] });
+    }
+};
+// sort method 공부할 것.
+```
+
+### ESLint 설치
+
+Linter는 에러가 발생할 시, 이를 알려주는 도구이다.
+
+eslint 설치
+
+```powershell
+PS C:\Users\user\Desktop\Project\wetube> npm install eslint -g
+PS C:\Users\user\Desktop\Project\wetube> eslint --init
+```
+
+-g는 해당 package를 global하게 설치한다는 의미이다. (프로젝트 특정 폴더가 아닌, 컴퓨터 전체에서 사용할 수 있게끔 설치한다는 말.)
+
+=> 이렇게 하니까 에러가 난다. 따라서 eslint를 제거하고 그 다음, extension에서 eslint를 설치하거나, local하게 eslint를 설치할 것.
+
 <br>
 
 <br>
