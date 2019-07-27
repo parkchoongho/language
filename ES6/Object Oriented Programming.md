@@ -205,3 +205,184 @@ let hound = new Dog();
 
 ```
 
+<br>
+
+### Extend Constructors to Receive Arguments
+
+The `Bird`and `Dog`constructors from last challenge worked well. However, notice that all `Birds`that are created with the `Bird`constructor are automatically named Albert, are blue in color, and have two legs. What if you want birds with different values for name and color? It's possible to change the properties of each bird manually but that would be a lot of work:
+
+```javascript
+let swan = new Bird();
+swan.name = "Carlos";
+swan.color = "white";
+```
+
+Suppose you were writing a program to keep track of hundreds or even thousands of different birds in an aviary. It would take a lot of time to create all the birds, then change the properties to different values for every one.
+
+To more easily create different `Bird`objects, you can design your Bird constructor to accept parameters:
+
+```javascript
+function Bird(name, color) {
+    this.name = name;
+    this.color = color;
+    this.numLegs = 2;
+}
+```
+
+Then pass in the values as arguments to define each unique bird into the `Bird`constructor:
+
+```javascript
+let cardinal = new Bird("Bruce", "red");
+```
+
+This gives a new instance of `Bird`with name and color properties set to Bruce and red, respectively. The `numLegs`property is still set to 2.
+
+The `cardinal`has these properties:
+
+```javascript
+cardinal.name // => Bruce
+cardinal.color // => red
+cardinal.numLegs // => 2
+```
+
+The constructor is more flexible. It's now possible to define the properties for each `Bird`at the time it is created, which is one way that JavaScript constructors are so useful. They group objects together based on shared characteristics and behavior and define a blueprint that automates their creation.
+
+```javascript
+function Dog(name, color) {
+    this.name = name;
+    this.color = color;
+    this.numLegs = 4;
+}
+
+let terrier = new Dog("Parkass", "blue");
+```
+
+<br>
+
+### Verify an Object's Constructor with instanceof
+
+Anytime a constructor function creates a new object, that object is said to be an `instance`of its constructor. JavaScript gives a convenient way to verify this with the `instanceof`operator. `instanceof`allows you to compare an object to a constructor, returning `true`or `false`based on whether or not that object was created with the constructor. Here's an example:
+
+```javascript
+let Bird = function(name, color) {
+    this.name = name;
+    this.color = color;
+    this.numLegs = 2;
+}
+
+let crow = new Bird("Alexis", "black");
+
+crow instanceof Bird; // => true
+```
+
+If an object is created without using a constructor, `instanceof`will verify that it is not an instance of that constructor:
+
+```javascript
+let canary = {
+    name: "Mildred",
+    color: "Yellow",
+    numLegs: 2
+};
+
+canary instanceof Bird; // => false
+```
+
+```javascript
+/* jshint expr: true */
+
+function House(numBedrooms) {
+    this.numBedrooms = numBedrooms;
+}
+
+let myHouse = new House(1);
+
+myHouse instanceof House;
+```
+
+<br>
+
+### Understand Own Properties
+
+In the following example, the `Bird`constructor defines two properties: `name`and `numLegs`:
+
+```javascript
+function Bird(name) {
+    this.name = name;
+    this.numLegs = 2;
+}
+
+let duck = new Bird("Donald");
+let canary = new Bird("Tweety");
+```
+
+`name`and `numLegs`are called `own`properties, because they are defined directly on the instance object. That means that `duck`and `canary`each has its own separate copy of these properties.
+
+In fact every instance of `Bird`will have its own copy of these properties.
+
+The following code adds all of the `own`properties of `duck`to the array `ownProps`:
+
+```javascript
+let ownProps = [];
+
+for (let property in duck) {
+    if(duck.hasOwnProperty(property)) {
+        ownProps.push(property);
+    }
+}
+
+console.log(ownProps); // prints [ "name", "numLegs" ]
+```
+
+```javascript
+function Bird(name) {
+    this.name = name;
+    this.numLegs = 2;
+}
+
+let canary = new Bird("Tweety");
+let ownProps = [];
+// Add your code below this line
+for(let property in canary){
+    ownProps.push(property);
+}
+```
+
+<br>
+
+### Use Prototype Properties to Reduce Duplicate Code
+
+Since `numLegs`will probably have the same value for all instances of `Bird`, you essentially have a duplicated variable `numLegs`inside each `Bird`instance.
+
+This may not be an issue when there are only two instances, but imagine if there are millions of instances. That would be a lot of duplicated variables.
+
+A better way is to use `Bird’s``prototype`. The `prototype`is an object that is shared among ALL instances of `Bird`. Here's how to add `numLegs`to the `Bird prototype`:
+
+```javascript
+Bird.prototype.numLegs = 2;
+```
+
+Now all instances of `Bird`have the `numLegs`property.
+
+```javascript
+console.log(duck.numLegs); // prints 2
+console.log(canary.numLegs); // prints 2
+```
+
+Since all instances automatically have the properties on the `prototype`, think of a `prototype`as a "recipe" for creating objects.
+
+Note that the `prototype`for `duck`and `canary`is part of the `Bird`constructor as `Bird.prototype`. Nearly every object in JavaScript has a `prototype`property which is part of the constructor function that created it.
+
+```javascript
+function Dog(name) {
+    this.name = name;
+}
+Dog.prototype.numLegs = 4;
+// Add your code above this line
+let beagle = new Dog("Snoopy");
+```
+
+<br>
+
+### Iterate Over All Properties
+
+You have now seen two kinds of properties: `own`properties and `prototype`properties. `Own`properties are defined directly on the object instance itself. And `prototype`properties are defined on the `prototype`.
