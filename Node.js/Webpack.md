@@ -31,6 +31,7 @@ assets 폴더를 생성한다. 생성위치는 webpack.config.js 처럼 프로�
 
 ```javascript
 const path = require("path");
+const autoprefixer = require("autoprefixer");
 const ExtractCSS = require("extract-text-webpack-plugin");
 
 const MODE = process.env.WEBPACK_ENV;
@@ -38,34 +39,39 @@ const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
 const OUTPUT_DIR = path.join(__dirname, "static");
 
 const config = {
-    entry: ENTRY_FILE,
-    mode: MODE,
-    module: {
-        rules: [
-            {
-                test: /\.(scss)$/,
-                use: ExtractCSS.extract([
-                    {
-                        loader: "css-loader"
-                    },
-                    {
-                        loader: "postcss-library"
-                    },
-                    {
-                        loader: "sass-loader"
-                    }
-                ])
+  entry: ENTRY_FILE,
+  mode: MODE,
+  module: {
+    rules: [
+      {
+        test: /\.(scss)$/,
+        use: ExtractCSS.extract([
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              plugin() {
+                return [autoprefixer({ browsers: "cover 99.5%" })];
+              }
             }
-        ]
-    },
-    output: {
-        path: OUTPUT_DIR,
-        filename: "[name].[format]"
-    }
+          },
+          {
+            loader: "sass-loader"
+          }
+        ])
+      }
+    ]
+  },
+  output: {
+    path: OUTPUT_DIR,
+    filename: "[name].js"
+  },
+  plugins: [new ExtractCSS("styles.css")]
 };
 
 module.exports = config;
-
 ```
 
 loader란, 기본적으로 webpack에게 파일을 처리하는 방법을 알려주는 역할을 한다. webpack은 아무것도 할줄 모르기에, loader를 추가해야 비로소 파일을 handling할 수 있는 능력이 생긴다.
@@ -77,3 +83,4 @@ PS C:\Users\user\Desktop\Project\wetube> npm install extract-text-webpack-plugin
 npm에서 새로운 버전을 설치하고 싶으면, @ 기호를 쓰는 방법도 있다.
 
 webpack은 config 파일에서, 아래에서 위로 진행된다.
+
