@@ -97,3 +97,136 @@ export const postJoin = async (req, res) => {
 };
 ```
 
+<br>
+
+### 회원가입 후, 자동 로그인
+
+global Router.js
+
+```javascript
+import express from "express";
+import routes from "../routes";
+import { home, search } from "../controllers/videoController";
+import {
+  logout,
+  getJoin,
+  postJoin,
+  getLogin,
+  postLogin
+} from "../controllers/userController";
+
+const globalRouter = express.Router();
+
+globalRouter.get(routes.join, getJoin);
+globalRouter.post(routes.join, postJoin, postLogin);
+
+globalRouter.get(routes.login, getLogin);
+globalRouter.post(routes.login, postLogin);
+
+globalRouter.get(routes.home, home);
+globalRouter.get(routes.search, search);
+globalRouter.get(routes.logout, logout);
+
+export default globalRouter;
+```
+
+globalRouter.post(routes.join, postJoin, postLogin)에서 postJoin에서 받은 username(여기서는 email)과 password 정보들을 postLogin으로 보내서 인증하도록 한다. 현재 passport 인증 방식은 항상 username과 passport를 찾도록 설정되어 있다.
+
+userController.js에서 postJoin 컨트롤러와 postLogin 컨트롤러 수정
+
+(next를 추가하고 성공하면 next를 통해 postLogin 함수를 불러와 자동으로 로그인이 되게끔 설정, postLogin은 미리 설정해 놓은 local strategy로 인증하고 실패하면 /login 성공하면 /으로 리다이렉트 하도록 설정) 
+
+```javascript
+export const postJoin = async (req, res, next) => {
+  const {
+    body: { name, email, password, veriPassword }
+  } = req;
+
+  if (password !== veriPassword) {
+    res.status(400);
+    res.render("join", { pageTitle: "Join" });
+  } else {
+    try {
+      const user = await User({
+        name,
+        email
+      });
+      await User.register(user, password);
+      next();
+    } catch (error) {
+      console.log(error);
+      res.redirect(routes.home);
+    }
+  }
+};
+
+export const postLogin = passport.authenticate("local", {
+  failureRedirect: routes.login,
+  successRedirect: routes.home
+});
+```
+
+app.js 수정
+
+(쿠키가 설정되면 passport가 초기화 된 후, 자동으로 설정할 수 있도록 passport.initialize(), passport.session()를 추가한다. => 순서가 중요. 그 다음 요청에서 localsMiddleWare.js에서 user을 가져올 수 있도록 위치시킨다.)
+
+```javascript
+import express from "express"; // import express
+import morgan from "morgan";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import passport from "passport";
+import { localsMiddleWare } from "./middlewares";
+import routes from "./routes";
+import globalRouter from "./routers/globalRouter";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
+import "./passport";
+
+const app = express(); // call express
+
+app.use(helmet());
+app.set("view engine", "pug");
+app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(localsMiddleWare);
+
+app.use(routes.home, globalRouter); // 전역적 Router
+app.use(routes.users, userRouter);
+app.use(routes.videos, videoRouter);
+
+export default app;
+```
+
+middlewares.js 수정
+
+(모든 페이지에서 user를 가져올 수 있도록 res.locals.user = req.user || {} 를 작성. => 만일 없을 경우에는 빈 객체 {}를 준다.)
+
+```javascript
+import multer from "multer";
+import routes from "./routes";
+
+const multerVideo = multer({ dest: "uploads/videoList/" });
+
+export const localsMiddleWare = (req, res, next) => {
+  res.locals.siteName = "WeTube";
+  res.locals.routes = routes;
+  res.locals.user = req.user || {};
+  next();
+};
+
+export const uploadVideo = multerVideo.single("videoFile");
+```
+
+<br>
+
+### Expression-Session 
+
+Expression-Session은 세션을 관리하는데 필요한 프로그램이다.
