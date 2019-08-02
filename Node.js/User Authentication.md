@@ -297,3 +297,200 @@ export default app;
 ```
 
 이 상태에서 로그인하고 그 다음, 서버를 재가동시키면 session이 유지되지 않는다. (서버는 어느 사용자가 어느 쿠키를 가지고 있는지를 계속해서 기억하고 있어야 한다. 이렇게 세션을 유지못하는 것은 서버가 재가동될시, 누가 누군지를 판별할 수 없게 되는 것과 마찬가지)
+
+따라서 session을 특정 장소에 저장해 관리할 필요성이 있다.
+
+=> DB를 이용해 session을 저장. connect-mongo를 사용한다.
+
+mongo-connect 설치
+
+```powershell
+PS C:\Users\user\Desktop\Project\wetube> npm install connect-mongo
+```
+
+app.js 수정
+
+```javascript
+import express from "express"; // import express
+import morgan from "morgan";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import passport from "passport";
+import mongoose from "mongoose";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import { localsMiddleWare } from "./middlewares";
+import routes from "./routes";
+import globalRouter from "./routers/globalRouter";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
+import "./passport";
+
+const app = express(); // call express
+
+const CookieStore = MongoStore(session);
+
+app.use(helmet());
+app.set("view engine", "pug");
+app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: new CookieStore({ mongooseConnection: mongoose.connection })
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(localsMiddleWare);
+
+app.use(routes.home, globalRouter); // 전역적 Router
+app.use(routes.users, userRouter);
+app.use(routes.videos, videoRouter);
+
+export default app;
+```
+
+저장소를 mongo와 연결시켜주어야 한다. (mongo와의 연결은 mongoose가 하게되니 mongoose를 import)
+
+### routes 출입 제한
+
+예를들어, 이미 로그인이 된 사용자는, Join 화면으로 접근을 못하게 하는 것과 같은 것을 의미.
+
+이를 가능하게 하기위해 미들웨어를 생성.
+
+middleware.js 수정
+
+```javascript
+import multer from "multer";
+import routes from "./routes";
+
+const multerVideo = multer({ dest: "uploads/videoList/" });
+
+export const localsMiddleWare = (req, res, next) => {
+  res.locals.siteName = "WeTube";
+  res.locals.routes = routes;
+  res.locals.user = req.user || null;
+  next();
+};
+
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
+};
+
+export const onlyPrivate = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect(routes.home);
+  }
+};
+
+export const uploadVideo = mul
+terVideo.single("videoFile");
+```
+
+이렇게 미들웨어를 설정하고 라우터에서 컨트롤러에 도달하기전에 제어하고 싶은 곳에 함수를 넣어주면된다.
+
+globalRouter.js 수정
+
+=> /login, /join 에 get,post 요청을 하는 것은 로그인이 안된 상태에서만 되야하므로 각각에 onlyPublic함수를 middleware로 넣어준다.
+
+```javascript
+import express from "express";
+import routes from "../routes";
+import { home, search } from "../controllers/videoController";
+import {
+  logout,
+  getJoin,
+  postJoin,
+  getLogin,
+  postLogin
+} from "../controllers/userController";
+import { onlyPublic } from "../middlewares";
+
+const globalRouter = express.Router();
+
+globalRouter.get(routes.join, onlyPublic, getJoin);
+globalRouter.post(routes.join, onlyPublic, postJoin, postLogin);
+
+globalRouter.get(routes.login, onlyPublic, getLogin);
+globalRouter.post(routes.login, onlyPublic, postLogin);
+
+globalRouter.get(routes.home, home);
+globalRouter.get(routes.search, search);
+globalRouter.get(routes.logout, logout);
+
+export default globalRouter;
+```
+
+userRouter 수정
+
+=> profile 수정, 비밀번호 변경은 로그인이 된 상태에서만 가능해야하므로 only private을 middleware로 설정.
+
+```javascript
+import express from "express";
+import routes from "../routes";
+import {
+  userDetail,
+  editProfile,
+  changePassword
+} from "../controllers/userController";
+import { onlyPrivate } from "../middlewares";
+
+const userRouter = express.Router();
+
+userRouter.get(routes.editProfile, onlyPrivate, editProfile);
+userRouter.get(routes.changePassword, onlyPrivate, changePassword);
+userRouter.get(routes.userDetail(), userDetail);
+
+export default userRouter;
+```
+
+videoRouter 수정
+
+=> 영상을 업로드하고 편집하고 삭제하는 것은 로그인된 상태에서만 가능해야 하므로 middleware로 onlyPrivate설정.
+
+```javascript
+import express from "express";
+import routes from "../routes";
+import {
+  videoDetail,
+  deleteVideo,
+  getUpload,
+  postUpload,
+  getEditVideo,
+  postEditVideo
+} from "../controllers/videoController";
+import { uploadVideo, onlyPrivate } from "../middlewares";
+
+const videoRouter = express.Router();
+
+// Upload
+videoRouter.get(routes.upload, onlyPrivate, getUpload);
+videoRouter.post(routes.upload, onlyPrivate, uploadVideo, postUpload);
+
+// Video Detail
+videoRouter.get(routes.videoDetail(), videoDetail);
+
+// Edit Video
+videoRouter.get(routes.editVideo(), onlyPrivate, getEditVideo);
+videoRouter.post(routes.editVideo(), onlyPrivate, postEditVideo);
+
+// Delete Video
+videoRouter.get(routes.deleteVideo(), onlyPrivate, deleteVideo);
+
+export default videoRouter;
+```
+
