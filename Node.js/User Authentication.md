@@ -360,6 +360,8 @@ export default app;
 
 저장소를 mongo와 연결시켜주어야 한다. (mongo와의 연결은 mongoose가 하게되니 mongoose를 import)
 
+<br>
+
 ### routes 출입 제한
 
 예를들어, 이미 로그인이 된 사용자는, Join 화면으로 접근을 못하게 하는 것과 같은 것을 의미.
@@ -492,5 +494,260 @@ videoRouter.post(routes.editVideo(), onlyPrivate, postEditVideo);
 videoRouter.get(routes.deleteVideo(), onlyPrivate, deleteVideo);
 
 export default videoRouter;
+```
+
+<br>
+
+### Github Login
+
+passsport-github 설치
+
+```powershell
+PS C:\Users\user\Desktop\Project\wetube> npm i passport-github
+```
+
+github에 OAuth Application 설정하고 난후 passport.js 수정
+
+```javascript
+import routes from "./routes";
+
+passport.use(User.createStrategy());
+
+passport.use(
+    new GithubStrategy(
+        {
+            clientID: process.env.GH_ID,
+            clientSecret: process.env.GH_SECRET,
+            callbackURL: `http://localhost:3000${routes.githubCallback}`
+        },
+        githubLoginCallback
+    )
+);
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+```
+
+clientID와 clientSecret은 보이면 안되므로 환경변수에 넣어놓고 불러와 사용한다. callbackURL은 github에 요청을 한 다음, 이동할 URL이다. 그러면 자동으로 GitHub가 이에 해당하는 유저 정보를 가져와 주고 이를 다시 githubLoginCallback 함수에 전달해  로그인을 진행한다. (프로세스가 정호가히 어떻게 되는지 이해할 것.)
+
+globalRouter.js
+
+```javascript
+import express from "express";
+import passport from "passport";
+import routes from "../routes";
+import { home, search } from "../controllers/videoController";
+import {
+    logout,
+    getJoin,
+    postJoin,
+    getLogin,
+    postLogin,
+    githubLogin,
+    postGithubLogin
+} from "../controllers/userController";
+import { onlyPublic, onlyPrivate } from "../middlewares";
+
+const globalRouter = express.Router();
+
+globalRouter.get(routes.join, onlyPublic, getJoin);
+globalRouter.post(routes.join, onlyPublic, postJoin, postLogin);
+
+globalRouter.get(routes.login, onlyPublic, getLogin);
+globalRouter.post(routes.login, onlyPublic, postLogin);
+
+globalRouter.get(routes.home, home);
+globalRouter.get(routes.search, search);
+globalRouter.get(routes.logout, onlyPrivate, logout);
+
+globalRouter.get(routes.github, githubLogin);
+globalRouter.get(
+    routes.githubCallback,
+    passport.authenticate("github", { failureRedirect: "/login" }),
+    postGithubLogin
+);
+
+export default globalRouter;
+```
+
+userController.js
+
+```javascript
+import passport from "passport";
+import routes from "../routes";
+import User from "../models/User";
+
+export const getJoin = (req, res) => {
+    res.render("join", { pageTitle: "Join" });
+};
+
+export const postJoin = async (req, res, next) => {
+    const {
+        body: { name, email, password, veriPassword }
+    } = req;
+
+    if (password !== veriPassword) {
+        res.status(400);
+        res.render("join", { pageTitle: "Join" });
+    } else {
+        try {
+            const user = await User({
+                name,
+                email
+            });
+            await User.register(user, password);
+            next();
+        } catch (error) {
+            console.log(error);
+            res.redirect(routes.home);
+        }
+    }
+};
+
+export const getLogin = (req, res) =>
+res.render("login", { pageTitle: "Login" });
+
+export const postLogin = passport.authenticate("local", {
+    failureRedirect: routes.login,
+    successRedirect: routes.home
+});
+
+export const githubLogin = passport.authenticate("github");
+
+export const githubLoginCallback = async (_, __, profile, cb) => {
+    const {
+        _json: { id, avatarUrl, name, email }
+    } = profile;
+    try {
+        const user = await User.findOne({ email });
+        if (user) {
+            user.githubID = id;
+            user.save();
+            return cb(null, user);
+        }
+        const newUser = await User.create({
+            name,
+            email,
+            githubID: id,
+            avatarUrl
+        });
+        return cb(null, newUser);
+    } catch (error) {
+        return cb(error);
+    }
+};
+
+export const postGithubLogin = (req, res) => {
+    res.redirect(routes.home);
+};
+
+export const logout = (req, res) => {
+    req.logout();
+    res.redirect(routes.home);
+};
+
+export const users = (req, res) => res.render("users", { pageTitle: "Users" });
+export const userDetail = (req, res) =>
+res.render("userDetail", { pageTitle: "User Detail" });
+export const editProfile = (req, res) =>
+res.render("editProfile", { pageTitle: "Edit Profile" });
+export const changePassword = (req, res) =>
+res.render("changePassword", { pageTitle: "Change Password" });
+```
+
+passport.js
+
+```javascript
+import passport from "passport";
+import GithubStrategy from "passport-github";
+import User from "./models/User";
+import { githubLoginCallback } from "./controllers/userController";
+import routes from "./routes";
+
+passport.use(User.createStrategy());
+
+passport.use(
+    new GithubStrategy(
+        {
+            clientID: process.env.GH_ID,
+            clientSecret: process.env.GH_SECRET,
+            callbackURL: `http://localhost:3000${routes.githubCallback}`
+        },
+        githubLoginCallback
+    )
+);
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+```
+
+routes.js
+
+```javascript
+// Global
+const HOME = "/";
+const JOIN = "/join";
+const LOGIN = "/login";
+const LOGOUT = "/logout";
+const SEARCH = "/search";
+
+// Users
+const USERS = "/users";
+const USER_DETAIL = "/:id";
+const EDIT_PROFILE = "/edit-profile";
+const CHANGE_PASSWORD = "/change-password";
+
+// Videos
+const VIDEOS = "/videos";
+const UPLOAD = "/upload";
+const VIDEO_DETAIL = "/:id";
+const EDIT_VIDEO = "/:id/edit";
+const DELETE_VIDEO = "/:id/delete";
+
+// Github
+const GITHUB = "/auth/github";
+const GITHUB_CALLBACK = "/auth/github/callback";
+
+const routes = {
+    home: HOME,
+    join: JOIN,
+    login: LOGIN,
+    logout: LOGOUT,
+    search: SEARCH,
+    users: USERS,
+    userDetail: id => {
+        if (id) {
+            return `/users/${id}`;
+        }
+        return USER_DETAIL;
+    },
+
+    editProfile: EDIT_PROFILE,
+    changePassword: CHANGE_PASSWORD,
+    videos: VIDEOS,
+    upload: UPLOAD,
+    videoDetail: id => {
+        if (id) {
+            return `/videos/${id}`;
+        }
+        return VIDEO_DETAIL;
+    },
+    editVideo: id => {
+        if (id) {
+            return `/videos/${id}/edit`;
+        }
+        return EDIT_VIDEO;
+    },
+    deleteVideo: id => {
+        if (id) {
+            return `/videos/${id}/delete`;
+        }
+        return DELETE_VIDEO;
+    },
+    github: GITHUB,
+    githubCallback: GITHUB_CALLBACK
+};
+
+export default routes;
 ```
 
