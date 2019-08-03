@@ -560,10 +560,12 @@ globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);
 globalRouter.get(routes.logout, onlyPrivate, logout);
 
-globalRouter.get(routes.github, githubLogin);
+globalRouter.get(routes.github, githubLogin); // githubLogin 함수가 사용자를 GitHub 사이트로 보내는 역할.
 globalRouter.get(
-    routes.githubCallback,
+    routes.githubCallback, 
+    // githubCallback URL로 들어오면 passport는 githubLoginCallback 함수를 실행한다.
     passport.authenticate("github", { failureRedirect: "/login" }),
+    // 만약 유저를 찾으면, 쿠키를 생성하고 저정한 후, postGitHubLogin 함수를 실행하고 못 찾았으면 "/login"으로 리다이렉트 한다.
     postGithubLogin
 );
 
@@ -616,7 +618,7 @@ export const githubLogin = passport.authenticate("github");
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
     const {
-        _json: { id, avatarUrl, name, email }
+        _json: { id, avatar_url: avatarUrl, name, email }
     } = profile;
     try {
         const user = await User.findOne({ email });
@@ -749,5 +751,193 @@ const routes = {
 };
 
 export default routes;
+```
+
+<br>
+
+### Authentication Process
+
+**Local 방식**
+
+username과 password를 사용한 인증방식을 local 방식이라 한다. username과 password를 post 방식으로 전달한다. 설치해둔 플러그인인 mongoose가 자동으로 이를 체크해 username과 password가 맞으면 passport에게 맞다는 것을 알리고 그 다음, passport가 쿠키를 생성한다. 
+
+**GitHub 방식**
+
+먼저, 사용자는 GitHub 사이트로 이동하면 GitHub사이트에서 권한 승인(Auth)을 한다. 그 다음, GitHub 사이트는 그 사용자의 정보를 사용자에게 전달한다. 그때, /auth/github/callback url로 오게된다. 이렇게 되면, passport가 함수를 호출하게 되는데, 그 함수가 우리가 만든 githubLoginCallback이다.
+
+githubLoginCallback에서 유저 정보와 같은 데이터를 받아오고 이 데이터를 바탕으로 하고 싶은 프로세스를 설정한다. 이때, githubLoginCallback 함수의 1가지 조건이 있는데, callback(cb) 함수를 return 해야한다는 것이다. 그리고 그 함수에게는 error가 있는지, user가 있는지를 알려주어야 한다.
+
+만일 error가 있으면 passport는 error가 있고 user는 없는 것으로 판단하고 일을 진행한다. user가 존재하면 passport는 이 user를 가지고 쿠키를 생성하고 저정한 후, 저장된 쿠키를 브라우저로 보낸다.
+
+**Tip**: 이유는 정확히 모르겠으나 .env 파일에서 ID는 ""을 붙여서 전달하면 제대로 전달되는데 Password에 ""를 붙히면 ""까지 문자열로 인식되어 전달된다. 따라서 Passsword는 ""로 감싸지 말것. (이유가 멀까?)
+
+<br>
+
+### User Detail 설정
+
+routes 설정
+
+userDetail에서 로그인된 유저의 상태를 가져오는 것이므로 /me라는 url을 routes.js에 추가한다.
+
+```javascript
+// Global
+const HOME = "/";
+const JOIN = "/join";
+const LOGIN = "/login";
+const LOGOUT = "/logout";
+const SEARCH = "/search";
+
+// Users
+const USERS = "/users";
+const USER_DETAIL = "/:id";
+const EDIT_PROFILE = "/edit-profile";
+const CHANGE_PASSWORD = "/change-password";
+const ME = "/me";
+
+// Videos
+const VIDEOS = "/videos";
+const UPLOAD = "/upload";
+const VIDEO_DETAIL = "/:id";
+const EDIT_VIDEO = "/:id/edit";
+const DELETE_VIDEO = "/:id/delete";
+
+// Github
+const GITHUB = "/auth/github";
+const GITHUB_CALLBACK = "/auth/github/callback";
+
+const routes = {
+    home: HOME,
+    join: JOIN,
+    login: LOGIN,
+    logout: LOGOUT,
+    search: SEARCH,
+    users: USERS,
+    userDetail: id => {
+        if (id) {
+            return `/users/${id}`;
+        }
+        return USER_DETAIL;
+    },
+
+    editProfile: EDIT_PROFILE,
+    changePassword: CHANGE_PASSWORD,
+    videos: VIDEOS,
+    upload: UPLOAD,
+    videoDetail: id => {
+        if (id) {
+            return `/videos/${id}`;
+        }
+        return VIDEO_DETAIL;
+    },
+    editVideo: id => {
+        if (id) {
+            return `/videos/${id}/edit`;
+        }
+        return EDIT_VIDEO;
+    },
+    deleteVideo: id => {
+        if (id) {
+            return `/videos/${id}/delete`;
+        }
+        return DELETE_VIDEO;
+    },
+    github: GITHUB,
+    githubCallback: GITHUB_CALLBACK,
+    me: ME
+};
+
+export default routes;
+```
+
+globalRouter.js
+
+위에 설정한 routes를 globalRouter.js에서 컨트롤러를 지정해 준다.
+
+```javascript
+import express from "express";
+import passport from "passport";
+import routes from "../routes";
+import { home, search } from "../controllers/videoController";
+import {
+    logout,
+    getJoin,
+    postJoin,
+    getLogin,
+    postLogin,
+    githubLogin,
+    postGithubLogin,
+    getMe
+} from "../controllers/userController";
+import { onlyPublic, onlyPrivate } from "../middlewares";
+
+const globalRouter = express.Router();
+
+globalRouter.get(routes.join, onlyPublic, getJoin);
+globalRouter.post(routes.join, onlyPublic, postJoin, postLogin);
+
+globalRouter.get(routes.login, onlyPublic, getLogin);
+globalRouter.post(routes.login, onlyPublic, postLogin);
+
+globalRouter.get(routes.home, home);
+globalRouter.get(routes.search, search);
+globalRouter.get(routes.logout, onlyPrivate, logout);
+
+globalRouter.get(routes.github, githubLogin); // githubLogin 함수가 사용자를 GitHub 사이트로 보내는 역할.
+globalRouter.get(
+    routes.githubCallback, // githubCallback URL로 들어오면 passport는 githubLoginCallback 함수를 실행한다.
+    passport.authenticate("github", { failureRedirect: "/login" }),
+    // 만약 유저를 찾으면, 쿠키를 생성하고 저정한 후, postGitHubLogin 함수를 실행하고 못 찾았으면 "/login"으로 리다이렉트 한다.
+    postGithubLogin
+);
+
+globalRouter.get(routes.me, getMe);
+
+export default globalRouter;
+```
+
+ userController.js
+
+userController.js에서 위에 설정해둔 getMe 컨트롤러 함수를 작성한다. (아래 코드 추가)
+
+```javascript
+export const getMe = (req, res) => {
+    res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+};
+```
+
+middleware.js
+
+컨트롤러에서 온 유저와 미들웨어에서 온 유저를 구분짓기 위해 미들웨어의 유저이름을 user에서 loggedUser로 교체한다.
+
+```javascript
+import multer from "multer";
+import routes from "./routes";
+
+const multerVideo = multer({ dest: "uploads/videoList/" });
+
+export const localsMiddleWare = (req, res, next) => {
+    res.locals.siteName = "WeTube";
+    res.locals.routes = routes;
+    res.locals.loggedUser = req.user || null;
+    next();
+};
+
+export const onlyPublic = (req, res, next) => {
+    if (req.user) {
+        res.redirect(routes.home);
+    } else {
+        next();
+    }
+};
+
+export const onlyPrivate = (req, res, next) => {
+    if (req.user) {
+        next();
+    } else {
+        res.redirect(routes.home);
+    }
+};
+
+export const uploadVideo = multerVideo.single("videoFile");
 ```
 
