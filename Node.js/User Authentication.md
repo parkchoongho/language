@@ -941,3 +941,32 @@ export const onlyPrivate = (req, res, next) => {
 export const uploadVideo = multerVideo.single("videoFile");
 ```
 
+<br>
+
+### Facebook Login
+
+Facebook 로그인은 http를 허용하지 않는다. 따라서 localhost를 https로 만들어 주어야 하는데 이때 사용하는 것이 localtunnel이다. localtunnel은 로컬서버에 https 터널을 만들어준다. 
+
+(https 문제 때문에 잘되지 않는다. 다른 부분 완성 후, 돌아와서 해볼것!!)
+
+<br>
+
+### User Profile
+
+```jade
+extends layouts/main
+
+block content
+    .user-profile
+        .user-profile__header
+            img.u-avatar(src=user.avatarUrl)
+            h4.profile__username=user.name
+        if user.id === loggedUser.id
+            .user-profile__btns
+                a(href=`/users${routes.editProfile}`)
+                    button ✏️ Edit Profile
+                a(href=`/users${routes.changePassword}`)
+                    button 🔒 Change Password 
+```
+
+이 코드가 의미하는 것은 middleware에서 가져온 loggedUser.id와 userController의 userDetail 컨트롤러 함수에서 받아온 user.id를 비교해서 같으면 위 와 같은 화면을 구성하게 한 것이다. 
