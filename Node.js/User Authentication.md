@@ -970,3 +970,115 @@ block content
 ```
 
 이 코드가 의미하는 것은 middleware에서 가져온 loggedUser.id와 userController의 userDetail 컨트롤러 함수에서 받아온 user.id를 비교해서 같으면 위 와 같은 화면을 구성하게 한 것이다. 
+
+<br>
+
+### Edit User & Change Password
+
+패스워드는 텍스트 그대로 저장되지 않는다. (노출되서는 안되는 정보이기에 항상 암호화 되서 저장되어야한다.)
+
+```javascript
+export const getChangePassword = (req, res) =>
+res.render("changePassword", { pageTitle: "Change Password" });
+
+export const postChangePassword = async (req, res) => {
+    const {
+        body: { oldPassword, newPassword, veriPassword }
+    } = req;
+    try {
+        if (newPassword !== veriPassword) {
+            res.status(400);
+            res.redirect(routes.changePassword);
+            return;
+        }
+        await req.user.changePassword(oldPassword, newPassword);
+        // 이렇게 비밀번호를 바꿀 수 있다. changePassword method는 어떻게 나왔는지 공부할 것
+        res.redirect(routes.me);
+    } catch (error) {
+        res.status(400);
+        res.redirect(routes.changePassword);
+    }
+};
+```
+
+<br>
+
+### Adding Creator to Videos
+
+이제 비디오 모델에 누가 이 비디오를 업로드 했는지를 추가해야한다. 
+
+videoController의 postUpload 함수 컨트롤러에서 req에서 user.id를 가져와 creator에 추가한다. (passport 덕에 req에 계속 user가 담겨있다.)
+
+```javascript
+export const postUpload = async (req, res) => {
+    const {
+        body: { title, description },
+        file: { path }
+    } = req;
+    const newVideo = await Video.create({
+        fileUrl: path,
+        title,
+        description,
+        creator: req.user.id
+    });
+    req.user.videos.push(newVideo.id);
+    req.user.save();
+    res.redirect(routes.videoDetail(newVideo.id));
+};
+```
+
+ populate는 객체를 가져오는 함수이다. populate는 오직 objectId 타입에만 쓰일 수 있다.
+
+아래와 같이 코드를 짜면 creator는 더 이상 id가 아닌 객체 하나가 된다. 따라서 여기에서 username을 가져올 수 있다.
+
+videoDetail 함수 컨트롤러
+
+```javascript
+export const videoDetail = async (req, res) => {
+    console.log(req.user);
+    const {
+        params: { id }
+    } = req;
+
+    try {
+        const video = await Video.findById(id).populate("creator");
+        console.log(video);
+        res.render("videoDetail", { pageTitle: video.title, video });
+    } catch (error) {
+        console.log(error);
+        res.redirect(routes.home);
+    }
+};
+```
+
+내가 올린 비디오를 다른 계정이 편집할 수 없도록 하는 작업이 필요하다.
+
+videoDetail.pug
+
+```jade
+extends layouts/main
+
+block content
+    .video-detail__container
+        .video__player
+            video(src=`/${video.fileUrl}`)
+        .video__info
+            if video.creator.id === loggedUser.id
+                a(href=routes.editVideo(video.id))
+                    button Edit video
+            h5.video__title=video.title
+            p.video__description=video.description
+            if video.views === 1
+                span.video__views 1 view
+            else 
+                span.video__views #{video.views} views
+            .video__author
+                |Uploaded By 
+                a(href=routes.userDetail(video.creator.id))=video.creator.name
+        .video__comments
+            if video.comments.length === 1
+                span.video__comment-number 1 comment
+            else
+                span.video__comment-number #{video.comments.length} comments
+```
+
