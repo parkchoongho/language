@@ -343,3 +343,45 @@ export const postAddComment = async (req, res) => {
 ```
 
 우선 postAddComment 함수를 생성해 Comment Model에 새 댓글이 들어갈 수 있게 한다. 그리고 video가 댓글을 가지므로 새로운 댓글의 id를 video.comments에 저장하고 videoDetail에서 comments를 가져가 활용할 수 있게 .populate("comments")코드를 추가한다.
+
+Frontend 작업
+
+assets폴더 안 js 폴더안에 addComment.js 파일을 생성한다. 
+
+addComment.js 작성
+
+```javascript
+import axios from "axios";
+
+const addCommentForm = document.getElementById("jsAddComment");
+
+const sendComment = async comment => {
+    const videoId = window.location.href.split("/videos/")[1];
+
+    const response = await axios({
+        url: `/api/${videoId}/comment`,
+        method: "POST",
+        data: {
+            comment
+        }
+    });
+    console.log(response);
+};
+
+const handleSubmit = event => {
+    event.preventDefault();
+    const commentInput = addCommentForm.querySelector("input");
+    const comment = commentInput.value;
+    sendComment(comment);
+    commentInput.value = "";
+};
+
+function init() {
+    addCommentForm.addEventListener("submit", handleSubmit);
+}
+
+if (addCommentForm) {
+    init();
+}
+```
+
