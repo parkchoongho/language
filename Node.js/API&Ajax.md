@@ -385,3 +385,60 @@ if (addCommentForm) {
 }
 ```
 
+또한, 여기까지는 내가 작성한 댓글을 보고 싶으면 다시 리로딩해야만 확인할 수 있다. 진짜 실시간은 아니지만 내가 댓글을 작성하면 실시간으로 댓글이 달린 것처럼 볼 수 있는 작업을 해보자.
+
+addComment.js 수정
+
+```javascript
+import axios from "axios";
+
+const addCommentForm = document.getElementById("jsAddComment");
+const commentList = document.getElementById("jsCommentList");
+const commentNumber = document.getElementById("jsCommentNumber");
+
+const increaseNumber = () => {
+    commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
+};
+
+const addComment = comment => {
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    span.innerHTML = comment;
+    li.appendChild(span);
+    commentList.prepend(li);
+    increaseNumber();
+};
+
+const sendComment = async comment => {
+    const videoId = window.location.href.split("/videos/")[1];
+
+    const response = await axios({
+        url: `/api/${videoId}/comment`,
+        method: "POST",
+        data: {
+            comment
+        }
+    });
+    if (response.status === 200) {
+        addComment(comment);
+    }
+};
+
+const handleSubmit = event => {
+    event.preventDefault();
+    const commentInput = addCommentForm.querySelector("input");
+    const comment = commentInput.value;
+    sendComment(comment);
+    commentInput.value = "";
+};
+
+function init() {
+    addCommentForm.addEventListener("submit", handleSubmit);
+}
+
+if (addCommentForm) {
+    init();
+}
+```
+
+response.status가 200이 아닌데 위 작업을 실행하면 실시간으로 댓글이 달린 것 처럼 보이고 다시 리로딩을 하면 댓글이 사라지게 된다. 따라서 response.status가 200이고 DB에도 적용이 된 상태에서만 위 작업이 수행되게끔 한다.
