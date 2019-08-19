@@ -193,5 +193,153 @@ export default apiRouter;
 
 <br>
 
+### 댓글 기능
 
+Backend 작업
 
+우선 아까와 같이 routes.js를 수정한다.
+
+routes.js 수정
+
+```javascript
+// Global
+const HOME = "/";
+const JOIN = "/join";
+const LOGIN = "/login";
+const LOGOUT = "/logout";
+const SEARCH = "/search";
+
+// Users
+const USERS = "/users";
+const USER_DETAIL = "/:id";
+const EDIT_PROFILE = "/edit-profile";
+const CHANGE_PASSWORD = "/change-password";
+const ME = "/me";
+
+// Videos
+const VIDEOS = "/videos";
+const UPLOAD = "/upload";
+const VIDEO_DETAIL = "/:id";
+const EDIT_VIDEO = "/:id/edit";
+const DELETE_VIDEO = "/:id/delete";
+
+// Github
+const GITHUB = "/auth/github";
+const GITHUB_CALLBACK = "/auth/github/callback";
+
+// API
+const API = "/api";
+const REGISTER_VIEW = "/:id/view";
+const ADD_COMMENT = "/:id/comment";
+
+const routes = {
+    home: HOME,
+    join: JOIN,
+    login: LOGIN,
+    logout: LOGOUT,
+    search: SEARCH,
+    users: USERS,
+    userDetail: id => {
+        if (id) {
+            return `/users/${id}`;
+        }
+        return USER_DETAIL;
+    },
+
+    editProfile: EDIT_PROFILE,
+    changePassword: CHANGE_PASSWORD,
+    videos: VIDEOS,
+    upload: UPLOAD,
+    videoDetail: id => {
+        if (id) {
+            return `/videos/${id}`;
+        }
+        return VIDEO_DETAIL;
+    },
+    editVideo: id => {
+        if (id) {
+            return `/videos/${id}/edit`;
+        }
+        return EDIT_VIDEO;
+    },
+    deleteVideo: id => {
+        if (id) {
+            return `/videos/${id}/delete`;
+        }
+        return DELETE_VIDEO;
+    },
+    github: GITHUB,
+    githubCallback: GITHUB_CALLBACK,
+    me: ME,
+    api: API,
+    registerView: REGISTER_VIEW,
+    addComment: ADD_COMMENT
+};
+
+export default routes;
+```
+
+apiRouter 수정
+
+```javascript
+import express from "express";
+import routes from "../routes";
+import {
+    postRegisterView,
+    postAddComment
+} from "../controllers/videoController";
+
+const apiRouter = express.Router();
+
+apiRouter.post(routes.registerView, postRegisterView);
+apiRouter.post(routes.addComment, postAddComment);
+
+export default apiRouter;
+```
+
+videoController.js 수정
+
+```javascript
+export const videoDetail = async (req, res) => {
+    const {
+        params: { id }
+    } = req;
+
+    try {
+        const video = await Video.findById(id)
+        .populate("creator")
+        .populate("comments");
+
+        res.render("videoDetail", { pageTitle: video.title, video });
+    } catch (error) {
+        console.log(error);
+        res.redirect(routes.home);
+    }
+};
+
+// Add Comment
+
+export const postAddComment = async (req, res) => {
+    const {
+        params: { id },
+        body: { comment },
+        user
+    } = req;
+
+    try {
+        const video = await Video.findById(id);
+        const newComment = await Comment.create({
+            text: comment,
+            creator: user.id
+        });
+        video.comments.push(newComment.id);
+        video.save();
+    } catch (error) {
+        res.status(400);
+    } finally {
+        res.end();
+    }
+};
+```
+
+우선 postAddComment 함수를 생성해 Comment Model에 새 댓글이 들어갈 수 있게 한다. 그리고 video가 댓글을 가지므로 새로운 댓글의 id를 video.comments에 저장하고 videoDetail에서 comments를 가져가 활용할 수 있게 .populate("comments")코드를 추가한다.
