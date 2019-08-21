@@ -430,3 +430,98 @@ function App() {
 export default App;
 ```
 
+<br>
+
+### Protection with PropTypes
+
+prop에 잘못된 값을 주면 예기치 못한 클라이언트 상 에러가 발생할 수 있다. 따라서 prop에 알맞은 값이 들어갔는지 체크하는 절차가 필요하다. 
+
+우선 prop-types를 설치한다.
+
+```powershell
+PS C:\Users\user\Desktop\Project\movie_app_react> npm install prop-types
+```
+
+이 prop-types 모듈은 내가 전달받은 props가 원하는 props인지 확인해주는 역할을 한다.
+
+사용방법은 import를 사용해 불러온 후, proptypes를 활용할 수 있다.
+
+```jsx
+import React from "react";
+import PropTyes from "prop-types";
+
+const foodILike = [
+  {
+    id: 1,
+    name: "Kimchi",
+    image:
+      "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg",
+    rating: 5
+  },
+  {
+    id: 2,
+    name: "Samgyeopsal",
+    image:
+      "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg",
+    rating: 4.5
+  },
+  {
+    id: 3,
+    name: "Bibimbap",
+    image:
+      "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb",
+    rating: 4.9
+  },
+  {
+    id: 4,
+    name: "Doncasu",
+    image:
+      "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg",
+    rating: 5
+  },
+  {
+    id: 5,
+    name: "Kimbap",
+    image:
+      "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg",
+    rating: 4.3
+  }
+];
+
+function Food({ name, picture, rating }) {
+  return (
+    <div>
+      <h2>I Like {name}</h2>
+      <h4>{rating} / 5.0</h4>
+      <img src={picture} alt={name} />
+    </div>
+  );
+}
+
+Food.propTyes = {
+  name: PropTyes.string.isRequired,
+  picture: PropTyes.string.isRequired,
+  rating: PropTyes.number.isRequired
+};
+
+function App() {
+  return (
+    <div>
+      {foodILike.map(dish => (
+        <Food
+          key={dish.id}
+          name={dish.name}
+          picture={dish.image}
+          rating={dish.rating}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default App;
+```
+
+만약 `PropTypes.number.isRequired` 에서 isRequired를 삭제하면 undefined도 허용한다는 의미이다. (number 또는 undefined를 허용하겠다는 뜻)
+
+`Food.propTypes` 는 반드시 propTypes로 작성해야 react가 체크할 수 있다.
