@@ -95,3 +95,29 @@ Virtual Document Object Model
 => 말 그대로 소스코드에는 존재하지 않는 다는 말이다. (react가 그것을 만들어낸다.)
 
 이것이 react가 빠른 이유이다. (가상이고 존재하지 않기 때문이다.)
+
+<br>
+
+### Creating First React Component
+
+index.js
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+
+기본적으로 `<App />` 이것을 component라 부른다. 그리고 react는 기본적으로 component와 함께 동작하게 되어있다.
+
+**What is Component?**
+
+Component는 기본적으로 HTML을 반환하는 함수이다. JavaScript와 HTML 사이의 이러한 조합을 JSX라한다. (JSX는 React에 특화된 거의 유일한 개념이다. 나머지는 JavaScript 개념)
+
+react application은 한 번에 하나의 component만 rendering 할 수 있다.
+
+`ReactDOM.render(<App /><Potato />, document.getElementById("root"));`
+
+위와 같은 코드 불가능
