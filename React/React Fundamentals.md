@@ -121,3 +121,113 @@ react application은 한 번에 하나의 component만 rendering 할 수 있다.
 `ReactDOM.render(<App /><Potato />, document.getElementById("root"));`
 
 위와 같은 코드 불가능
+
+<br>
+
+### Reusable Components with JSX + Props
+
+JSX는 component에 정보를 실어서 보낼 수 있다. Component는 재사용이 가능하며, 반복해서 사용할 수 있다. 
+
+App.js
+
+```jsx
+import React from "react";
+
+function Movie() {
+  return <h1>I Like Movie</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <h1>Hello</h1>
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+    </div>
+  );
+}
+
+export default App;
+```
+
+만약 여러 영화리스트를 보여주고 싶으면, 위 처럼 작성하지 않고도 여러개를 보여줄 수 있다.
+
+App.js
+
+```jsx
+import React from "react";
+
+function Movie() {
+    return <h1>I Like Movie</h1>;
+}
+
+function App() {
+    return (
+        <div>
+            <h1>Hello</h1>
+            <Movie name="Titanic" />
+        </div>
+    );
+}
+
+export default App;
+```
+
+Movie component에 정보를 보내고 싶으면 name="Titanic"  같이 코드를 작성하면 된다. 
+
+(자세하게 풀면, movie component에 Titanic이라는 value로 prop name을 준 것이다.)
+
+react는 이 props를 가져올 수 있다.
+
+```jsx
+import React from "react";
+
+function Movie() {
+    return <h1>I Like Movie</h1>;
+}
+
+function App() {
+    return (
+        <div>
+            <h1>Hello</h1>
+            <Movie name="Titanic" something={true} />
+        </div>
+    );
+}
+
+export default App;
+```
+
+이와같이 여러 props를 줄 수도 있다. (여러 Data 형태 전달가능) 이렇게 father component에서 children component로 원하는 많은 형태의 props를 전달 가능하다. 이렇게 보내진 props를 children component는 객체 형태로 받아올 수 있다.
+
+```jsx
+import React from "react";
+
+function Movie({ name }) {
+  return <h1>I Like {name}</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <h1>Hello</h1>
+      <Movie name="Titanic" />
+    </div>
+  );
+}
+
+export default App;
+```
+
+ES6의 특징인 destructing을 활용하여 위와 같이 코드를 작성할 수있다. 
+
+`function Movie({name})` 을 이렇게 작성하면 `const { name } = props;`가 자동으로 동작하고 나서 name을 사용할 수 있게된다. 
+
+`const { name } = props;` 이 코드는 `const name = props.name` 이랑 같다.
+
+<br>
