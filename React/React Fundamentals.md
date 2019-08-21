@@ -231,3 +231,124 @@ ES6의 특징인 destructing을 활용하여 위와 같이 코드를 작성할 �
 `const { name } = props;` 이 코드는 `const name = props.name` 이랑 같다.
 
 <br>
+
+### Dynamic Component Generation
+
+React에 동적인 데이터를 추가해보자. 우선 API로 부터 데이터를 가져왔다고 가정하고 그 데이터를 `const movieILike = []` 이라고 설정해보자.
+
+App.js
+
+```jsx
+import React from "react";
+
+function Food({ name }) {
+    return <h1>I Like {name}</h1>;
+}
+
+const foodILike = [
+    {
+        name: "Kimchi",
+        image:
+        "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg"
+    },
+    {
+        name: "Samgyeopsal",
+        image:
+        "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg"
+    },
+    {
+        name: "Bibimbap",
+        image:
+        "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb"
+    },
+    {
+        name: "Doncasu",
+        image:
+        "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg"
+    },
+    {
+        name: "Kimbap",
+        image:
+        "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg"
+    }
+];
+
+function App() {
+    return (
+        <div>
+            <h1>Hello</h1>
+            <Food name="Bulgogi" />
+        </div>
+    );
+}
+
+export default App;
+```
+
+**Map method**
+
+Map method는 arry의 각 item에 function을 실행하고 그 결과값을 갖는 array를 리턴한다.
+
+```javascript
+const friends = ["dal", "mark", "lynn", "japan guy"]
+friends.map(current => {
+    return 0
+})
+// 결과 [0,0,0,0]
+```
+
+**Tip:** Component안에서 JavaScript 코드를 작성하려면  { }안에다 작성하면 된다.
+
+```jsx
+import React from "react";
+
+function Food({ name, picture }) {
+  return (
+    <div>
+      <h2>I Like {name}</h2>
+      <img src={picture} />
+    </div>
+  );
+}
+
+const foodILike = [
+  {
+    name: "Kimchi",
+    image:
+      "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg"
+  },
+  {
+    name: "Samgyeopsal",
+    image:
+      "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg"
+  },
+  {
+    name: "Bibimbap",
+    image:
+      "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb"
+  },
+  {
+    name: "Doncasu",
+    image:
+      "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg"
+  },
+  {
+    name: "Kimbap",
+    image:
+      "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg"
+  }
+];
+
+function App() {
+  return (
+    <div>
+      {foodILike.map(dish => (
+        <Food name={dish.name} picture={dish.image} />
+      ))}
+    </div>
+  );
+}
+
+export default App;
+```
+
