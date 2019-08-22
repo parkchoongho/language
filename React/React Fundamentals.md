@@ -525,3 +525,94 @@ export default App;
 만약 `PropTypes.number.isRequired` 에서 isRequired를 삭제하면 undefined도 허용한다는 의미이다. (number 또는 undefined를 허용하겠다는 뜻)
 
 `Food.propTypes` 는 반드시 propTypes로 작성해야 react가 체크할 수 있다.
+
+<br>
+
+### Class Components and State
+
+state는 보통 동적 데이터(dynamic data)로 작업할 때 사용한다. 우선 지금까지 작성한 정직인 데이터를 삭제하고 function component를 class component로 변경하자.
+
+`class App extends React.Component`
+
+=> App class가 React class component로부터 가져오고 있다는 뜻.
+
+Class React Component는 return을 가지지 않는다. 왜냐하면, function이 아니기 때문이다. 그 대신에 render method를 가지고 있다. 
+
+```jsx
+class App extends React.Component{
+    render(){}
+}
+```
+
+React Component가 render method를 가지고 있기 때문에 extends를 통해 App class도 이제 render method가 있다.
+
+```jsx
+import React from "react";
+import PropTyes from "prop-types";
+
+class App extends React.Component {
+  render() {
+    return <h1>I am a Class Component.</h1>;
+  }
+}
+
+export default App;
+```
+
+react는 자동으로 class component의 render method를 실행한다.
+
+function component 대신 class component를 사용하는 이유는 바로 state이다. state는 객체이고 component의 data를 넣을 공간이며 이 데이터는 변한다.
+
+```jsx
+import React from "react";
+import PropTyes from "prop-types";
+
+class App extends React.Component {
+  state = {
+    count: 0
+  };
+  render() {
+    return <h1>I am a Class Componen {this.state.count}</h1>;
+  }
+}
+
+export default App;
+```
+
+class이므로 state만 써서는 안되고 `this.state`라고 써야한다. 그렇다면 변하는 데이터를 react에서는 어떻게 입력하고 활용할 수 있을까?
+
+```jsx
+import React from "react";
+import PropTyes from "prop-types";
+
+class App extends React.Component {
+  state = {
+    count: 0
+  };
+
+  add = () => {
+    console.log("Add");
+  };
+
+  minus = () => {
+    console.log("Minus");
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>I am a Class Component {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+JavaScript에서는 "click" 이벤트를 eventListener에 등록하는 방법등을 사용하는데 react에서는 자동적으로 onClick prop을 가지고 있다.
+
+`this.add` 라고 적는 이유는 이 JavaScript 파일이 로드되면서 바로 실행되는 것이 아닌,(this.add()는 바로 실행된다.) click 했을 때만  함수가 호출되기를 원하기 때문이다.
+
