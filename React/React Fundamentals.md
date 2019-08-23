@@ -616,3 +616,120 @@ JavaScript에서는 "click" 이벤트를 eventListener에 등록하는 방법등
 
 `this.add` 라고 적는 이유는 이 JavaScript 파일이 로드되면서 바로 실행되는 것이 아닌,(this.add()는 바로 실행된다.) click 했을 때만  함수가 호출되기를 원하기 때문이다.
 
+<br>
+
+### All you need to know about State
+
+위에서 이해한 State를 활용하고자 할 때, state를 직접 변경해서는 안된다. state 값을 직접 변경하면 브라우저에 반영이 되지 않는데, 왜냐하면 react가 reder function을 refresh하지 않기 때문이다.
+
+=> 매번 state 상태가 변경될 때, react가 render function을 호출해서 바꾸길 원한다는 의미.
+
+**따라서 setState function을 호출하면, react는 스마트해서 언제 setState를 호출할 지를 알고 또한 view를 refresh하길 원하는 것을 알고 render function을 refresh하길 원하는 것을 안다**. 
+
+```jsx
+import React from "react";
+import PropTyes from "prop-types";
+
+class App extends React.Component {
+  state = {
+    count: 0
+  };
+
+  add = () => {
+    this.setState({ count: 1 });
+  };
+
+  minus = () => {
+    this.setState({ count: -1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>I am a Class Component {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+setState는 새로운 state를  취해야한다. 
+
+이렇게 코드를 작성을 하면 전체 page를 렌더링하지 않고 변화가 있는 부분만 react가 업데이트한다. (Virtual DOM을 가지고 있기 때문에 가능한 작업)
+
+```jsx
+import React from "react";
+import PropTyes from "prop-types";
+
+class App extends React.Component {
+  state = {
+    count: 0
+  };
+
+  add = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  minus = () => {
+    this.setState({ count: this.state.count - 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>I am a Class Component {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+이 코드 방법도 state를 직접적으로 다루므로 좋은 방법이 아니다. (성능 문제가 있다고 하는데 자세한거는 아직 모름) 그런데 react는 현재 state를 가져올 수 있는 방법을 제공한다.
+
+(state를 설정할 때, 외부의 상태에 의존하지 않는 가장 좋은 방법이다.)
+
+```jsx
+import React from "react";
+import PropTyes from "prop-types";
+
+class App extends React.Component {
+  state = {
+    count: 0
+  };
+
+  add = () => {
+    this.setState(current => ({
+      count: current.count + 1
+    }));
+  };
+
+  minus = () => {
+    this.setState(current => ({
+      count: current.count - 1
+    }));
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>I am a Class Component {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+**반드시 기억할것**: setState를 호출하는 매 순간, react는 새로운 state와 함께 render function을 호출한다. (다시 rendering을 한다는 뜻)
+
