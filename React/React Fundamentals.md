@@ -822,3 +822,52 @@ setTimeout은 delay function이다. 6초 후에 rendering이 완료된 것처럼
 
 state를 미리 선언하지않고 나중에 state를 추가(state에 선언하지 않은 값을 setState에서 넣어준 경우)해도 에러가 발생하지는 않지만 미리 선언하는 것이 좋은 코딩 기법이다. (프로그래머의 버릇마다 다른데, 나는 개인적으로 미리 선언하는 것을 선호)
 
+<br>
+
+### Fetching Movies from API
+
+일반적으로 사람들이 JavaScript에서 data를 fetch하는 방법은 fetch를 사용하는 것이다. 그런데 여기서는 axios를 사용해볼 예정이다.
+
+**Axios**
+
+axios는 fetch위에 있는 작은 layer라 생각하면 된다. (땅콩을 둘러싸고 있는 초콜릿 같은 느낌?)
+
+axios 설치
+
+```powershell
+PS C:\Users\user\Desktop\Project\movie_app_react> npm install axios
+```
+
+`axios.get("https://yts-proxy.now.sh/list_movies.json")` 
+
+이렇게 코드를 작성하면 axios가 json형태의 데이터를 우리에게 준다. 
+
+```jsx
+import React from "react";
+import axios from "axios";
+
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: []
+  };
+  getMovies = async () => {
+    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+  };
+
+  async componentDidMount() {
+    this.getMovies();
+  }
+  render() {
+    const { isLoading } = this.state;
+    return <div>{isLoading ? "Loading..." : "We are ready"}</div>;
+  }
+}
+
+export default App;
+```
+
+주의해야할 점은 axios가 항상 빠르게 동작하지 않는다는 점이다. 따라서 JavaScript에게 axios의 동작이 끝날 때까지 기다려야 한다는 것을 알려야한다. 따라서 여기에 `async await` 방식을 적용한다.
+
+=> async를 통해 이 함수가 비동기라고 알리고 함수 내부에서는 어떤 작업을 기다려야 되는지를 await를 통해 알려준다. (async없이는 await을 쓸 수 없다.)
+
