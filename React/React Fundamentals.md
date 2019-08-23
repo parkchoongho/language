@@ -733,3 +733,59 @@ export default App;
 
 **반드시 기억할것**: setState를 호출하는 매 순간, react는 새로운 state와 함께 render function을 호출한다. (다시 rendering을 한다는 뜻)
 
+<br>
+
+### Component Life Cycle
+
+위 코드에서 우리가 React Component에서 사용하는 유일한 함수는 render 함수이다. React Class Component 이보다 더 많은 기능을 가지고 있다. 그 중 life cycle method가 있다.
+
+
+
+**Life Cycle Method**
+
+life cycle method는 기본적으로 react가 component를 생성하고 없애는 방법이다. 
+
+Component가 생성될 때, render 전에 호출되는 몇개의 function들이 존재하며, render가 된 후, 호출되는 또 다른 function들이 존재한다. 
+
+이 중에 필요한 함수들을 카테코리별로 소개한다.
+
+
+
+**Mounting**
+
+Mounting은 태어나는 것과 같다.
+
+- constructor()
+
+react에서 온 것이 아니며, JavaScript에서 class를 만들 때 호출되는 것이다. 
+
+- render()
+
+constructor()가 호출되고 그 다음 render()가 호출된다. 
+
+- componentDidMount()
+
+component가 render 될 때, 이 component가 처음 render 되었다고 알려준다.
+
+
+
+**Updating**
+
+일반적인 업데이트를 뜻한다. (위 코드에서 Add눌러 상태를 변경하는 것을 업데이트라 한다.)
+
+- render()
+- componentDidUpdate()
+
+State를 바꾸면 component를 호출하고 먼저 render를 호출한 다음에, 업데이트가 완료되면 componentDidUpdate()가 실행된다.
+
+
+
+**Unmounting**
+
+Component가 죽는 것을 의미한다. (페이지를 바꿀 때, state를 사용해 component를 교체 등등)
+
+- componentWillUnmount
+
+component가 사라질 때, 호출된다.
+
+<br>
