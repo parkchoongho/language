@@ -548,7 +548,6 @@ React Component가 render method를 가지고 있기 때문에 extends를 통해
 
 ```jsx
 import React from "react";
-import PropTyes from "prop-types";
 
 class App extends React.Component {
   render() {
@@ -565,7 +564,6 @@ function component 대신 class component를 사용하는 이유는 바로 state
 
 ```jsx
 import React from "react";
-import PropTyes from "prop-types";
 
 class App extends React.Component {
   state = {
@@ -583,7 +581,6 @@ class이므로 state만 써서는 안되고 `this.state`라고 써야한다. 그
 
 ```jsx
 import React from "react";
-import PropTyes from "prop-types";
 
 class App extends React.Component {
   state = {
@@ -628,7 +625,6 @@ JavaScript에서는 "click" 이벤트를 eventListener에 등록하는 방법등
 
 ```jsx
 import React from "react";
-import PropTyes from "prop-types";
 
 class App extends React.Component {
   state = {
@@ -663,7 +659,6 @@ setState는 새로운 state를  취해야한다.
 
 ```jsx
 import React from "react";
-import PropTyes from "prop-types";
 
 class App extends React.Component {
   state = {
@@ -698,7 +693,6 @@ export default App;
 
 ```jsx
 import React from "react";
-import PropTyes from "prop-types";
 
 class App extends React.Component {
   state = {
@@ -788,4 +782,43 @@ Component가 죽는 것을 의미한다. (페이지를 바꿀 때, state를 사�
 
 component가 사라질 때, 호출된다.
 
+참고자료: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
 <br>
+
+### Planning the Movie Component
+
+위에서 배운 사항을 바탕으로 이제 Movie Component를 생성해보자.
+
+우선 application가 작동하자마자 생겨나는 것이 바로 mount이다.
+
+```jsx
+import React from "react";
+
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: []
+  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 6000);
+  }
+  render() {
+    const { isLoading } = this.state;
+    return <div>{isLoading ? "Loading..." : "We are ready"}</div>;
+  }
+}
+
+export default App;
+```
+
+브라우저가 작동하기 시작하면 로딩되는 것이 맞으므로 isLoading 값을 true로 설정했다. 그래서 삼항연산자를 활용해 이를 구성한다. 그 다음, render를 하기 시작하면 componentDidMount를 호출한다.
+
+setTimeout은 delay function이다. 6초 후에 rendering이 완료된 것처럼 설정.
+
+이론적으로 우리가 할 일은 componentDidMount에서 data를 fetch하는 작업이다. 그리고 API로부터 data fetching을 완료하면 "We are redy" 대신 Movie Component를 render한다.
+
+state를 미리 선언하지않고 나중에 state를 추가(state에 선언하지 않은 값을 setState에서 넣어준 경우)해도 에러가 발생하지는 않지만 미리 선언하는 것이 좋은 코딩 기법이다. (프로그래머의 버릇마다 다른데, 나는 개인적으로 미리 선언하는 것을 선호)
+
