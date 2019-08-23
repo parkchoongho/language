@@ -985,3 +985,103 @@ export default App;
 ```
 
 원래는 Movie Component를 return하는 거였으나 arrow function의 특징을 이용해 `return` 와 `{}`을 없앴다.
+
+<br>
+
+### Styling the Movies
+
+이 파트에서는 HTML을 적절히 구성하는 작업을 해본다.
+
+App.js 수정
+
+```jsx
+import React from "react";
+import axios from "axios";
+import Movie from "./Movie";
+
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: []
+  };
+  getMovies = async () => {
+    const {
+      data: {
+        data: { movies }
+      }
+    } = await axios.get(
+      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+    );
+
+    console.log(movies);
+    this.setState({ movies, isLoading: false });
+  };
+
+  async componentDidMount() {
+    this.getMovies();
+  }
+  render() {
+    const { isLoading, movies } = this.state;
+    return (
+      <section class="container">
+        {isLoading ? (
+          <div class="loader">
+            <span class="loader__text">Loading...</span>
+          </div>
+        ) : (
+          <div class="movies">
+            {movies.map(movie => (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                year={movie.year}
+                title={movie.title}
+                summary={movie.summary}
+                poster={movie.medium_cover_image}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    );
+  }
+}
+
+export default App;
+```
+
+Movie.js 수정
+
+```jsx
+import React from "react";
+import PropTypes from "prop-types";
+
+function Movie({ id, year, title, summary, poster }) {
+  return (
+    <div class="movie">
+      <img src={poster} alt={title} title={title} />
+      <div class="movie__data">
+        <h3 class="movie__title">{title}</h3>
+        <h5 class="movie__year">{year}</h5>
+        <p class="movie__summary">{summary}</p>
+      </div>
+    </div>
+  );
+}
+
+Movie.propTypes = {
+  id: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired
+};
+
+export default Movie;
+```
+
+`img` 태그에서 `title` property는 마우스를 해당 이미지에 올렸을 때 뜨는 텍스트다.
+
+이렇게까지 하고 css를 작업하는데 create-react-app 덕분에 css 통합이 쉽다. 여러가지 방법이 존재하는데, 여기서는 style component를 사용한다.
+
+<br>
