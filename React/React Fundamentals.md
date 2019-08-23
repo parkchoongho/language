@@ -871,3 +871,117 @@ export default App;
 
 => async를 통해 이 함수가 비동기라고 알리고 함수 내부에서는 어떤 작업을 기다려야 되는지를 await를 통해 알려준다. (async없이는 await을 쓸 수 없다.)
 
+<br>
+
+### Rendering the Movies
+
+```jsx
+import React from "react";
+import axios from "axios";
+
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: []
+  };
+  getMovies = async () => {
+    const {
+      data: {
+        data: { movies }
+      }
+    } = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+
+    console.log(movies);
+    this.setState({ movies, isLoading: false });
+  };
+
+  async componentDidMount() {
+    this.getMovies();
+  }
+  render() {
+    const { isLoading } = this.state;
+    return <div>{isLoading ? "Loading..." : "We are ready"}</div>;
+  }
+}
+
+export default App;
+```
+
+위 코드를 통하여 state를 업데이트하고 영화 리스트 데이터를 가져왔다.
+
+그 다음 Rendering 작업을 위해 Movie Component를 작성한다.
+
+Movie의 경우에는 state가 없기 때문에 component가 class가 될 필요가 없다. 따라서 함수 형태로 작성한다.
+
+```jsx
+import React from "react";
+import PropTypes from "prop-types";
+
+function Movie({ id, year, title, summary, poster }) {
+  return <h5>{title}</h5>;
+}
+
+Movie.propTypes = {
+  id: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired
+};
+
+export default Movie;
+```
+
+이제 App.js에서 Movie를 렌더링할 때 2가지를 사용할 수 있다. map method를 사용하거나 다른 함수를 만들어서 사용할 수도 있다. 이건 오로지 개발자의 선택에 잘려있다.
+
+```jsx
+import React from "react";
+import axios from "axios";
+import Movie from "./Movie";
+
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: []
+  };
+  getMovies = async () => {
+    const {
+      data: {
+        data: { movies }
+      }
+    } = await axios.get(
+      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+    );
+
+    console.log(movies);
+    this.setState({ movies, isLoading: false });
+  };
+
+  async componentDidMount() {
+    this.getMovies();
+  }
+  render() {
+    const { isLoading, movies } = this.state;
+    return (
+      <div>
+        {isLoading
+          ? "Loading..."
+          : movies.map(movie => (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                year={movie.year}
+                title={movie.title}
+                summary={movie.summary}
+                poster={movie.medium_cover_image}
+              />
+            ))}
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+원래는 Movie Component를 return하는 거였으나 arrow function의 특징을 이용해 `return` 와 `{}`을 없앴다.
