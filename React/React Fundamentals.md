@@ -1082,7 +1082,7 @@ export default Movie;
 
 `img` 태그에서 `title` property는 마우스를 해당 이미지에 올렸을 때 뜨는 텍스트다.
 
-이렇게까지 하고 css를 작업하는데 create-react-app 덕분에 css 통합이 쉽다. 여러가지 방법이 존재하는데, 여기서는 style component를 사용한다.
+이렇게까지 하고 css를 작업하는데 create-react-app 덕분에 css 통합이 쉽다. 여러가지 방법이 존재하는데, (style component, inline style 등등) 여기서는 css 파일을 만들어서 적용하는 방법을 활용한다.
 
 <br>
 
@@ -1189,5 +1189,16 @@ Movie.propTypes = {
 export default Movie;
 ```
 
-`genres: PropTypes.arrayOf(PropTypes.string).isRequired` 에서 보면 array안에 있는 요소들도 PropsTypes로 설정할 수 있는 것을 확인한다.
+`genres: PropTypes.arrayOf(PropTypes.string).isRequired` 에서 보면 array안에 있는 요소들도 PropsTypes로 설정할 수 있는 것을 확인한다. 또 반복되서 만들어지는 요소에 키값을 주어야 하므로
 
+```jsx
+{genres.map((genre, index) => (
+    <li key={index} className="genres__genre">
+        {genre}
+    </li>
+))}
+```
+
+이렇게 코드를 작성한다. 
+
+**Tip:** map method는 자동으로 한 요소에 해당하는 index값을 가져온다.
