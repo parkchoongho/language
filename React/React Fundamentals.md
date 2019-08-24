@@ -1085,3 +1085,109 @@ export default Movie;
 이렇게까지 하고 css를 작업하는데 create-react-app 덕분에 css 통합이 쉽다. 여러가지 방법이 존재하는데, 여기서는 style component를 사용한다.
 
 <br>
+
+### Adding Genres
+
+Jsx에서는 HTML을 class property를 그대로 class라고 쓰면 react가 class component와 헷갈릴 수 있기 때문에 className이라고 작성한다. 그리고 API에서 받아온 movies에서 genres 데이터도 가져온다.
+
+App.js 수정
+
+```jsx
+import React from "react";
+import axios from "axios";
+import Movie from "./Movie";
+import "./App.css";
+
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    movies: []
+  };
+  getMovies = async () => {
+    const {
+      data: {
+        data: { movies }
+      }
+    } = await axios.get(
+      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+    );
+
+    console.log(movies);
+    this.setState({ movies, isLoading: false });
+  };
+
+  async componentDidMount() {
+    this.getMovies();
+  }
+  render() {
+    const { isLoading, movies } = this.state;
+    return (
+      <section className="container">
+        {isLoading ? (
+          <div className="loader">
+            <span className="loader__text">Loading...</span>
+          </div>
+        ) : (
+          <div className="movies">
+            {movies.map(movie => (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                year={movie.year}
+                title={movie.title}
+                summary={movie.summary}
+                poster={movie.medium_cover_image}
+                genres={movie.genres}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    );
+  }
+}
+
+export default App;
+```
+
+Movie.js 수정
+
+```jsx
+import React from "react";
+import PropTypes from "prop-types";
+import "./Movie.css";
+
+function Movie({ year, title, summary, poster, genres }) {
+  return (
+    <div className="movie">
+      <img src={poster} alt={title} title={title} />
+      <div className="movie__data">
+        <h3 className="movie__title">{title}</h3>
+        <h5 className="movie__year">{year}</h5>
+        <ul className="genres">
+          {genres.map((genre, index) => (
+            <li key={index} className="genres__genre">
+              {genre}
+            </li>
+          ))}
+        </ul>
+        <p className="movie__summary">{summary}</p>
+      </div>
+    </div>
+  );
+}
+
+Movie.propTypes = {
+  id: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired
+};
+
+export default Movie;
+```
+
+`genres: PropTypes.arrayOf(PropTypes.string).isRequired` 에서 보면 array안에 있는 요소들도 PropsTypes로 설정할 수 있는 것을 확인한다.
+
