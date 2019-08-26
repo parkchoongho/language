@@ -4,7 +4,7 @@ Server란 컴퓨터다. 인터넷에 연결된 컴퓨터.
 
 #### 소프트웨어적 서버 => 인터넷에 연결된 한 덩어리의 코드
 
-종합해서 Server란 접속을 받고 접속을 계속해서 기다리는 Something이다.
+종합해서 Server란 접속을 받고 접속을 계속해서 기다리는 무언가이다.
 
 <br>
 
@@ -99,7 +99,9 @@ found 0 vulnerabilities
 ==========================================
 ```
 
-Tip: 만약 누군가와 해당 프로젝트를 가지고 협업을 한다면, package-lock.json 파일과node_modules라는 폴더까지 모두 다 줄 필요는 없다. 왜냐하면 상대방에게 package.json파일만 건네면 상대방이 `npm install` 명령어를 통해 설치할 수 되기 때문이다. package.json 파일의 `"dependencies"` 키값에 할당된 값들을 확인해 해당 프로젝트에 필요한 프레임워크나 라이브러리를 설치해준다. 
+**Tip**: 만약 누군가와 해당 프로젝트를 가지고 협업을 한다면, package-lock.json 파일과node_modules라는 폴더까지 모두 다 줄 필요는 없다. 왜냐하면 상대방에게 package.json파일만 건네면 상대방이 `npm install` 명령어를 통해 설치할 수 있기 때문이다. package.json 파일의 `"dependencies"` 키값에 할당된 값들을 확인해 해당 프로젝트에 필요한 프레임워크나 라이브러리를 설치해준다.
+
+`npm init`을 하면 `package.json` 파일이 생성되고 `npm install express`를 하면 `node_modules` 폴더와 `package-lock.json` 파일이 생성된다. 
 
 <br>
 
@@ -133,6 +135,8 @@ package.json 파일에 scripts 키값에 명령어를 축약해서 내릴 수 �
 
 ### Basic Server
 
+index.js 생성
+
 ```javascript
 const express = require('express');
 const app = express();
@@ -143,7 +147,7 @@ function handleListening() {
   console.log(`Listening on: http://localhost:${PORT}`);
 }
 
-app.listen(PORT, handleListening); // PORT 3000번을 듣는 것이(Listening) 끝나면(시작하면? => 이거 확실하게 알아볼 것.) handleListening을 콜백함수로 불러라.
+app.listen(PORT, handleListening); // PORT 3000번을 듣는 작업을(Listening) 완료하면 handleListening을 콜백함수로 불러라.
 ```
 
 <br>
@@ -272,7 +276,9 @@ PS C:\Users\user\Desktop\revieWetube> npm install helmet
 
 ```javascript
 import helmet from "helmet";
-app.use(helmet()); // 왜 여기에서는 helmet()을 사용할까? app.use(betweenHome)과의 차이점?
+app.use(helmet()); 
+// 왜 여기에서는 helmet()을 사용할까? 
+// app.use(betweenHome)과의 차이점?
 ```
 
 위 코드를 추가해주면 된다. (Morgan에서 Helmet으로 바뀐것 빼고 코드가 똑같다.)
@@ -446,7 +452,7 @@ import { app } from "./app";
 
 ### Default로 Export한 것과 아닌것의 차이점은 무엇일까?
 
-Default로 export한것은 파일채로 export하는 것이다.
+`language/ES6` 폴더에 있는 ES6 파일 참고할 것.
 
 <br>
 
