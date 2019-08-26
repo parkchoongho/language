@@ -573,7 +573,9 @@ In most cases, the file path requires a `./`before it; otherwise, node will look
 
 ### Use export to Reuse a Code Block
 
-위 exercise에서 처럼, `import`를 사용하기 위해서는 `export` 되어야 합니다. 다른 파일에서 재 사용할 수 있는 코드 - 함수나 변수 같은 - 를 `import`하려면, 반드시 먼저 `export` 해야 합니다. `import` 처럼 `export`는 non-browser feature입니다.
+위 exercise에서 처럼, `import`를 사용하기 위해서는 `export` 되어야 합니다. 다른 파일에서 재 사용할 수 있는 코드 - 함수나 변수 같은 - 를 `import`하려면, 반드시 먼저 `export` 해야 합니다. `import` 처럼 `export`는 non-browser feature입니다. 
+
+**Tip:** non-browser feature란, 브라우저 환경 설정이외의 설정이 필요한 feature을 의미합니다. (왜냐하면 모든 브라우저가 ES6를 지원하는 것은 아니기 때문입니다. 따라서 babel과 같이 최신의 ES6 코드를 모든 브라우저가 이해할 수 있는 예전의 코드로 바꿔주는 툴이 필요합니다.)
 
 밑에 코드는 *named export*를 보여줍니다. 이것을 활용하면, `import`를 통해 다른 파일에서 `export`한 어떤 코드든 가져올 수 있습니다.
 
