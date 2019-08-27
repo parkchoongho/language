@@ -53,3 +53,64 @@ server.start(() => console.log("GraphQL Server Learning"));
 ```
 
 이렇게만 작성하고 서버를 돌리면 Schema가 없다는 에러가 발생한다. (Schema는 사용자에게 보내거나 사용자로부터 받을 data에 대한 설명이다.)
+
+<br>
+
+### Creating the first Query and Resolver
+
+위에 언급한 것처럼 Schema는 Data에 대한 일종의 서술이라 생각하면 된다.ㄴ
+
+**Schema 작성**
+
+프로젝트에 graphql 폴더를 만들고 그 안에 schema.graphql 파일을 생성하자.
+
+```
+type Query{
+    name: String!
+}
+```
+
+GraphQl에서 Query는 정보를 가져올 때만 사용되며, 데이터를 바꾸는 것은 Mutaion이라 한다.
+
+index.js 수정
+
+```javascript
+import { GraphQLServer } from "graphql-yoga";
+
+const server = new GraphQLServer({
+  typeDefs: "graphql/schema.graphql"
+});
+
+server.start(() => console.log("GraphQL Server Learning"));
+```
+
+이렇게까지만 코드를 작성하면 Query에 이름을 보내면 string을 보낸다는 설명만 했을 뿐이다. 따라서 코드를 동작하게 만들기 위해서, Resolvers를 만들어야 한다. Resolvers란, Query를 resolve(해결) 한다는 의미이다. (Query는 Database에게 있어 문제 같은 것이고, 따라서 이 Query를 resolve(해결)해야 한다.)
+
+graphql 폴더 밑에 resolvers.js 파일 생성
+
+```javascript
+const resolvers = {
+  Query: {
+    name: () => "Park Choong Ho"
+  }
+};
+
+export default resolvers;
+```
+
+index.js 수정
+
+```javascript
+import { GraphQLServer } from "graphql-yoga";
+import resolvers from "./graphql/resolvers";
+
+const server = new GraphQLServer({
+  typeDefs: "graphql/schema.graphql",
+  resolvers
+});
+
+server.start(() => console.log("GraphQL Server Running"));
+```
+
+<br>
+
