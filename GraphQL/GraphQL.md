@@ -35,3 +35,21 @@ GraphQL을 사용하면, 하나의 query로 정확하게 원하는 정보만을 
 **그렇다면, GraphQL에서는 어떻게 내가 원하는 여러정보만을 받아올 수 있을까?**
 
 GraphQL에서는 URL이 존재하지 않는다. 오직 하나의 종점만이 존재. GraphQL을 활용하면 요청한 정보들만 원하는 방식으로 가져오거나 변형할 수 있다.
+
+<br>
+
+### Creating a GraphQL Server with GraphQL Yoga
+
+GraphQL Server 생성
+
+index.js
+
+```javascript
+import { GraphQLServer } from "graphql-yoga";
+
+const server = new GraphQLServer({});
+
+server.start(() => console.log("GraphQL Server Learning"));
+```
+
+이렇게만 작성하고 서버를 돌리면 Schema가 없다는 에러가 발생한다. (Schema는 사용자에게 보내거나 사용자로부터 받을 data에 대한 설명이다.)
