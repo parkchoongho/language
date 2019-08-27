@@ -114,3 +114,58 @@ server.start(() => console.log("GraphQL Server Running"));
 
 <br>
 
+### Extending the Schema
+
+schema.graphql은 지금 이렇게 구성되어있다.
+
+```
+type Query {
+  name: String!
+}
+```
+
+여기서 `String!` 를 `Int!` 로 바꿔주면 에러가 난다. 왜냐하면 resolvers.js에서 String을 return하기 때문이다. 이렇게 미리 내가 원하는 data type을 설정하고 그에 맞지 않는 data가 들어왔을 경우 이를 막을 수 있다는 점에서 Awesome!!
+
+**GraphQL Playground**
+
+GraphQL Playground는 graphql-yoga에 따라오는 것인데, Database를 테스트할 수 있게 한다.
+
+Query는 서버에서 받아야하는 것이기 때문에, POST로 보낸다.
+
+이번에는 조금 복잡한 형태의 쿼리를 받는 것을 해본다.
+
+schema.graphql 수정
+
+```
+type ChoongHo {
+  name: String!
+  age: Int!
+  gender: String!
+}
+
+type Query {
+  person: ChoongHo!
+}
+```
+
+이 파일에 맞게 resolvers.js도 수정한다.
+
+resolvers.js 수정
+
+```javascript
+const choongho = {
+  name: "Park Choong Ho",
+  age: 28,
+  gender: "male"
+};
+
+const resolvers = {
+  Query: {
+    person: () => choongho
+  }
+};
+
+export default resolvers;
+```
+
+이렇게 객체의 value 값을 하나하나 Type 검사를 자동으로 할 수 있다.
