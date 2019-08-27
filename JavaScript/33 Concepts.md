@@ -94,3 +94,39 @@ Math.pow(5, "hello");
 ```
 
 <br>
+
+## 3. Value Types and Reference Types
+
+```javascript
+let a = 50;
+let b = a;
+
+a = 10;
+console.log(b);
+```
+
+이렇게 하면 콘솔에 50이 뜬다. 왜냐하면 `let b = a` 를 할 때, a의 **value**를 복사하기 때문이다. 따라서 이것은 참조하는 Reference와는 다르다.
+
+```javascript
+const sexy = ["kimchi", "potato"];
+const pretty = sexy;
+
+console.log(pretty);
+
+sexy.push("bulgogi");
+
+console.log(pretty);
+```
+
+=> 위는 `["kimchi", "potato"]`가 나타나고 아래는 `["kimchi", "potato", "bulgogi"]`가 나타난다. 이것을 Reference라 부른다. pretty를 업데이트 하지 않았지만 프리티가 업데이트 되었다. 따라서 이것은 값을 복사하는 것이 아닌, Referencing한 것이다.
+
+위에서 sexy의 값이 `["kimchi", "potato"]` 가 되는 것이 아니라, sexy는 `["kimchi", "potato"]` 를 참조하고 있는 것이다. 그리고 pretty는 sexy와 같은 것을 참조하고 있기에 sexy가 참조하는 배열이 업데이트 되면 pretty에도 반영되는 것이다.
+
+```javascript
+console.log([10] === [10]);
+```
+
+둘은 각각 메모리에 위치한 다른 object이므로 false를 출력한다.
+
+**Tip:** Value는 string, number, boolean, NaN, undefined, null, symbol에서 가능하고 Reference는 array, object, function에서 사용될 수 있다.
+
