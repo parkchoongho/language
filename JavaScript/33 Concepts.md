@@ -130,3 +130,73 @@ console.log([10] === [10]);
 
 **Tip:** Value는 string, number, boolean, NaN, undefined, null, symbol에서 가능하고 Reference는 array, object, function에서 사용될 수 있다.
 
+<br>
+
+## 4. Type Coercion
+
+```javascript
+console.log(4 + "hello");
+console.log(4 + 4 + "hello");
+console.log("" == true);
+console.log(1 == true);
+console.log(66 + true);
+// 4hello
+// 8hello
+// false
+// true
+// 67
+```
+
+자바스크립트는 최대한 에러가 발생하지 않는 방향으로 개발했기에 위와 같은 결과가 나온다.
+
+#### Type Coercion
+
+Type Coercion (or Conversion)은 자바스크립트가 강제적으로 값을 변환시킨다는 뜻이다.
+
+`console.log(66 + true)` 코드를 자바스크립트가 만나면, true를 1로 변환시키기 때문에 67이 출력된다. (false는 0으로 변환된다.)
+
+하지만 더하기가 항상 숫자로 변환시키는 것은 아니다. `console.log(66 + "false")` 이 코드를 작성하면 66false가 결과로 나온다. 여기서는 66을 string으로 바꿔준다. (오직 더하기에서만 이렇게 작동하고 이를 loaded operator라고 한다.)
+
+```javascript
+console.log(11 + 55 + "false");
+// 66false 출력. 왜냐하면 자바스크립트는 왼쪽에서 오른쪽으로 코드를 읽어내려가기 때문이다.
+console.log(25 - "1");
+// 24 출력 
+```
+
+```javascript
+console.log("" == true);
+console.log(0 == true);
+console.log(NaN == true);
+console.log(undefined == true);
+console.log(null == true);
+```
+
+`===` 를 사용해서 비교하면 Type Coercion이 일어나지 않는다.
+
+```javascript
+console.log(1 == "1");
+// true
+console.log(1 === "1");
+// false
+console.log("true" == true)
+// false
+```
+
+`console.log("true" == true)` 가 거짓인 이유는?
+
+== 는 boolean을 만나면 숫자로 변환한다. "true"도 숫자로 바꾸려하지만 `NaN `이 된다.
+
+결과적으로 `console.log(NaN == 1)` 이 되며 false를 출력한다.
+
+== 는 이렇게 예기치 못한 결과를 낳을 수 있으므로 === 를 사용하는 것을 생활화 하는 것이 좋다.
+
+```javascript
+const hello = "";
+if(typeof hello !== undefined){
+    console.log("hello");
+}
+// hello는 undefined가 아니기 때문에 hello를 출력한다.
+```
+
+<br>
