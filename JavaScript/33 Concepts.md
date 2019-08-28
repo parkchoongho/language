@@ -200,3 +200,49 @@ if(typeof hello !== undefined){
 ```
 
 <br>
+
+## 5. Typeof
+
+Typeof는 데이터가 어떤 타입을 가지는지 알고 싶을 때 사용한다.
+
+```javascript
+console.log(typeof 1);
+// number 출력
+console.log(function(){});
+// function 출력
+```
+
+그런데 typeof에도 예기치 못하게 발생하는 에러가 있다.
+
+```javascript
+console.log(typeof null);
+// object 출력
+```
+
+그래서 이걸 고치겠다는 논의가 진행되었으나 이미 JavaScript로 작성된 많은 프로그램들이 영향을 받을까봐 고쳐지지는 않았다.
+
+이외에도 몇 가지 버그가 더 있다.
+
+```javascript
+console.log(typeof []);
+// object 출력
+console.log(typeof {});
+// object 출력
+```
+
+Array인지 Object인지 체크하고 싶은데 둘다 Object로 나온다. 이런 경우에는 typeof 대신 instanceof를 사용한다. (instanceof는 primitive type에서는 적용되지 않는다.)
+
+```javascript
+console.log([] instanceof Array);
+// true 출력
+console.log({} instanceof Array);
+// false 출력
+console.log([] instanceof Object);
+// true 출력
+console.log({} instanceof Object);
+// true 출력
+```
+
+number, string, boolean, undefined, function등을 체크하고 싶으면 typeof를 사용한다.
+
+<br>
