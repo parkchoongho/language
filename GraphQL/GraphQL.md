@@ -169,3 +169,71 @@ export default resolvers;
 ```
 
 이렇게 객체의 value 값을 하나하나 Type 검사를 자동으로 할 수 있다.
+<br>
+
+### Extending the Schema Part Two
+
+Resolver가 Database를 살피고 요구한 데이터를 돌려주는 역할을 한다.
+
+이제 좀 더 복잡한 형태의 Query를 살펴보자.
+
+schema.graphql 수정
+
+```
+type Person {
+  id: Int!
+  name: String!
+  age: Int!
+  gender: String!
+}
+
+type Query {
+  people: [Person]!
+  person(id: Int!): Person
+}
+```
+
+`person(id:Int!): Person` 에서 마지막 Person에 !를 하지 않는 이유는 해당 id 값을 가지는 데이터가 없을 수 있어서다.
+
+db.js 생성
+
+```javascript
+export const people = [
+  {
+    id: "1",
+    name: "Park Choong Ho",
+    age: 28,
+    gender: "male"
+  },
+  {
+    id: "2",
+    name: "Park Ki Juung",
+    age: 27,
+    gender: "female"
+  }
+];
+
+export const getById = id => {
+  const filteredPeople = people.filter(person => person.id === id);
+  return filteredPeople[0];
+};
+```
+
+resolvers.js 수정
+
+```javascript
+import { people, getById } from "./db";
+
+const resolvers = {
+  Query: {
+    people: () => people,
+    person: () => getById()
+  }
+};
+
+export default resolvers;
+```
+
+여기서 person 쿼리를 날리면 getById를 불러오는 것까지는 완성했다. 그런데 특정 id값을 argument로 입력해서 한 객체를 가져오려 하는데, 어떤 ID를 요청했는지 어떻게 해야 알 수 있을까? 또 어떻게 그 ID를 Query에 넣을까?
+
+<br>
