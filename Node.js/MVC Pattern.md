@@ -64,7 +64,7 @@ Pug는 Express에서 View를 다루는 방식 중 하나이다. (일종의 View 
 
 (밑 코드는 pug코드이다.)
 
-```html
+```jade
 doctype html
 html <--! 탭안쪽에 있는 코드면, 그 내부에 있는 코드임을 뜻한다. -->
     head
@@ -80,7 +80,7 @@ block content 이 부분에 다른 화면들의 내용들이 들어간다. (이�
 
 밑에 코드는 main.pug를 extend한  home.pug이다.
 
-```html
+```jade
 extends layouts/main <!-- main.pug를 그대로 가져오겠다.-->
 	
 block content
@@ -91,7 +91,7 @@ block content
 
 Pug는 document를 부분으로 나누어 레고 조립하듯이 사용할 수 있다.
 
-```html
+```jade
 footer.footer
     .footer__icon
         i.fab.fa-youtube
@@ -101,7 +101,7 @@ footer.footer
 
 사용방법
 
-```html
+```jade
 doctype html
 html
     head
@@ -117,7 +117,7 @@ html
 
 <br>
 
-```html
+```jade
 .social-login
     button
         span
@@ -131,7 +131,7 @@ html
 
 ### How to put javascript code in pug?
 
-```pug
+```jade
 footer.footer
     .footer__icon
         i.fab.fa-youtube
@@ -166,7 +166,7 @@ export const localsMiddleWare = (req, res, next) => {
 
 middlewares.js 파일을 만들어  Controller정보를 활용할 수 있게한다.
 
-```html
+```jade
 doctype html
 html
     head
@@ -205,7 +205,7 @@ export const home = (req, res) => res.render("home", { pageTitle: "Home" });
 
 CSS 방법론으로 html 요소에  클래스나 id를 설정할 때 특정한 규칙에 따라 설정하는 것을 말한다.
 
-```html
+```jade
 <!-- join.pug -->
 extends layouts/main
 
@@ -220,7 +220,7 @@ block content
         include partials/socialLogin
 ```
 
-```html
+```jade
 <!-- login.pug -->
 extends layouts/main
 
@@ -233,7 +233,7 @@ block content
         include partials/socialLogin
 ```
 
-```html
+```jade
 <!-- socialLogin.pug -->
 .social-login
     button.social-login--github
@@ -360,7 +360,7 @@ export default userRouter;
 
 header.pug에 input 폼을 추가한다.
 
-```html
+```jade
 header.header
     .header__column
         a(href=routes.home)
@@ -368,7 +368,7 @@ header.header
     .header__column
         form(action=routes.search, method="get")
             input(type="text", placeholder= "Search By Term", name="term")
-<!-- name을 설정해야 url에 표시가 된다., 컨트롤러가 쿼리에 접근하려면 method가 get이어야 한다. 왜냐하면 get 방식이 url에 정보를 추가하기 때문이다.-->
+
     .header__column
         ul  
             li
@@ -376,6 +376,8 @@ header.header
             li
                 a(href=routes.login) Log In
 ```
+
+name을 설정해야 url에 표시가 된다. 그리고 컨트롤러가 쿼리에 접근하기 위해서는 method가 get이어야 한다. 왜냐하면 get 방식이 url에 정보를 추가하기 때문이다.
 
 search.pug도 들어온 input값을 반영할 수 있도록 수정한다.
 
