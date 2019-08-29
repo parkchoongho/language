@@ -246,3 +246,55 @@ console.log({} instanceof Object);
 number, string, boolean, undefined, function등을 체크하고 싶으면 typeof를 사용한다.
 
 <br>
+
+## 6. Function Scope, Block Scope and Lexical Scope
+
+Scope는 선언한 Variable이 존재하는가?(정의가 되었나)에 대한 답이다.
+
+```javascript
+if(true){
+	const hello = "Hi!";
+}
+
+console.log(hello);
+// error 발생 hello is not defined
+```
+
+hello는 자신이 속한 { }안에서만 존재한다.
+
+```javascript
+const h = "hello";
+
+function a(){
+	console.log(h);
+	const b = "b";
+}
+
+a();
+console.log(b);
+```
+
+hello는 출력되지만 변수 b는 a 함수 { }안에서 선언되었으므로 외부에서 접근할 수 있습니다.
+
+```javascript
+if(true){
+	var hello = "h";
+}
+
+console.log(hello);
+// h 출력
+```
+
+여기서는 h가 출력된다. 이것이 var를 써서는 안되는 이유이다. let, const는 block scope이다. (let, const는 선언된 scope안에서만 접근이 가능하다.)
+
+개발자로 일을 할 때는 Scope를 공유해야 할때가 있다.
+
+```javascript
+let hello;
+if(true){
+	hello = "hello";
+}
+console.log(hello)
+```
+
+<br>
