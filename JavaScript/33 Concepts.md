@@ -298,3 +298,72 @@ console.log(hello)
 ```
 
 <br>
+
+## 7. Expression vs Statement
+
+**Expression**이란, value를 리턴하는 무언가를 의미한다.
+
+```javascript
+5 + 1
+```
+
+JavaScript에서는 위를 expression이라 부른다. (위 값을 6으로 return한다.) 무엇이든 value 를 return 하는 것은 expression이다.
+
+```javascript
+function add(a, b){
+    return a + b;
+}
+const addedNumber = add(5, 6);
+```
+
+위 코드에서 `add(5,  6)`는 expression이다. 함수 부분에서 return이 없어도 expression이다. (undefined를 return하기 때문이다.) JavaScript는 expression을 value로 교체하고 계속 진행해 나간다.
+
+**Statement** 란, 명령 혹은 지시를 뜻한다.
+
+```javascript
+if(true){
+    // bla bla bla
+}
+```
+
+statement는 variable에 할당할 수 없다.
+
+```javascript
+const thing = if(true){
+    // bla bla bla
+}
+```
+
+위 같이 코드를 작성하면 에러가 발생한다. (= 연산자 때문에 expression을 기대하고 있다.)
+
+cf) **Function Declaratoin & Function Expression**
+
+```javascript
+const addedNumber = add(1, 5);
+
+function add (a, b){
+    return a + b;
+}
+
+console.log(addedNumber);
+// 6이 출력됨. 작동한다.
+```
+
+`function add (a, b){`
+    `return a + b;`
+`}`
+
+이 코드 부분은 declaration이다. JavaScript는 declaration을 보면 이를 코드 상단부로 가져온다. (이건 hoisting이라는 프로세스다.)
+
+```javascript
+const addedNumber = add(1, 5);
+
+const add = (a, b) => a + b;
+
+console.log(addedNumber);
+// 에러 발생 (Not defined Error)
+```
+
+에러가 발생한다. (Not defined Error) 왜냐하면 `const add= (a, b) => a + b;` 는 **declaration이 아닌, expression이기 때문이다.**
+
+<br>
