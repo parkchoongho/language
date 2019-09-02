@@ -1,16 +1,13 @@
-# 1. CSS 구성요소
+## 1. CSS 구성요소
 
 **CSS**는 크게 2가지로 구성되어 있다.
-
-<br>
 
 ### (1) Property
 
 ```css
-property-name: value; /* 이름에 있어 중간 공백을 허용하지 않고 value 다음에 마지막으로 세미콜론(;)으로 마무리한다. */
+property-name: value; 
+/* 이름에 있어 중간 공백을 허용하지 않고 value 다음 마지막에 세미콜론(;)으로 마무리한다. */
 ```
-
-<br>
 
 ### (2) Selector
 
@@ -23,13 +20,11 @@ h1 {
   property-name: value;
   property-name: value;
   property-name: value;
-  /*property를 원하는 만큼 selector에 적용할 수 있다.*/
+  /* property를 원하는 만큼 selector에 적용할 수 있다. */
 }
 ```
 
 이렇게 작성하면 된다.
-
-<br>
 
 또 **selector**로 **ID** 또는 **Class**를 사용할 수 있는데 이 때는 그냥 태그와 표기법이 조금 달라진다.
 
@@ -45,8 +40,6 @@ h1 {
 }
 ```
 
-<br>
-
 최종적으로 **css**는 이렇게 작성할 수 있다고 보면된다.
 
 ```css
@@ -59,13 +52,9 @@ selector (id, class, tag name) {
 
 <br>
 
-<br>
-
-# 2. HTML과 CSS 연결하기
+## 2. HTML과 CSS 연결하기
 
 **CSS**를 **HTML**에서 사용하는 방법에는 2가지가 있다.
-
-<br>
 
 ### (1) inline
 
@@ -80,9 +69,7 @@ selector (id, class, tag name) {
 <body></body>
 ```
 
-이 방법이 좋지 않은 이유는 만일 어떤 프로젝트에서 배경이 빨간색인 파일이 여러개 필요하다고 할 때, 위 **style**코드를 각 **html** 파일에 계속해서 붙여넣어야 하기 때문이다.
-
-<br>
+**Tip:** 만약 프로젝트에서 배경이 빨간색인 파일이 여러개 필요하다면, 위 **style**코드를 각 **html** 파일에 모두 붙여넣어야 한다.
 
 ### (2) externel하게 연결
 
@@ -99,13 +86,11 @@ body {
 }
 ```
 
-이렇게 하면 <link rel="stylesheet" href="style.css"> 로 각 **html** 파일에서 **css** 파일로 접근할 수 있다.
+이렇게 하면 `<link rel="stylesheet" href="style.css">` 로 각 **html** 파일에서 **css** 파일로 접근가능하다.
 
 <br>
 
-<br>
-
-# 3. Box Model
+## 3. Box Model
 
 ### Box는 총 4가지 요소로 구성된다.
 
@@ -117,25 +102,17 @@ body {
 
 **Content**는 말그대로 그 **Box**에 들어가는 내용물이다. 이미지, 영상, 텍스트 등등 다양한 형태의 파일을 가질 수 있다.
 
-<br>
-
 ### (2) Padding
 
 **Padding**은 **Content**와 **Border**사이의 간격을 의미한다.
-
-<br>
 
 ### (3) Border
 
 **Border**는 **Box**가 가지는 테두리를 나타낸다.
 
-<br>
-
 ### (4) Margin
 
-**Margin**은 **Border**로부터 바깥 쪽 요소와의 거리를 나타낸다.**(확실한가?)**
-
-<br>
+**Margin**은 **Border**로부터 바깥 쪽 요소와의 거리를 나타낸다.
 
 ### Padding Margin 단축키
 
@@ -147,9 +124,7 @@ h1 {
 }
 ```
 
-margin에도 똑같이 적용된다.
-
-<br>
+margin도 같은 방식으로 동작한다.
 
 ### Border
 
@@ -158,21 +133,17 @@ h1 {
   border-width: 5px;
   border-color: blue;
   border-style: dashed; /* 점선을 의미 */
-  border: 5px dashed blue; /* 이렇게 단축해서 표현할 수도 있다. */
+  border: 5px dashed blue; /* 이렇게 단축해서 표현 가능. */
 }
 ```
 
 <br>
 
-<br>
-
-# 4. Display
-
-<br>
+## 4. Display
 
 ### (1) Block
 
-Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
+옆에 어떤 요소도 허용하지 않을 때, **Block**을 사용한다.
 
 ```html
 <!DOCTYPE html>
@@ -202,9 +173,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 <img width="161" alt="block" src="https://user-images.githubusercontent.com/34790763/58922106-83e09380-8774-11e9-9d9e-67d40b2db628.PNG">
 
-이렇게 크기와 상관없이 옆으로 다른요소를 허용하지 않는 것을 **Block**이라 칭한다.
-
-<br>
+크기와 상관없이 옆에 다른 요소를 허용하지 않는 것을 **Block**이라 한다.
 
 ### (2) Inline-Block
 
@@ -240,8 +209,6 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 **Box**는 **Block**과 **Inline-Block**중 하나의 값을 가져야한다. (디폴트 값은 **Block**이다.)
 
-<br>
-
 ### 3) Inline
 
 **Inline**은 박스안의 모든 **Property** 설정값을 지운다.
@@ -276,11 +243,11 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 **Inline**으로 **Display**를 설정하면 더 이상 **Block**으로 설정되지 않는다. 대신에 위 예시처럼 **Text**로 적용된다.
 
-따라서 만약에 **Inline** 설정값을 유지하는 동시에 **Box**형태를 원한다면 **Inline-Block**을 **Display** 설정값으로 사용하면된다.
+따라서 만약에 **Inline** 설정값을 유지하는 동시에 **Box**형태를 원한다면 **Inline-Block**을 **Display** 설정값으로 사용한다.
 
 <br>
 
-# 5. Position
+## 5. Position
 
 ```css
  body,
@@ -292,17 +259,11 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 }
 ```
 
-이걸 설정하는 이유는 브라우저가 가지고 있는 디폴트 값을 상쇄시키기 위함이다.
-
-<br>
-
-### Position은 4가지가 존재한다.
-
-<br>
+이렇게 설정하는 이유는 브라우저가 가지고 있는 디폴트 값을 상쇄시키기 위함이다. (브라우저마다 가지고 있는 CSS 값이 다르기 때문이다.)
 
 ### (1) Static
 
- **Static** 요소를 거기두면 그 자리에 있을 것이라는 말이다. (# 먼 말이지?) 모든 박스의 디폴트 값은 **Static**이다.
+ **Static**은 요소가 그 자리에 계속 있다는 말이다. 모든 박스의 디폴트 값은 **Static**이다. Static이 지정된 요소는 document의 일반적인 흐름(normal flow)를 따라 배치된다.
 
 ```html
 <!DOCTYPE html>
@@ -338,11 +299,9 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-<br>
-
 ### (2) Fixed
 
-**Fixed**는 항상 그 자리에 고정되어 브라우저에 나타난다.(스크롤해도 사라지지 않는다.) 포지션을 고정하고 상, 하, 좌, 우를 줄 수 있다.
+**Fixed**로 지정된 요소는 문서 흐름에 있어 제거되고 페이지 레이아웃에서 요소를 위한 공간이 형성되지 않는다. 대신, 스크린의 viewport를 기준으로 해서 위치가 정해지는데, 따라서 스크롤해도 움직이지 않는 고정자리를 가진다. **Fixed**는 항상 그 자리에 고정되어 브라우저에 나타난다.(스크롤해도 사라지지 않는다.) 포지션을 고정하고 상, 하, 좌, 우를 줄 수 있다.
 
 ```html
 <!DOCTYPE html>
@@ -389,11 +348,11 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-<br>
-
 ### (3) Absolute, Relative
 
-어디에든 붙을 수 있다는 점에서 **Fixed**랑 비슷하다. 하지만, 스크롤해서 보이지는 않는다.
+**Relative**로 지정된 요소는 document의 normal flow에 따라 배치된다. 그리고 요소 자신에 대한 상대적인 top, bottom, left, right 속성에 의한 좌표로 배치된다. (별도의 거리 속성을 주지 않는다면, static과 동일하게 작용한다.) 이때의 좌표는 다른 요소들의 위치에 영향을 주지 않는다. 페이지 레이아웃 상에서 요소에게 할당된 공간은 static과 동일하다.
+
+**Absolute**로 지정된 요소는 문서 흐름에서 제외되고 페이지 레이아웃에서 요소를 위한 공간이 형성되지 않는다. 대신, 가장 가까운 위치에 있는 조상에 대해 상대적 위치에 배치된다. 조상이 없는 경우에는 초기 컨테이닝 블록을 기준으로 배치된다.
 
 ```html
 <!DOCTYPE html>
@@ -436,11 +395,7 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 </html>
 ```
 
-<br>
-
 이렇게 하면 **abs-child** div가 맨 오른쪽으로 이동한 것을 볼 수있다. 왜냐하면 **abs-child** div가 **html** 상에서 **부모**에 해당하는 요소를 찾지 못했기 때문이다. 다시 말하면, **absolute** **position**이 설정되면 이 요소는 해당 요소와 관계가 있는 (**relative - 부모박스**) 요소를 찾게 되고 이에 따라 위치가 결정된다. 반대로 부모요소를 찾지 못했다면 **body**에 맞춰서 움직이게 된다. 밑에 코드를 보자.
-
-<br>
 
 ```html
 <!DOCTYPE html>
@@ -486,17 +441,13 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 ```
 
-<br>
-
 이렇게 관계를 만들어주면 **abs-child** div요소는 이제 그 상위의 부모 요소인 **abs-box**에 상대적으로 움직이게 된다.
 
-<br>
+참고 문헌: https://developer.mozilla.org/ko/docs/Web/CSS/position
 
 <br>
 
-# 6. Flex
-
-<br>
+## 6. Flex
 
 ### (1) 기존 display의 문제점
 
@@ -534,15 +485,11 @@ Block은 옆에 아무것도 없을 때 **Block**이라고 한다.
 
 이렇게 많은 박스를 갖게 되면 자동으로 밑으로 넘어가게 된다. (이 많은 블록을 옆으로 붙게하고 싶어도 방법이 없음.)
 
-이렇게 설정할시 **Margin**도 각가 달라진다. (마지막과 첫 **Margin**) 또, 가운데 정렬, 핸드폰과의 호환 등등 여러 부분에서 기존의 **Display**는 문제점을 가지고 있었다.
+이렇게 설정할시 **Margin**도 각가 달라진다. (마지막과 첫 **Margin**) 또 가운데 정렬, 모바일 호환 문제 등등 여러 부분에서 기존 **Display**는 문제점을 가지고 있었다.
 
 따라서 자동으로 완성되는 **Grid**가 필요!! 
 
-<br>
-
 ### (2) Flex 사용법
-
-<br>
 
 Flex는 부모 클래스를 만들고 그 안에 적용하고 싶은 박스들을 만든다.
 
@@ -578,8 +525,6 @@ Flex는 부모 클래스를 만들고 그 안에 적용하고 싶은 박스들�
 Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부모 클래스에만 적용한다. 
 
 이렇게 코드를 작성하면 box 클래스에 inline-block으로 display속성을 설정하지 않아도 inline-block처럼 적용된다.
-
-<br>
 
 #### justify-content, align-items
 
@@ -664,8 +609,6 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 ```
 
 => **이렇게 flex-direction을 column으로 설정(디폴트 값이 row)하면 justify-content가 세로 align-items가 가로가 된다.**
-
-<br>
 
 박스가 많아지면 flex가 어떻게 되는지 보자.
 
@@ -783,9 +726,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 <br>
 
-<br>
-
-# 7. Pseudo-Selector (가상 셀렉터)
+## 7. Pseudo-Selector (가상 셀렉터)
 
 **가상 셀럭터란, 셀렉터인데 element가 아닌 것을 뜻한다.** 
 
