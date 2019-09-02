@@ -438,7 +438,6 @@ h1 {
     </div>
   </body>
 </html>
-
 ```
 
 이렇게 관계를 만들어주면 **abs-child** div요소는 이제 그 상위의 부모 요소인 **abs-box**에 상대적으로 움직이게 된다.
@@ -480,18 +479,19 @@ h1 {
     <div class="box"></div>
   </body>
 </html>
-
 ```
 
-이렇게 많은 박스를 갖게 되면 자동으로 밑으로 넘어가게 된다. (이 많은 블록을 옆으로 붙게하고 싶어도 방법이 없음.)
+많은 박스를 갖게 되면 요소들이 자동으로 밑으로 넘어간다. 
 
-이렇게 설정할시 **Margin**도 각가 달라진다. (마지막과 첫 **Margin**) 또 가운데 정렬, 모바일 호환 문제 등등 여러 부분에서 기존 **Display**는 문제점을 가지고 있었다.
+**Margin**도 각기 달라지고 (마지막과 첫 **Margin**) 또 가운데 정렬, 모바일 호환 문제 등등 여러 방면에서 기존 **Display**는 문제점을 가지고 있다. 
 
-따라서 자동으로 완성되는 **Grid**가 필요!! 
+### (2) Flex Box 모델
 
-### (2) Flex 사용법
+flexbox라 불리는 모델은 Flex Box Module은 flexbox내 아이템간 공간 배분과 강력한 정렬 기능을 제공하기 위한 1차원 레이아웃 모델이다. flexbox를 1차원적이라 함은, 레이아웃을 다룰 때 한 번에 하나의 차원(행 또는 열)만을 다룬다는 의미이다. 이는 행과 열을 동시에 고려하는 CSS Grid Layout과는 대조적인 부분이다.
 
-Flex는 부모 클래스를 만들고 그 안에 적용하고 싶은 박스들을 만든다.
+### (3) Flex 사용법
+
+Flex는 부모 클래스를 만들고 그 안에 적용하고 싶은 박스들을 생성한다.
 
 ```html
 <!DOCTYPE html>
@@ -522,11 +522,9 @@ Flex는 부모 클래스를 만들고 그 안에 적용하고 싶은 박스들�
 </html>
 ```
 
-Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부모 클래스에만 적용한다. 
+Flex는 Chlidren 박스에 적용하지 않는다. 오직 부모 클래스에만 적용한다. 또, flex를 설정하면 box 클래스에 inline-block으로 display속성을 설정하지 않아도 inline-block처럼 작용한다.
 
-이렇게 코드를 작성하면 box 클래스에 inline-block으로 display속성을 설정하지 않아도 inline-block처럼 적용된다.
-
-#### justify-content, align-items
+**justify-content, align-items**
 
 ```html
 <!DOCTYPE html>
@@ -562,7 +560,6 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
     </div>
   </body>
 </html>
-
 ```
 
 - justify-content: 가로로 아이템 정렬하는 것을 제어
@@ -608,7 +605,7 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 
 ```
 
-=> **이렇게 flex-direction을 column으로 설정(디폴트 값이 row)하면 justify-content가 세로 align-items가 가로가 된다.**
+=> **flex-direction을 column으로 설정(디폴트 값이 row)하면 justify-content가 세로 align-items가 가로가 된다.**
 
 박스가 많아지면 flex가 어떻게 되는지 보자.
 
@@ -655,7 +652,7 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 </html>
 ```
 
-이렇게 설정하면 box width 200px로 인해 inline-block은 자동으로 밑으로 넘어갔지만 flex는 box의 width를 자동으로 줄여준다.
+box의 property가 width: 200px로 설정되어 있어 inline-block은 밑으로 넘어갔지만 flex는 box의 width를 자동으로 줄여준다.
 
 <br>
 
@@ -667,7 +664,7 @@ Flex를 사용할 때는 Chlidren 박스에 적용하지 않는다. 오직 부�
 
 <br>
 
-#### flex-wrap
+**flex-wrap**
 
 flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 유지하게 되고 화면을 넘어가는 box들을 밑으로 내려보낸다.
 
@@ -718,7 +715,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 </html>
 ```
 
-이렇게 코드를 작성하면 flex-wrap property가 wrap으로 설정되어 있기 때문에 화면 구성이 이렇게 된다.
+flex-wrap property가 wrap으로 설정되어 있기 때문에 화면 구성이 이렇게 된다.
 
 (디폴트 값은 no wrap이다.)
 
@@ -767,8 +764,6 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 
 이렇게 속성 값으로 접근하는 것을 가상 셀럭터라고 한다.
 
-<br>
-
 #### 여러 가상셀렉터
 
 ```css
@@ -777,9 +772,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 }
 ```
 
-모든 box class를 가진 요소중에 마지막 요소 배경을 green으로 설정하라.
-
-<br>
+=> 모든 box class를 가진 요소중에 마지막 요소 배경을 green으로 설정하라.
 
 ```css
 .box:first-child {
@@ -787,9 +780,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 }
 ```
 
-모든 boxclass를 가진 요소중에 첫번째 요소 배경을 green으로 설정하라.
-
-<br>
+=> 모든 boxclass를 가진 요소중에 첫번째 요소 배경을 green으로 설정하라.
 
 ```css
 .box:nth-child(2) {
@@ -797,9 +788,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 }
 ```
 
-모든 box class를 가진 요소중에 두번째 요소 배경을 green으로 설정하라.
-
-<br>
+=> 모든 box class를 가진 요소중에 두번째 요소 배경을 green으로 설정하라.
 
 #### 직계
 
@@ -809,9 +798,7 @@ flex-wrap property를 wrap으로 설정하면 box가 기존에 설정된 값을 
 }
 ```
 
-direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 않는다.
-
-<br>
+direct child 직계라고 하고 바로 밑에 있는 child에게만 해당된다.
 
 ```html
 <!DOCTYPE html>
@@ -851,19 +838,15 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 <img width="942" alt="directchild" src="https://user-images.githubusercontent.com/34790763/59353505-16c59300-8d5e-11e9-94ef-bc7bd7838f0c.PNG">
 
-**이렇게 화면이 구성되는데 왜냐하면 child class 박스는 container class의 직계가 아니기 때문에 영향을 받지 않기 때문이다.**
+**이렇게 화면이 구성되는 이유는 child class 박스는 container class의 직계가 아니기에 영향을 받지 않기 때문이다.**
 
 <br>
 
-<br>
+## 8. CSS States
 
-# 8. CSS States
-
-#### Active Focus Visited Hover 이렇게 총 4개의 State가 존재한다.
+### Active Focus Visited Hover 이렇게 총 4개의 State가 존재한다.
 
 브라우저 요소 검사 창에서 확인 가능
-
-<br>
 
 - **Hover**: 해당 요소에 먼가가 올라오면(hover) 실행.
 
@@ -878,8 +861,6 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 }
 ```
 
-<br>
-
 - **Active**: 해당 요소를 클릭하면 실행.
 
 ```css
@@ -892,8 +873,6 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
     background-color: aquamarine;
 }
 ```
-
-<br>
 
 - **Focus**: 해당요소에 focus(해당요소가 선택된 상태)가 되면 실행.
 
@@ -908,8 +887,6 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 }
 ```
 
-<br>
-
 - **Visited**: 해당 요소를 클릭하면 해당 링크가 보여지는 것.
 
 ```css
@@ -920,225 +897,9 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 <br>
 
-<br>
+## 9. Transitions
 
-# 9. Position
-
-```css
- body,
- html 
-{
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-```
-
-이걸 설정하는 이유는 브라우저가 가지고 있는 디폴트 값을 상쇄시키기 위함이다
-
-### Position은 4가지가 존재한다.
-
-<br>
-
-### (1) Static
-
- **Static** 요소를 거기두면 그 자리에 있을 것이라는 말이다. (# 먼 말이지?) 모든 박스의 디폴트 값은 **Static**이다.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      body,
-      html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        height: 400%;
-        background-color: red;
-      }
-      .box {
-        width: 300px;
-        height: 300px;
-        background-color: beige;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="box">
-      <div class="box-child"></div>
-    </div>
-  </body>
-</html>
-```
-
-<br>
-
-### (2) Fixed
-
-**Fixed**는 항상 그 자리에 고정되어 브라우저에 나타난다.(스크롤해도 사라지지 않는다.) 포지션을 고정하고 상, 하, 좌, 우를 줄 수 있다.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      body,
-      html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        height: 400%;
-        background-color: red;
-      }
-      #boxOne {
-        width: 300px;
-        height: 300px;
-        background-color: beige;
-        position: static;
-      }
-      #boxTwo {
-        width: 300px;
-        height: 300px;
-        background-color: greenyellow;
-        position: fixed;
-        top: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="boxOne">
-      <div class="box-child"></div>
-    </div>
-    <div id="boxTwo">
-      <div class="box-child"></div>
-    </div>
-  </body>
-</html>
-```
-
-<br>
-
-### (3) Absolute, Relative
-
-어디에든 붙을 수 있다는 점에서 **Fixed**랑 비슷하다. 하지만, 스크롤해서 보이지는 않는다.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      body,
-      html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        height: 400%;
-        background-color: red;
-      }
-       .abs-box {
-        width: 400px;
-        height: 400px;
-        background-color: yellow;
-      }
-      .abs-child {
-        width: 100px;
-        height: 100px;
-        background-color: green;
-        position: absolute;
-        right: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="abs-box">
-      <div class="abs-child"></div>
-    </div>
-  </body>
-</html>
-```
-
-<br>
-
-이렇게 하면 **abs-child** div가 맨 오른쪽으로 이동한 것을 볼 수있다. 왜냐하면 **abs-child** div가 **html** 상에서 **부모**에 해당하는 요소를 찾지 못했기 때문이다. 다시 말하면, **absolute** **position**이 설정되면 이 요소는 해당 요소와 관계가 있는 (**relative - 부모박스**) 요소를 찾게 되고 이에 따라 위치가 결정된다. 반대로 부모요소를 찾지 못했다면 **body**에 맞춰서 움직이게 된다. 밑에 코드를 보자.
-
-<br>
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      body,
-      html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        height: 400%;
-        background-color: red;
-      }
-      .abs-box {
-        width: 400px;
-        height: 400px;
-        background-color: yellow;
-        position: relative;
-      }
-      .abs-child {
-        width: 100px;
-        height: 100px;
-        background-color: green;
-        position: absolute;
-        right: 10px;
-        top: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="abs-box">
-      <div class="abs-child"></div>
-    </div>
-  </body>
-</html>
-
-```
-
-<br>
-
-이렇게 관계를 만들어주면 **abs-child** div요소는 이제 그 상위의 부모 요소인 **abs-box**에 상대적으로 움직이게 된다.
-
-<br>
-
-<br>
-
-# 10. Transitions
-
-#### 웹에서의 여러가지 동작 -이동/ 변경 등등- 을 멋지게 보여주는 효과가 트랜지션이다.
-
-<br>
+**CSS Transition**은 CSS 속성을 변경할 때 애니메이션 속도를 조절하는 방법을 나타냅니다. 속성 변경이 바로 적용되는 대신, 그 변화가 일정기간에 걸쳐 일어나도록 할 수 있습니다. 웹에서 여러가지 동작 -이동/ 변경 등등- 을 보여주는 효과가 트랜지션이다. 두 상태 사이의 트랜지션을 포함하는 애니메이션을 암묵적 트랜지션이라 칭하기도 하는데, 이는 시작과 종료 사이의 상태를 브라우저가 암묵적으로 정의하기 때문입니다.
 
 ```css
 .box {
@@ -1150,9 +911,7 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 }
 ```
 
-이렇게 hover를 적용하면 변경할때 변화하는 모습(Transitions)효과가 없다. 그 사이에 아무런 애니매이션이 없게된다.
-
-<br>
+이렇게 hover를 적용하면 변화하는 과정(Transitions)이 없다. 그 사이에 아무런 애니매이션이 없게된다.
 
 ```css
 .box {
@@ -1166,8 +925,6 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 ```
 
 코드에는 이렇게 적용시키면 된다.
-
-<br>
 
 ```css
 .box {
@@ -1184,13 +941,13 @@ direct child 직계라고 하고 그 밑에 있는 child에게는 해당되지 �
 
 Transition은 어떤 State가 바뀔 떄 적용되는 것이다. (State에는 **hover, active, focus**, visited등이 있다.)  =>  굵게 칠해진 3개에 효과적으로 적용된다.
 
-<br>
+참고 문헌: https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions
 
 <br>
 
-# 11. Transformations
+## 10. Transformations
 
-#### HTML 문서 element들을 변경하여 모습이 변하는 효과
+**Transform**은 좌표공간을 변형함으로써 문서 normal flow를 방해하지 않고 콘텐츠의 형태와 위치를 바꿔줍니다.
 
 ```css
 .box {
@@ -1221,9 +978,9 @@ Transition과 연결한 예시
 
 <br>
 
-<br>
+## 11. Animations
 
-# 12. Animations
+**CSS Animation**은 한 요소에 적용되는 CSS 스타일을 다른 CSS 스타일로 전환시켜줍니다. 애니메이션은 애니메니션을 나타내는 CSS 스타일과 애니메이션의 중간 상태를 나타내는 키프레임들로 이루어집니다.
 
 #### 어떠한 효과를 State를 줄 필요 없이 계속 발생하길 원한다면 어떻게 할까?
 
@@ -1272,9 +1029,7 @@ keyframes은 css로 하여금 animation이 생성되었음을 알려준다.
 
 <br>
 
-<br>
-
-# 13. Media Queries
+## 12. Media Queries
 
 #### 디바이스의 종류마다 필요한 화면의 크기가 다르다. 브라우저가 필요한 크기에 따라 제어하는 것이 필요할 때 사용하는 것이 Media Query다.
 
