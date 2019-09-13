@@ -367,3 +367,7 @@ console.log(addedNumber);
 에러가 발생한다. (Not defined Error) 왜냐하면 `const add= (a, b) => a + b;` 는 **declaration이 아닌, expression이기 때문이다.**
 
 <br>
+
+## 8. IIFE & Modules
+
+IIFE(Immediate-Invoked Function Expressions)
