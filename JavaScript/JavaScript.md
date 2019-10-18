@@ -1,30 +1,24 @@
-# 1. Why JS?
+# JavaScript
+
+### Why JS?
 
 JavaScript는 웹에서 쓰이는 유일한 프로그래밍 언어
 
 Backend에는 많은 옵션들이 존재(Python, Ruby, 하스켈, ASP,...etc)
 
-But, Frontend는 바로 JavaScript로 해야한다. 
+But, Frontend는 JavaScript밖에 없다. 
 
-<br>
-
-<br>
-
-# 2. ES5, ES6 ?
+### ES5, ES6 ?
 
 ECMAScript의 준말이며 일종의 Specification이다.
 
 **(Specification이 머지?)**
 
-=> JavaScript는 중앙 집중화가 잘 되어있어 누군가 업데이트를 하면 모든 브라우저에서 작동하게 된다. 이렇게 JavaScript는 일종의 체계 메뉴얼을 갖추고 있는데 이를 두고 Specification이라 한다. 이를 다른발로 ECMAScript라 하는 것이다. 각각의 브라우저 마다 이 Specification을 받아 다르게 해석한다. 
+=> JavaScript는 중앙 집중화가 잘 되어있어 누군가 업데이트를 하면 모든 브라우저에서 작동하게 된다. 이렇게 JavaScript는 일종의 체계 메뉴얼을 갖추고 있는데 이를 두고 Specification이라 한다. 이를 다른 말로 ECMAScript라 한다. 각각의 브라우저 마다 이 Specification을 받아 다르게 해석한다. 
 
 뒤에 붙는 숫자는 ECMAScript의 버전 업데이트를 말하는 것이다. 
 
-<br>
-
-<br>
-
-# 3. Vanilla JavaScript
+### Vanilla JavaScript
 
 Vanilla JavaScript는 JavaScript의 일종으로 라이브러리가 없는 JavaScript를 이야기한다.
 
@@ -32,9 +26,7 @@ Vanilla JavaScript는 JavaScript의 일종으로 라이브러리가 없는 JavaS
 
 JavaScript는 프로그래머가 나쁜 코드를 작성하는 것을 허용한다. 
 
-각각의 Instruction은 다른 줄에 존재한다. (이런 한줄에 존재하는 것을 **Expression**이라 부른다.) <br>Expression은 한줄에 존재해야한다. 한 Expression이 끝났다는 것은 **';'**을 마지막에 붙혀 표현한다.
-
-<br>
+각각의 Instruction은 다른 줄에 존재한다. (이런 한줄에 존재하는 것을 **Expression**이라 부른다.) Expression은 한줄에 존재해야한다. 한 Expression이 끝났다는 것은 **';'**을 마지막에 붙혀 표현한다.
 
 ### 변수 사용법
 
@@ -64,8 +56,6 @@ a = 4; //에러가 발생하지 않는다. 왜냐하면 let으로 변수를 선�
 const dayOfWeek = "월"// 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법이다.
 ```
 
-<br>
-
 ### Data Types
 
 String, Number, Boolean, Float
@@ -78,11 +68,7 @@ const float = 55.1; // float은 언제나 floating number(떠돌이 소숫점)�
 
 ```
 
-<br>
-
 ### How to organize data in JavaScript?
-
-<br>
 
 1) Array
 
@@ -93,8 +79,6 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 console.log(daysOfWeek[0]); //특정값에 대해 접근하려면 index로 접근해야한다.
 ```
-
-<br>
 
 2) Object
 
@@ -117,8 +101,6 @@ console.log(nicoInfo.name);
 
 Object와 Array의 가장 큰 차이점은 Object는 각 value에 이름을 붙힌다는 점이다.
 
-<br>
-
 Object안에 Array를 넣을 수도 있고 Array안에 Object를 넣을 수도 있다.
 
 ```javascript
@@ -136,8 +118,6 @@ const fav = {
 }
 ```
 
-<br>
-
 자바스크립트 객체에 저장할 때 Key 값과 Value 값이 같으면 이렇게 코드를 짤 수 있다.
 
 ```javascript
@@ -148,8 +128,6 @@ const coordsObj = {
     lon // lat: lat, lon: lon과 같은 코드이다.
 };
 ```
-
-<br>
 
 ### What is function?
 
@@ -162,8 +140,6 @@ function sayHello(name) {
 
 sayHello("Park");
 ```
-
-<br>
 
 ### Argument
 
@@ -188,8 +164,6 @@ sayHello("Park", 28);
 ```
 
 이렇게 argument를 2개로 줄 수도 있고 argument는 갯수에 구애받지 않고 가질 수 있다.
-
-<br>
 
 ### 함수를 활용한 간단한 계산기 객체
 
@@ -228,8 +202,6 @@ Exponent: ${exponent}
 
 ```
 
-<br>
-
 ### DOM (Document Object Model)
 
 document는 하나의 객체로서 자바스크립트가 html 파일 요소에 접근할 수 있게 해준다. html 태그를 가져다가 객체로 만든다.
@@ -258,8 +230,6 @@ const title = document.querySelectorAll(".title"); // queryselectorAll은 모든
 ```
 
 querySelectorAll은 모든 요소를 가져와 배열형태로 저장.
-
-<br>
 
 ### Event
 
@@ -295,8 +265,6 @@ window.addEventListener("resize", handleResize);
 
 **handleResize()가 아니다.** handleResize); 는 **내가 필요할 때 (윈도우 크기가 변경될 때) handleResize라는 함수를 호출**하는 것이다. **handleResize()는 지금 당장 호출**하는 것이다.
 
-<br>
-
 ```javascript
 const title = document.querySelector("#title");
 
@@ -313,8 +281,6 @@ window.addEventListener("resize", handleResize);
 이벤트에 대해서 알아보고 싶으면 이 사이트를 확인하자.
 
 <https://developer.mozilla.org/ko/docs/Web/Events>
-
-<br>
 
 ### 이벤트 예시
 
@@ -342,8 +308,6 @@ form.addEventListener("submit", handleSubmit)
 ```
 
 또 다른 예시) form 태그의 submit event가 발생할 때 기본 동작을 막는 코드 (이렇게 하면 form 태그 input에 무언가를 입력하고 Enter를 쳐도 입력값이 사라지지 않는다.)
-
-<br>
 
 ### 코드 별 분리
 
@@ -374,8 +338,6 @@ init();
 ```
 
 왜냐하면 자바스크립트를 통해 css를 제어하고 있기 때문이다. 따라서 위 코드를 이렇게 바꾸는 것이 더 좋은 코드이다.
-
-<br>
 
 ```css
 body {
@@ -440,8 +402,6 @@ function init() {
 init();
 ```
 
-<br>
-
 ### 삼항연산자(Ternary Operator)
 
 삼항연산자를 활용해 if문을 string 한줄에 적을 수 있다.
@@ -453,8 +413,6 @@ clockTitle.innerText = `${hours < 10 ? `0${hours}` : hours} : ${
 
 // hours < 10 는 조건문이고 만일 이 조건문이 참이면 : 표시를 기준으로 앞에 있는 값을 리턴하고 거짓을 경우에는 뒤에 있는 값을 리턴한다.
 ```
-
-<br>
 
 ### Local Storage
 
@@ -490,8 +448,6 @@ const loadedToDos = localStorage.getItem(TODO_LS);
 const parseToDos = JSON.parse(loadedToDos); // JSON이란 'JavaScript Object Notation'의 줄임말로 데이터를 전달할 때, 자바스크립트가 다룰 수 있도록 Object로 바꿔주는 기능을 의미한다.
 ```
 
-<br>
-
 ### 요소생성
 
 document.querySelector나 document.getElementById 등으로 존재하는 요소를 받아오기가 가능하다. 이외에도 다음의 코드를 활용하면 js에서 html요소를 생성할 수 있다.
@@ -503,8 +459,6 @@ const span = document.createElement("span");
 ```
 
 이런 방식으로 html 요소를 생성할 수 있다.
-
-<br>
 
 ### Filter
 
@@ -518,8 +472,6 @@ filter는 forEach처럼 각각의 item에 같은 행동을 취한다. filter가 
 
 => 위 함수는 toDos에 있는 각각의 요소에 대해 toDo.id와 li.id가 같지 않은 요소들을 가지고 있는 array를 cleanToDos에 반환한다.
 
-<br>
-
 ### Math Module
 
 JavaScript에는 Math라는 모듈이 존재한다. 
@@ -530,8 +482,6 @@ Math.random() * 3 // 0과 3사이의 숫자를 생성.(실수 범위)
 Math.floor(Math.random()*3) // 0과 3사이의 정수를 생성. (0포함 3 미포함) 소수점을 버린다.
 Math.ceil(Math.random()*3) // 1과 4사이의 정수를 생성. (1포함 4 미포함) 소수점을 올린다.
 ```
-
-<br>
 
 ### API(Application Programming Interface)
 
