@@ -237,3 +237,398 @@ export default resolvers;
 여기서 person 쿼리를 날리면 getById를 불러오는 것까지는 완성했다. 그런데 특정 id값을 argument로 입력해서 한 객체를 가져오려 하는데, 어떤 ID를 요청했는지 어떻게 해야 알 수 있을까? 또 어떻게 그 ID를 Query에 넣을까?
 
 <br>
+
+### Creating Queries with Arguments
+
+GraphQL Resolvers는 GraphQL로부터 요청을 받습니다. GrapgQL 서버가 Query나 Mutation 정의를 발견하면 Resolver를 찾을것이고 그에 해당하는 함수를 실행하게 될것입니다. 
+
+resolvers.js 수정
+
+```javascript
+import { people, getById } from "./db";
+
+const resolvers = {
+  Query: {
+    people: () => people,
+    person: (_, { id }) => getById(id)
+  }
+};
+
+export default resolvers;
+```
+
+schema 파일에서 데이터가 어때야하는지를 정의하고 Operation을 해결할 Resolver를 만드는 것이 GraphQL의 핵심이된다. Resolver는 프로세스에 대한 설명이다. 따라서 다른 API갈 수도 있고 Database에 접근할 수도 있으며 무엇이든 할 수 있다.
+
+<br>
+
+### Defining Mutation
+
+Mutation은 Database 상태가 변할 때 사용하는 것이다.
+
+resolvers.js 수정
+
+```javascript
+import {
+  people,
+  getPersonById,
+  movies,
+  getMovieById,
+  deleteMovieById
+} from "./db";
+
+const resolvers = {
+  Query: {
+    people: () => people,
+    person: (_, { id }) => getPersonById(id),
+    movies: () => movies,
+    movie: (_, { id }) => getMovieById(id)
+  },
+  Mutation: {
+    deleteMovie: (_, { id }) => deleteMovieById(id)
+  }
+};
+
+export default resolvers;
+```
+
+schema.graphql 수정
+
+```
+type Person {
+  id: Int!
+  name: String!
+  age: Int!
+  gender: String!
+}
+
+type Movie {
+  id: Int!
+  name: String!
+  score: Float!
+}
+
+type Query {
+  people: [Person]!
+  person(id: Int!): Person
+  movies: [Movie]!
+  movie(id: Int!): Movie
+}
+
+type Mutation {
+  deleteMovie(id: Int!): Boolean!
+}
+```
+
+db.js 수정
+
+```javascript
+export const people = [
+  {
+    id: "1",
+    name: "Park Choong Ho",
+    age: 28,
+    gender: "male"
+  },
+  {
+    id: "2",
+    name: "Park Ki Juung",
+    age: 27,
+    gender: "female"
+  }
+];
+
+export const getPersonById = id => {
+  const filteredPeople = people.filter(person => person.id === String(id));
+  return filteredPeople[0];
+};
+
+export let movies = [
+  { id: 0, name: "Star Wars - The new one", score: 0.1 },
+  { id: 1, name: "Avengers - The new one", score: 8 },
+  { id: 2, name: "The Godfather I", score: 99 },
+  { id: 3, name: "Logan", score: 2 }
+];
+
+export const getMovieById = id => {
+  const filteredMovies = movies.filter(movie => movie.id === id);
+  return filteredMovies[0];
+};
+
+export const deleteMovieById = id => {
+  const filteredMovies = movies.filter(movie => movie.id !== id);
+  if (movies.length > filteredMovies.length) {
+    movies = filteredMovies;
+    return true;
+  } else {
+    return false;
+  }
+};
+```
+
+<br>
+
+### Creating first Mutation
+
+resolver.js 수정
+
+```javascript
+import {
+  people,
+  getPersonById,
+  movies,
+  getMovieById,
+  deleteMovieById,
+  addMovie
+} from "./db";
+
+const resolvers = {
+  Query: {
+    people: () => people,
+    person: (_, { id }) => getPersonById(id),
+    movies: () => movies,
+    movie: (_, { id }) => getMovieById(id)
+  },
+  Mutation: {
+    deleteMovie: (_, { id }) => deleteMovieById(id),
+    addMovie: (_, { name, score }) => addMovie(name, score)
+  }
+};
+
+export default resolvers;
+```
+
+schema.graphql 수정
+
+```
+type Person {
+  id: Int!
+  name: String!
+  age: Int!
+  gender: String!
+}
+
+type Movie {
+  id: Int!
+  name: String!
+  score: Float!
+}
+
+type Query {
+  people: [Person]!
+  person(id: Int!): Person
+  movies: [Movie]!
+  movie(id: Int!): Movie
+}
+
+type Mutation {
+  addMovie(name: String!, score: Float!): Movie!
+  deleteMovie(id: Int!): Boolean!
+}
+```
+
+db.js 수정
+
+```javascript
+export const people = [
+  {
+    id: "1",
+    name: "Park Choong Ho",
+    age: 28,
+    gender: "male"
+  },
+  {
+    id: "2",
+    name: "Park Ki Juung",
+    age: 27,
+    gender: "female"
+  }
+];
+
+export const getPersonById = id => {
+  const filteredPeople = people.filter(person => person.id === String(id));
+  return filteredPeople[0];
+};
+
+export let movies = [
+  { id: 0, name: "Star Wars - The new one", score: 0.1 },
+  { id: 1, name: "Avengers - The new one", score: 8 },
+  { id: 2, name: "The Godfather I", score: 99 },
+  { id: 3, name: "Logan", score: 2 }
+];
+
+export const getMovieById = id => {
+  const filteredMovies = movies.filter(movie => movie.id === id);
+  return filteredMovies[0];
+};
+
+export const deleteMovieById = id => {
+  const filteredMovies = movies.filter(movie => movie.id !== id);
+  if (movies.length > filteredMovies.length) {
+    movies = filteredMovies;
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const addMovie = (name, score) => {
+  const newMovie = {
+    id: movies.length,
+    name,
+    score
+  };
+  movies.push(newMovie);
+
+  return newMovie;
+};
+```
+
+<br>
+
+### Wrapping a REST API with GraphQL
+
+db.js 수정
+
+```javascript
+import fetch from "node-fetch";
+
+const API_URL = "https://yts.lt/api/v2/list_movies.json?";
+
+export const getMovies = (limit, rating) => {
+  let REQUEST_URL = API_URL;
+
+  if (limit > 0) {
+    REQUEST_URL += `limit=${limit}&`;
+  }
+  if (rating > 0) {
+    REQUEST_URL += `minimum_rating=${rating}`;
+  }
+
+  return fetch(`${REQUEST_URL}`)
+    .then(res => res.json())
+    .then(json => json.data.movies);
+};
+```
+
+resolvers.js 수정
+
+```javascript
+import { getMovies } from "./db";
+
+const resolvers = {
+  Query: {
+    getMovies: (_, { limit, rating }) => getMovies(limit, rating)
+  }
+};
+
+export default resolvers;
+```
+
+schema.graphql
+
+```
+type Movie {
+  id: Int!
+  title: String!
+  rating: Float!
+  summary: String!
+  language: String!
+  medium_cover_image: String!
+}
+
+type Query {
+  getMovies(limit: Int, rating: Float): [Movie]!
+}
+```
+
+<br>
+
+### Final API
+
+db.js
+
+```javascript
+import axios from "axios";
+
+const API_BASE_URL = "https://yts.lt/api/v2";
+
+const LIST_MOVIES_URL = `${API_BASE_URL}/list_movies.json`;
+const MOVIE_DETAILS_URL = `${API_BASE_URL}/movie_details.json`;
+const MOVIE_SUGGESTIONS_URL = `${API_BASE_URL}/movie_suggestions.json`;
+
+export const getMovies = async (limit, rating) => {
+  const {
+    data: {
+      data: { movies }
+    }
+  } = await axios.get(LIST_MOVIES_URL, {
+    params: {
+      limit,
+      minimum_rating: rating
+    }
+  });
+  return movies;
+};
+
+export const getMovieDetails = async id => {
+  const {
+    data: {
+      data: { movie }
+    }
+  } = await axios.get(MOVIE_DETAILS_URL, {
+    params: {
+      movie_id: id
+    }
+  });
+  return movie;
+};
+
+export const getMovieSuggestions = async id => {
+  const {
+    data: {
+      data: { movies }
+    }
+  } = await axios.get(MOVIE_SUGGESTIONS_URL, {
+    params: {
+      movie_id: id
+    }
+  });
+  return movies;
+};
+```
+
+resolvers.js
+
+```javascript
+import { getMovies, getMovieDetails, getMovieSuggestions } from "./db";
+
+const resolvers = {
+  Query: {
+    getMovies: (_, { limit, rating }) => getMovies(limit, rating),
+    getMovieDetails: (_, { id }) => getMovieDetails(id),
+    getMovieSuggestions: (_, { id }) => getMovieSuggestions(id)
+  }
+};
+
+export default resolvers;
+```
+
+schema.graphql
+
+```
+type Movie {
+  id: Int!
+  title: String!
+  rating: Float!
+  genres: [String!]!
+  language: String!
+  medium_cover_image: String!
+}
+
+type Query {
+  getMovies(limit: Int, rating: Float): [Movie]!
+  getMovieDetails(id: Int!): Movie
+  getMovieSuggestions(id: Int!): [Movie]
+}
+```
+
