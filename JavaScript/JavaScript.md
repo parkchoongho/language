@@ -2,58 +2,58 @@
 
 ### Why JS?
 
-JavaScript는 웹에서 쓰이는 유일한 프로그래밍 언어
+JavaScript는 웹에서 쓰이는 유일한 프로그래밍 언어입니다.
 
-Backend에는 많은 옵션들이 존재(Python, Ruby, 하스켈, ASP,...etc)
+Backend에는 많은 옵션들이 존재(Python, Ruby, 하스켈, ASP,...etc)하지만
 
-But, Frontend는 JavaScript밖에 없다. 
+But, Frontend는 JavaScript밖에 선택지가 없습니다. 
 
 ### ES5, ES6 ?
 
-ECMAScript의 준말이며 일종의 Specification이다.
+ECMAScript의 준말이며 일종의 Specification입니다.
 
 **(Specification이 머지?)**
 
-=> JavaScript는 중앙 집중화가 잘 되어있어 누군가 업데이트를 하면 모든 브라우저에서 작동하게 된다. 이렇게 JavaScript는 일종의 체계 메뉴얼을 갖추고 있는데 이를 두고 Specification이라 한다. 이를 다른 말로 ECMAScript라 한다. 각각의 브라우저 마다 이 Specification을 받아 다르게 해석한다. 
+=> JavaScript는 중앙 집중화가 잘 되어있어 누군가 업데이트를 하면 모든 브라우저에 업데이트 내역이 적용됩니다. 이렇게 JavaScript는 일종의 체계 메뉴얼을 갖추고 있는데 이를 두고 Specification이라 부릅니다. 이를 다른 말로 ECMAScript라 합니다. 각각의 브라우저 마다 이 Specification을 받아 다르게 해석하는 특징을 가지고 있습니다. 
 
-뒤에 붙는 숫자는 ECMAScript의 버전 업데이트를 말하는 것이다. 
+뒤에 붙는 숫자는 ECMAScript의 버전 업데이트를 의미합니다. 
 
 ### Vanilla JavaScript
 
-Vanilla JavaScript는 JavaScript의 일종으로 라이브러리가 없는 JavaScript를 이야기한다.
+Vanilla JavaScript는 JavaScript의 일종으로 라이브러리가 없는 JavaScript를 말합니다.
 
-(브라우저를 통해 제공된 JavaScript라 보면 편하다.)
+(브라우저를 통해 제공된 JavaScript라 보면 됩니다.)
 
-JavaScript는 프로그래머가 나쁜 코드를 작성하는 것을 허용한다. 
+JavaScript는 프로그래머가 나쁜 코드를 작성하는 것을 허용합니다. 
 
-각각의 Instruction은 다른 줄에 존재한다. (이런 한줄에 존재하는 것을 **Expression**이라 부른다.) Expression은 한줄에 존재해야한다. 한 Expression이 끝났다는 것은 **';'**을 마지막에 붙혀 표현한다.
+또 다른 특징으로 자바스크립트 각각의 Instruction은 다른 줄에 존재합니다. (한줄에 존재하는 코드를  **Expression**이라 부릅니다.) 한 Expression이 끝났다는 것을 **';'**를 마지막에 붙혀 나타냅니다.
 
 ### 변수 사용법
 
 Create - Initialize - Use
 
-어떤 변수가 값이 변하지 않기를 원한다면 변수 앞에 **const**라고 쓴다. **const**는 constant의 준말로 상수라는 뜻이다. (변하지 않는 수)
+어떤 변수가 값이 변하지 않기를 원한다면 변수 앞에 **const**라고 씁니다. **const**는 constant의 준말로 상수라는 의미입니다. (변하지 않는 수)
 
 ```javascript
 const a = 221;
 const b = a - 5;
-a = 4; //이러면 에러가 발생한다. 왜냐하면 a는 변할 수 없는 고정값이기 때문에.
+a = 4; //이러면 에러가 발생합니다. 왜냐하면 a는 변할 수 없는 고정값이기 때문입니다.
 ```
 
-반대로 let으로 변수를 선언하면 계속해서 값을 바꿀 수 있다.
+반대로 let으로 변수를 선언하면 계속해서 값을 변경할 수 있습니다.
 
 ```javascript
 let a = 221;
 let b = a - 5;
-a = 4; //에러가 발생하지 않는다. 왜냐하면 let으로 변수를 선언했기 때문에.
+a = 4; //에러가 발생하지 않습니다. 왜냐하면 let으로 변수를 선언했기 때문입니다.
 ```
 
 => 기본적으로 변수 선언은 const로 할 것. 나중에 필요할 때만 let으로 선언.
 
-변수 선언시 Camel case 방식으로 변수를 작성해야 한다.
+변수 선언시 Camel case 방식으로 변수를 작성해야 합니다.
 
 ```javascript
-const dayOfWeek = "월"// 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법이다.
+const dayOfWeek = "월"// 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법입니다.
 ```
 
 ### Data Types
@@ -64,8 +64,7 @@ String, Number, Boolean, Float
 const string = "ABC";
 const number = 9;
 const boolean = true;
-const float = 55.1; // float은 언제나 floating number(떠돌이 소숫점)을 가진다.
-
+const float = 55.1; // float은 언제나 floating number(떠돌이 소숫점)을 가지게 됩니다.
 ```
 
 ### How to organize data in JavaScript?
@@ -77,7 +76,7 @@ const float = 55.1; // float은 언제나 floating number(떠돌이 소숫점)�
 ```javascript
 const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-console.log(daysOfWeek[0]); //특정값에 대해 접근하려면 index로 접근해야한다.
+console.log(daysOfWeek[0]); //특정값에 대해 접근하려면 index로 접근합니다.
 ```
 
 2) Object
@@ -92,16 +91,16 @@ const nicoInfo = {
     isHandsome: true
 };
 
-console.log(nicoInfo.name);// name에 접근하고 싶으면 이렇게 접근한다.
+console.log(nicoInfo.name);// name에 접근합니다.
 
-nicoInfo.gender = "Female"; // 이렇게 const nicoInfo안에 있는 값을 바꿀 수 있다. 하지만 nicoInfo자체는 바꿀 수 없다.
+nicoInfo.gender = "Female"; // 이렇게 const nicoInfo안에 있는 값을 바꿀 수 있지만 nicoInfo자체는 바꿀 수 없습니다.
 
 console.log(nicoInfo.name);
 ```
 
-Object와 Array의 가장 큰 차이점은 Object는 각 value에 이름을 붙힌다는 점이다.
+Object와 Array의 가장 큰 차이점은 Object는 각 value에 이름이 붙는다는 점입니다.
 
-Object안에 Array를 넣을 수도 있고 Array안에 Object를 넣을 수도 있다.
+Object안에 Array를 넣을 수 있고 Array안에 Object를 넣을 수도 있습니다.
 
 ```javascript
 const fav = {
@@ -118,20 +117,20 @@ const fav = {
 }
 ```
 
-자바스크립트 객체에 저장할 때 Key 값과 Value 값이 같으면 이렇게 코드를 짤 수 있다.
+자바스크립트 객체에 저장할 때 Key 값과 Value 값이 같으면 이런 문법을 적용할 수 있습니다.
 
 ```javascript
 const lat = position.coords.latitude;
 const lon = position.coords.longitude;
 const coordsObj = {
     lat,
-    lon // lat: lat, lon: lon과 같은 코드이다.
+    lon // lat: lat, lon: lon과 같은 코드입니다.
 };
 ```
 
 ### What is function?
 
-함수는 어떤 내용을 수행하는 부분으로서 원하는 만큼 쓸 수 있는 코드로 생각하면 된다.
+함수는 어떤 내용을 수행하는 부분으로서 원하는 만큼 쓸 수 있는 코드라 생각하면 됩니다.
 
 ```javascript
 function sayHello(name) {
