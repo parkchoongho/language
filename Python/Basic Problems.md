@@ -107,3 +107,22 @@ for i in range(1, 1001):
 print(total_sum)
 ```
 
+### 주민번호 가리기
+
+```python
+def mask_security_number(security_number):
+    # 코드를 입력하세요.
+    if len(security_number) == 14:
+        return security_number[:10] + '****'
+    if len(security_number) == 13:
+        return security_number[:9]+"****"
+    return "올바른 주민번호가 아닙니다."
+
+print(mask_security_number("880720-1234567"))
+print(mask_security_number("8807201234567"))
+print(mask_security_number("930124-7654321"))
+print(mask_security_number("9301247654321"))
+print(mask_security_number("761214-2357111"))
+print(mask_security_number("7612142357111"))
+```
+
