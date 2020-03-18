@@ -126,3 +126,21 @@ print(mask_security_number("761214-2357111"))
 print(mask_security_number("7612142357111"))
 ```
 
+### Palindrome
+
+```python
+def is_palindrome(word):
+    # 코드를 입력하세요.
+    half_index = len(word) // 2
+    for i in range(half_index):
+        if word[i] != word[len(word)-i-1]:
+            return False
+    return True
+
+print(is_palindrome("racecar"))
+print(is_palindrome("stars"))
+print(is_palindrome("토마토"))
+print(is_palindrome("kayak"))
+print(is_palindrome("hello"))
+```
+
