@@ -68,3 +68,21 @@ for a in range(1,333):
             print(a*b*c)
 ```
 
+### Flip
+
+```python
+numbers = [2, 4, 6, 8, 10, 12, 14]
+
+# 리스트 뒤집기
+# 코드를 입력하세요.
+for i in range(len(numbers) // 2):
+    left_index = i
+    right_index = len(numbers) - left_index - 1
+    
+    temp = numbers[left_index]
+    numbers[left_index] = numbers[right_index]
+    numbers[right_index] = temp
+
+print("뒤집어진 리스트: " + str(numbers))
+```
+
