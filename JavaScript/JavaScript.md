@@ -6,7 +6,7 @@ JavaScript는 웹에서 쓰이는 유일한 프로그래밍 언어입니다.
 
 Backend에는 많은 옵션들이 존재(Python, Ruby, 하스켈, ASP,...etc)하지만
 
-But, Frontend는 JavaScript밖에 선택지가 없습니다. 
+But, Frontend는 JavaScript밖에 선택지가 없습니다.
 
 ### ES5, ES6 ?
 
@@ -150,9 +150,9 @@ function sayHello(name) {
 sayHello("Park");
 ```
 
-여기서 sayHello() 함수에 전달되는 "Park"을 argument라고 한다. 함수가 정의되어 있을 때 같이 선언되어 있는 name은 parameter라 한다.(이 2개 용어를 혼용해서 사용하기도 한다.)
+여기서 sayHello() 함수에 전달되는 "Park"을 argument라고 합니다. 함수가 정의되어 있을 때 같이 선언되어 있는 name은 parameter라 합니다.(이 2개 용어를 혼용해서 사용하기도 한다.)
 
-=> "Park"값을 name에 넣고 이 name을 활용한 코드를 실행한다.
+=> "Park"값을 name에 넣고 이 name을 활용한 코드를 실행합니다.
 
 ```javascript
 function sayHello(name, age) {
@@ -162,7 +162,7 @@ function sayHello(name, age) {
 sayHello("Park", 28);
 ```
 
-이렇게 argument를 2개로 줄 수도 있고 argument는 갯수에 구애받지 않고 가질 수 있다.
+이렇게 argument를 2개로 줄 수도 있고 argument는 갯수에 구애받지 않고 가질 수 있습니다.
 
 ### 함수를 활용한 간단한 계산기 객체
 
