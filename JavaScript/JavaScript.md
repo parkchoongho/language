@@ -203,7 +203,7 @@ Exponent: ${exponent}
 
 ### DOM (Document Object Model)
 
-document는 하나의 객체로서 자바스크립트가 html 파일 요소에 접근할 수 있게 해준다. html 태그를 가져다가 객체로 만든다.
+document는 하나의 객체로서 자바스크립트가 html 파일 요소에 접근할 수 있게 해준다. html 태그를 가져다가 객체로 만듭니다.
 
 ```javascript
 const title = document.getElementById("title");
