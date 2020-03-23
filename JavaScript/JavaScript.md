@@ -14,9 +14,9 @@ ECMAScript의 준말이며 일종의 Specification입니다.
 
 **(Specification이 머지?)**
 
-=> JavaScript는 중앙 집중화가 잘 되어있어 누군가 업데이트를 하면 모든 브라우저에 업데이트 내역이 적용됩니다. 이렇게 JavaScript는 일종의 체계 메뉴얼을 갖추고 있는데 이를 두고 Specification이라 부릅니다. 이를 다른 말로 ECMAScript라 합니다. 각각의 브라우저 마다 이 Specification을 받아 다르게 해석하는 특징을 가지고 있습니다. 
+=> JavaScript는 중앙 집중화가 잘 되어있어 누군가 업데이트를 하면 모든 브라우저에 업데이트 내역이 적용됩니다. 이렇게 JavaScript는 일종의 체계 메뉴얼을 갖추고 있는데 이를 두고 Specification이라 부릅니다. 이를 다른 말로 ECMAScript라 합니다. 각각의 브라우저 마다 이 Specification을 받아 다르게 해석하는 특징을 가지고 있습니다.
 
-뒤에 붙는 숫자는 ECMAScript의 버전 업데이트를 의미합니다. 
+뒤에 붙는 숫자는 ECMAScript의 버전 업데이트를 의미합니다.
 
 ### Vanilla JavaScript
 
@@ -24,9 +24,9 @@ Vanilla JavaScript는 JavaScript의 일종으로 라이브러리가 없는 JavaS
 
 (브라우저를 통해 제공된 JavaScript라 보면 됩니다.)
 
-JavaScript는 프로그래머가 나쁜 코드를 작성하는 것을 허용합니다. 
+JavaScript는 프로그래머가 나쁜 코드를 작성하는 것을 허용합니다.
 
-또 다른 특징으로 자바스크립트 각각의 Instruction은 다른 줄에 존재합니다. (한줄에 존재하는 코드를  **Expression**이라 부릅니다.) 한 Expression이 끝났다는 것을 **';'**를 마지막에 붙혀 나타냅니다.
+또 다른 특징으로 자바스크립트 각각의 Instruction은 다른 줄에 존재합니다. (한줄에 존재하는 코드를 **Expression**이라 부릅니다.) 한 Expression이 끝났다는 것을 **';'**를 마지막에 붙혀 나타냅니다.
 
 ### 변수 사용법
 
@@ -53,7 +53,7 @@ a = 4; //에러가 발생하지 않습니다. 왜냐하면 let으로 변수를 �
 변수 선언시 Camel case 방식으로 변수를 작성해야 합니다.
 
 ```javascript
-const dayOfWeek = "월"// 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법입니다.
+const dayOfWeek = "월"; // 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법입니다.
 ```
 
 ### Data Types
@@ -69,7 +69,7 @@ const float = 55.1; // float은 언제나 floating number(떠돌이 소숫점)�
 
 ### How to organize data in JavaScript?
 
-1) Array
+1. Array
 
 선언 방법
 
@@ -79,19 +79,19 @@ const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 console.log(daysOfWeek[0]); //특정값에 대해 접근하려면 index로 접근합니다.
 ```
 
-2) Object
+2. Object
 
 선언방법
 
 ```javascript
 const nicoInfo = {
-	name: "Nico",
-    age: 33,
-    gender: "Male",
-    isHandsome: true
+  name: "Nico",
+  age: 33,
+  gender: "Male",
+  isHandsome: true
 };
 
-console.log(nicoInfo.name);// name에 접근합니다.
+console.log(nicoInfo.name); // name에 접근합니다.
 
 nicoInfo.gender = "Female"; // 이렇게 const nicoInfo안에 있는 값을 바꿀 수 있지만 nicoInfo자체는 바꿀 수 없습니다.
 
@@ -104,17 +104,18 @@ Object안에 Array를 넣을 수 있고 Array안에 Object를 넣을 수도 있�
 
 ```javascript
 const fav = {
-    favMovies: ["Along the Gods", "LOTR", "Oldboy"],
-    favFood:  [
-      {
-        name: "Kimchi",
-        fatty: false
-    },{
-        name: "Cheeseburger", 
-        fatty:true
+  favMovies: ["Along the Gods", "LOTR", "Oldboy"],
+  favFood: [
+    {
+      name: "Kimchi",
+      fatty: false
+    },
+    {
+      name: "Cheeseburger",
+      fatty: true
     }
-    ]
-}
+  ]
+};
 ```
 
 자바스크립트 객체에 저장할 때 Key 값과 Value 값이 같으면 이런 문법을 적용할 수 있습니다.
@@ -123,8 +124,8 @@ const fav = {
 const lat = position.coords.latitude;
 const lon = position.coords.longitude;
 const coordsObj = {
-    lat,
-    lon // lat: lat, lon: lon과 같은 코드입니다.
+  lat,
+  lon // lat: lat, lon: lon과 같은 코드입니다.
 };
 ```
 
@@ -168,21 +169,21 @@ sayHello("Park", 28);
 
 ```javascript
 const calculator = {
-    plus: function(a, b) {
-        return a + b;
-    },
-    minus: function(a, b) {
-        return a - b;
-    },
-    multiply: function(a, b) {
-        return a * b;
-    },
-    divide: function(a, b) {
-        return a / b;
-    },
-    exponent: function(a, b) {
-        return a ** b;
-    }
+  plus: function(a, b) {
+    return a + b;
+  },
+  minus: function(a, b) {
+    return a - b;
+  },
+  multiply: function(a, b) {
+    return a * b;
+  },
+  divide: function(a, b) {
+    return a / b;
+  },
+  exponent: function(a, b) {
+    return a ** b;
+  }
 };
 
 const plus = calculator.plus(5, 5);
@@ -198,7 +199,6 @@ Multiply: ${multiply}
 Divide: ${divide}
 Exponent: ${exponent}
 `);
-
 ```
 
 ### DOM (Document Object Model)
@@ -215,7 +215,7 @@ const title = document.getElementById("title");
 console.dir(title);
 ```
 
-위 코드를 통해 title객체안에 있는 key와 value들을 모두 확인할 수 있다.
+위 코드를 통해 title객체안에 있는 key와 value들을 모두 확인할 수 있습니다.
 
 ```javascript
 const title = document.querySelector("#title"); // id로 찾아 가장 첫번째 노드를 반환.
@@ -234,15 +234,15 @@ querySelectorAll은 모든 요소를 가져와 배열형태로 저장.
 
 이벤트는 웹사이트 상에서 발생할 수 있는 것들을 말한다. (Click, Resize, Submit, Load 등등)
 
-우리는 이러한 이벤트들을 중간에서 가져올 수 있다. 
+우리는 이러한 이벤트들을 중간에서 가져올 수 있다.
 
 event가 발생하면 발생했던 그 요소부터 document까지 올라간다.
 
 ```javascript
-window.addEventListener("resize")
+window.addEventListener("resize");
 ```
 
-=>  이게 우리가 이벤트를 받기를 기다리는 것이다. (Listen to Event) 위 코드 예시는 자바스크립트가 window가 resize하기를 기다리고 있다는 뜻!!
+=> 이게 우리가 이벤트를 받기를 기다리는 것이다. (Listen to Event) 위 코드 예시는 자바스크립트가 window가 resize하기를 기다리고 있다는 뜻!!
 
 ```javascript
 const title = document.querySelector("#title");
@@ -260,7 +260,7 @@ window를 resize하면 handleResize 함수를 호출한다.
 window.addEventListener("resize", handleResize);
 ```
 
-여기서 체킹할  사항
+여기서 체킹할 사항
 
 **handleResize()가 아니다.** handleResize); 는 **내가 필요할 때 (윈도우 크기가 변경될 때) handleResize라는 함수를 호출**하는 것이다. **handleResize()는 지금 당장 호출**하는 것이다.
 
@@ -275,7 +275,7 @@ function handleResize(event) {
 window.addEventListener("resize", handleResize);
 ```
 
-=> **이벤트를 다룰 함수를 만들때 마다 자바스크립트는 자동적으로 함수를 객체에 붙힌다.**  **event가 발생할 때** 마다 이 **event 객체가 호출**된다. 
+=> **이벤트를 다룰 함수를 만들때 마다 자바스크립트는 자동적으로 함수를 객체에 붙힌다.** **event가 발생할 때** 마다 이 **event 객체가 호출**된다.
 
 이벤트에 대해서 알아보고 싶으면 이 사이트를 확인하자.
 
@@ -299,11 +299,11 @@ window.addEventListener("online", handleOnline);
 이벤트 예시) 인터넷 연결을 감지할 수 있는 코드
 
 ```javascript
-function handleSubmit(event){
-	event.preventDefault(); // event 객체의 preventDefault method를 호출
+function handleSubmit(event) {
+  event.preventDefault(); // event 객체의 preventDefault method를 호출
 }
 
-form.addEventListener("submit", handleSubmit)
+form.addEventListener("submit", handleSubmit);
 ```
 
 또 다른 예시) form 태그의 submit event가 발생할 때 기본 동작을 막는 코드 (이렇게 하면 form 태그 input에 무언가를 입력하고 Enter를 쳐도 입력값이 사라지지 않는다.)
@@ -391,7 +391,7 @@ const title = document.querySelector("#title");
 const CLICKED_CLASS = "clicked";
 
 function handleClick() {
-  title.classList.toggle(CLICKED_CLASS);// 클래스 리스트에서 CLICKED_CLASS가 있으면 이를 지우고 없으면 그 클래스를 더한다.
+  title.classList.toggle(CLICKED_CLASS); // 클래스 리스트에서 CLICKED_CLASS가 있으면 이를 지우고 없으면 그 클래스를 더한다.
 }
 
 function init() {
@@ -407,17 +407,17 @@ init();
 
 ```javascript
 clockTitle.innerText = `${hours < 10 ? `0${hours}` : hours} : ${
-    minutes < 10 ? `0${minutes}` : minutes
-  } : ${seconds < 10 ? `0${seconds}` : seconds}`;
+  minutes < 10 ? `0${minutes}` : minutes
+} : ${seconds < 10 ? `0${seconds}` : seconds}`;
 
 // hours < 10 는 조건문이고 만일 이 조건문이 참이면 : 표시를 기준으로 앞에 있는 값을 리턴하고 거짓을 경우에는 뒤에 있는 값을 리턴한다.
 ```
 
 ### Local Storage
 
-Local Storage는 작은 정보를 유저 컴퓨터에 저장하는 방법중 하나이다. 
+Local Storage는 작은 정보를 유저 컴퓨터에 저장하는 방법중 하나이다.
 
-브라우저에서 F12키를 누르고 Application을 선택하면 확인할 수 있다. 
+브라우저에서 F12키를 누르고 Application을 선택하면 확인할 수 있다.
 
 ```javascript
 localStorage.setItem("nico", true); // 이렇게 코드를 작성하면 nico라는 키값에 true라는 value값이 설정된다. localStorage에 정보를 생선하는 방법.
@@ -431,8 +431,8 @@ Local Storage는 기본적으로 URLs 를 기초로 해서 동작한다. (해당
 local storage에는 자바스크립트 data를 저장할 수 없다. **local storage**에는 **오직 String형태**만 저정할 수 있다. 따라서 localstorage에 저장할 때는 문자화 시켜 저장해야 한다.
 
 ```javascript
-function saveToDos(){
-	localStorage.setItem(TODO_LS, JSON.stringify(toDos)); // toDos is array	
+function saveToDos() {
+  localStorage.setItem(TODO_LS, JSON.stringify(toDos)); // toDos is array
 }
 ```
 
@@ -463,71 +463,71 @@ const span = document.createElement("span");
 
 ```javascript
 const cleanToDos = toDos.filter(function(toDo) {
-    return toDo.id !== parseInt(li.id);
+  return toDo.id !== parseInt(li.id);
 });
 ```
 
-filter는 forEach처럼 각각의 item에 같은 행동을 취한다. filter가 하는 것은 함수가 true라고 return하는 아이템들이 들어가 있는 array를 return한다.  
+filter는 forEach처럼 각각의 item에 같은 행동을 취한다. filter가 하는 것은 함수가 true라고 return하는 아이템들이 들어가 있는 array를 return한다.
 
 => 위 함수는 toDos에 있는 각각의 요소에 대해 toDo.id와 li.id가 같지 않은 요소들을 가지고 있는 array를 cleanToDos에 반환한다.
 
 ### Math Module
 
-JavaScript에는 Math라는 모듈이 존재한다. 
+JavaScript에는 Math라는 모듈이 존재한다.
 
 ```javascript
-Math.random() // 0과 1사이의 숫자를 만든다.(실수 범위)
-Math.random() * 3 // 0과 3사이의 숫자를 생성.(실수 범위)
-Math.floor(Math.random()*3) // 0과 3사이의 정수를 생성. (0포함 3 미포함) 소수점을 버린다.
-Math.ceil(Math.random()*3) // 1과 4사이의 정수를 생성. (1포함 4 미포함) 소수점을 올린다.
+Math.random(); // 0과 1사이의 숫자를 만든다.(실수 범위)
+Math.random() * 3; // 0과 3사이의 숫자를 생성.(실수 범위)
+Math.floor(Math.random() * 3); // 0과 3사이의 정수를 생성. (0포함 3 미포함) 소수점을 버린다.
+Math.ceil(Math.random() * 3); // 1과 4사이의 정수를 생성. (1포함 4 미포함) 소수점을 올린다.
 ```
 
 ### API(Application Programming Interface)
 
-API는 다른 서버로부터 손쉽게 데이터를 가져올 수 있는 수단이다. 디자인이나 다른 요소들은 가져오지 않고 오로지 데이터만을 가지고 온다. 
+API는 다른 서버로부터 손쉽게 데이터를 가져올 수 있는 수단이다. 디자인이나 다른 요소들은 가져오지 않고 오로지 데이터만을 가지고 온다.
 
 ```javascript
 const weatherContainer = document.querySelector(".js-weather");
 
 const API_KEY = "2b461077b45a03601a15be3110b71617",
-      COORDS = "coords";
+  COORDS = "coords";
 
 function getWeather(lat, lon) {
-    fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
-    )
-        .then(function(response) {
-        // then이 뜻하는 것은 이 API로 부터 데이터가 다 넘어오면 then이후를 실행하겠다는 뜻이다
-        // 이 API로부터 json 데이터를 받아온다.
-        // console.log(response.json());
-        // reponse를 console에 찍어 보면 network 정보만 보인다.
-        // 이렇게 찍어보면 실질적으로 필요한 데이터는 pending되고 있는 것으로 나온다. 따라서 다음 코드에 then을 한번 더 찍어준다.
-        return response.json();
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+  )
+    .then(function(response) {
+      // then이 뜻하는 것은 이 API로 부터 데이터가 다 넘어오면 then이후를 실행하겠다는 뜻이다
+      // 이 API로부터 json 데이터를 받아온다.
+      // console.log(response.json());
+      // reponse를 console에 찍어 보면 network 정보만 보인다.
+      // 이렇게 찍어보면 실질적으로 필요한 데이터는 pending되고 있는 것으로 나온다. 따라서 다음 코드에 then을 한번 더 찍어준다.
+      return response.json();
     })
-        .then(function(json) {
-        console.log(json);
+    .then(function(json) {
+      console.log(json);
 
-        const location = json.name;
-        const temp = Math.floor(json.main.temp);
+      const location = json.name;
+      const temp = Math.floor(json.main.temp);
 
-        weatherContainer.innerText = `${location}동, ${temp}도 `;
+      weatherContainer.innerText = `${location}동, ${temp}도 `;
     });
 }
 
 function saveCoords(coordsObj) {
-    localStorage.setItem(COORDS, JSON.stringify(coordsObj));
+  localStorage.setItem(COORDS, JSON.stringify(coordsObj));
 }
 
 function handleGeoSuccess(position) {
-    //console.log(position);
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    const coordsObj = {
-        lat,
-        lon
-    };
-    saveCoords(coordsObj);
-    getWeather(lat, lon);
+  //console.log(position);
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  const coordsObj = {
+    lat,
+    lon
+  };
+  saveCoords(coordsObj);
+  getWeather(lat, lon);
 }
 ```
 
