@@ -115,3 +115,38 @@ public class Main {
 }
 ```
 
+### 삼각형 그리기
+
+ShapePrinter.java
+
+```java
+public class ShapePrinter {
+    public void printTriangle(int height) {
+        // 코드를 입력하세요.
+        for(int i = 1; i <= height; i++){
+            for(int j = 1; j <= i; j++){
+            System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+Main.java
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ShapePrinter printer = new ShapePrinter();
+
+        // 테스트
+        printer.printTriangle(3);
+        System.out.println("----------");
+        printer.printTriangle(5);
+        System.out.println("----------");
+        printer.printTriangle(10);
+    }
+}
+```
+
