@@ -189,3 +189,49 @@ public class Main {
 }
 ```
 
+### 플로이드의 삼각형
+
+ShapePrinter.java
+
+```java
+public class ShapePrinter {
+    public void printFloydsPyramid(int height) {
+        // 코드를 입력하세요.
+        int max = height * (height + 1) / 2;
+        String maxString = Integer.toString(max);
+        int maxStringLength = maxString.length();
+        int sum = 0;
+        for (int i = 1; i <= height; i++){
+            for(int j = 1; j <= i; j++){
+                sum ++;
+                String sumString = Integer.toString(sum);
+                int sumStringLength = sumString.length();
+                for(int k = 0; k < maxStringLength - sumStringLength; k++){
+                    System.out.print(" ");
+                }
+                System.out.print(sum);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+Main.java
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ShapePrinter printer = new ShapePrinter();
+
+        // 테스트
+        printer.printFloydsPyramid(3);
+        System.out.println("----------");
+        printer.printFloydsPyramid(5);
+        System.out.println("----------");
+        printer.printFloydsPyramid(15);
+    }
+}
+```
+
