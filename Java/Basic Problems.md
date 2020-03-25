@@ -150,3 +150,42 @@ public class Main {
 }
 ```
 
+### 피라미드 그리기
+
+ShapePrinter.java
+
+```java
+public class ShapePrinter {
+    public void printPyramid(int height) {
+        // 코드를 입력하세요.
+        for(int i = 1; i <= height; i++){
+            for(int j = 1; j <= 2 * height - 1; j++){
+                if ((height - i < j) && (height + i > j)){
+                    System.out.print("*");
+                }else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+Main.java
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ShapePrinter printer = new ShapePrinter();
+
+        // 테스트
+        printer.printPyramid(3);
+        System.out.println("----------");
+        printer.printPyramid(5);
+        System.out.println("----------");
+        printer.printPyramid(10);
+    }
+}
+```
+
