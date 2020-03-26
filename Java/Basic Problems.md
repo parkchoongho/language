@@ -76,7 +76,7 @@ public class GreatestDifferenceFinder {
             if(min > intArray[i]){
                 min = intArray[i];
             }
-            
+
         }
             return max - min;
     }
@@ -237,3 +237,4 @@ public class Main {
 }
 ```
 
+### 소개 프로그램
