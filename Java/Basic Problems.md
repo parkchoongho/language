@@ -1,3 +1,5 @@
+### 주기율표에서 문자열 찾기
+
 ```java
 public class Main {
     public static void main(String[] args) {
