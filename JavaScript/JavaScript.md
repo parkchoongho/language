@@ -222,7 +222,7 @@ const title = document.querySelector("#title"); // id로 찾아 가장 첫번째
 const title = document.querySelector(".title"); // class로 찾아 가장 첫번째 노드를 반환.
 ```
 
-querySeletor는 관련 노드 중 첫번째 노드를 반환한다.
+querySeletor는 관련 노드 중 첫번째 노드를 반환합니다.
 
 ```javascript
 const title = document.querySelectorAll(".title"); // queryselectorAll은 모든 요소들을 가져와서 배열형태로 전달한다.
