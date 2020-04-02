@@ -228,21 +228,21 @@ querySeletor는 관련 노드 중 첫번째 노드를 반환합니다.
 const title = document.querySelectorAll(".title"); // queryselectorAll은 모든 요소들을 가져와서 배열형태로 전달한다.
 ```
 
-querySelectorAll은 모든 요소를 가져와 배열형태로 저장.
+querySelectorAll은 모든 요소를 가져와 배열형태로 저장합니다.
 
 ### Event
 
-이벤트는 웹사이트 상에서 발생할 수 있는 것들을 말한다. (Click, Resize, Submit, Load 등등)
+이벤트는 웹사이트 상에서 발생할 수 있는 것들을 의미합니다. (Click, Resize, Submit, Load 등등)
 
-우리는 이러한 이벤트들을 중간에서 가져올 수 있다.
+우리는 이러한 이벤트들을 중간에서 가져올 수 있습니다.
 
-event가 발생하면 발생했던 그 요소부터 document까지 올라간다.
+event가 발생하면 발생했던 그 요소부터 document까지 올라갑니다.
 
 ```javascript
 window.addEventListener("resize");
 ```
 
-=> 이게 우리가 이벤트를 받기를 기다리는 것이다. (Listen to Event) 위 코드 예시는 자바스크립트가 window가 resize하기를 기다리고 있다는 뜻!!
+=> 해당 코드가 이벤트를 받기를 기다립니다. (Listen to Event) 위 코드 예시는 자바스크립트 객체 window가 resize하기를 기다리고 있다는 뜻!!
 
 ```javascript
 const title = document.querySelector("#title");
