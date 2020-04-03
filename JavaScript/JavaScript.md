@@ -53,7 +53,7 @@ a = 4; //에러가 발생하지 않습니다. 왜냐하면 let으로 변수를 �
 변수 선언시 Camel case 방식으로 변수를 작성해야 합니다.
 
 ```javascript
-const dayOfWeek = "월"; // 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법입니다.
+const dayOfWeek = "월"; // 변수명은 소문자로 시작해서 스페이스가 필요한 중간 중간 대문자로 써주는 방법 (Camel Case).
 ```
 
 ### Data Types
@@ -76,7 +76,7 @@ const float = 55.1; // float은 언제나 floating number(떠돌이 소숫점)�
 ```javascript
 const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-console.log(daysOfWeek[0]); //특정값에 대해 접근하려면 index로 접근합니다.
+console.log(daysOfWeek[0]); //특정값에 대해 접근하려면 index로 접근.
 ```
 
 2. Object
@@ -91,9 +91,9 @@ const nicoInfo = {
   isHandsome: true
 };
 
-console.log(nicoInfo.name); // name에 접근합니다.
+console.log(nicoInfo.name); // name에 접근.
 
-nicoInfo.gender = "Female"; // 이렇게 const nicoInfo안에 있는 값을 바꿀 수 있지만 nicoInfo자체는 바꿀 수 없습니다.
+nicoInfo.gender = "Female"; // 이렇게 const nicoInfo안에 있는 값을 변경할 수 있지만 nicoInfo자체는 변경 불가.
 
 console.log(nicoInfo.name);
 ```
@@ -125,7 +125,7 @@ const lat = position.coords.latitude;
 const lon = position.coords.longitude;
 const coordsObj = {
   lat,
-  lon // lat: lat, lon: lon과 같은 코드입니다.
+  lon // lat: lat, lon: lon과 같은 코드.
 };
 ```
 
@@ -151,7 +151,7 @@ function sayHello(name) {
 sayHello("Park");
 ```
 
-여기서 sayHello() 함수에 전달되는 "Park"을 argument라고 합니다. 함수가 정의되어 있을 때 같이 선언되어 있는 name은 parameter라 합니다.(이 2개 용어를 혼용해서 사용하기도 한다.)
+여기서 sayHello() 함수에 전달되는 "Park"을 argument라고 합니다. 함수가 정의되어 있을 때 같이 선언되어 있는 name은 parameter라 합니다.(이 2개 용어를 혼용해서 사용하기도 합니다.)
 
 => "Park"값을 name에 넣고 이 name을 활용한 코드를 실행합니다.
 
@@ -225,7 +225,7 @@ const title = document.querySelector(".title"); // class로 찾아 가장 첫번
 querySeletor는 관련 노드 중 첫번째 노드를 반환합니다.
 
 ```javascript
-const title = document.querySelectorAll(".title"); // queryselectorAll은 모든 요소들을 가져와서 배열형태로 전달한다.
+const title = document.querySelectorAll(".title"); // queryselectorAll은 모든 요소들을 가져와서 배열형태로 전달.
 ```
 
 querySelectorAll은 모든 요소를 가져와 배열형태로 저장합니다.
@@ -254,7 +254,7 @@ function handleResize() {
 window.addEventListener("resize", handleResize);
 ```
 
-window를 resize하면 handleResize 함수를 호출한다.
+window를 resize하면 handleResize 함수를 호출합니다.
 
 ```javascript
 window.addEventListener("resize", handleResize);
@@ -262,7 +262,7 @@ window.addEventListener("resize", handleResize);
 
 여기서 체킹할 사항
 
-**handleResize()가 아니다.** handleResize); 는 **내가 필요할 때 (윈도우 크기가 변경될 때) handleResize라는 함수를 호출**하는 것이다. **handleResize()는 지금 당장 호출**하는 것이다.
+**handleResize()가 아닌 것을 확인할 수 있습니다.** handleResize(); 는 **내가 필요할 때 (윈도우 크기가 변경될 때) handleResize라는 함수를 호출**하는 것입니다. **handleResize()는 지금 바로 함수를 호출**하는 것을 의미합니다.
 
 ```javascript
 const title = document.querySelector("#title");
@@ -275,9 +275,9 @@ function handleResize(event) {
 window.addEventListener("resize", handleResize);
 ```
 
-=> **이벤트를 다룰 함수를 만들때 마다 자바스크립트는 자동적으로 함수를 객체에 붙힌다.** **event가 발생할 때** 마다 이 **event 객체가 호출**된다.
+=> **이벤트 핸들링 함수를 만들 때 자바스크립트는 자동으로 함수를 객체에 붙힙니다.** **event가 발생할 때** 마다 이 **event 객체가 호출**됩니다.
 
-이벤트에 대해서 알아보고 싶으면 이 사이트를 확인하자.
+이벤트에 대해서 더 궁금하신 분들은 아래의 링크를 확인하시면 좋습니다.
 
 <https://developer.mozilla.org/ko/docs/Web/Events>
 
@@ -300,17 +300,17 @@ window.addEventListener("online", handleOnline);
 
 ```javascript
 function handleSubmit(event) {
-  event.preventDefault(); // event 객체의 preventDefault method를 호출
+  event.preventDefault(); // event 객체의 preventDefault method를 호출.
 }
 
 form.addEventListener("submit", handleSubmit);
 ```
 
-또 다른 예시) form 태그의 submit event가 발생할 때 기본 동작을 막는 코드 (이렇게 하면 form 태그 input에 무언가를 입력하고 Enter를 쳐도 입력값이 사라지지 않는다.)
+또 다른 예시) form 태그의 submit event가 발생할 때 기본 동작을 막는 코드 (form 태그내 input에 값을 입력하고 Enter를 쳐도 입력값이 사라지지 않습니다.)
 
 ### 코드 별 분리
 
-기본적으로 html은 html에서 css는 css에서 해결하고 javascript는 로직만 담당하는 코드가 좋다. 이런 시각에서 밑의 코드는 그다지 좋은 코드가 아니다.
+기본적으로 html은 html, css는 css끼리 묶고 javascript는 로직만 담당하는 코드가 좋습니다. 이런 시각에서 보면 밑의 코드는 그다지 좋은 코드가 아님을 알 수 있습니다.
 
 ```javascript
 const title = document.querySelector("#title");
@@ -336,7 +336,7 @@ function init() {
 init();
 ```
 
-왜냐하면 자바스크립트를 통해 css를 제어하고 있기 때문이다. 따라서 위 코드를 이렇게 바꾸는 것이 더 좋은 코드이다.
+자바스크립트를 통해 css를 제어하고 있습니다. 아래와 같이 코드를 변경해 봅시다.
 
 ```css
 body {
@@ -381,9 +381,9 @@ function init() {
 init();
 ```
 
-이렇게 바꾸면 자바스크립트 코드에서는 프로그램 흐름만 제어하고 css는 css 코드에서만 다루기 때문에 알아보기가 훨씬 쉽다.
+이렇게 자바스크립트와 css를 분리해 놓았기에 알아보기도 쉽고 유지보수 측면에서도 장점을 가지게 됩니다.
 
-참고로 위 자바스크립트 코드는 이렇게 바꿀 수 있다.
+위 자바스크립트 코드는 아래와 같이 더 간단히 변경할 수 있습니다.
 
 ```javascript
 const title = document.querySelector("#title");
@@ -391,7 +391,7 @@ const title = document.querySelector("#title");
 const CLICKED_CLASS = "clicked";
 
 function handleClick() {
-  title.classList.toggle(CLICKED_CLASS); // 클래스 리스트에서 CLICKED_CLASS가 있으면 이를 지우고 없으면 그 클래스를 더한다.
+  title.classList.toggle(CLICKED_CLASS); // 클래스 리스트에 CLICKED_CLASS가 있으면 지우고 없으면 그 클래스를 더하는 코드.
 }
 
 function init() {
@@ -403,32 +403,32 @@ init();
 
 ### 삼항연산자(Ternary Operator)
 
-삼항연산자를 활용해 if문을 string 한줄에 적을 수 있다.
+삼항연산자를 활용하면 if문을 더 간단히 작성할 수 있습니다.
 
 ```javascript
 clockTitle.innerText = `${hours < 10 ? `0${hours}` : hours} : ${
   minutes < 10 ? `0${minutes}` : minutes
 } : ${seconds < 10 ? `0${seconds}` : seconds}`;
 
-// hours < 10 는 조건문이고 만일 이 조건문이 참이면 : 표시를 기준으로 앞에 있는 값을 리턴하고 거짓을 경우에는 뒤에 있는 값을 리턴한다.
+// hours < 10 는 조건문이고 만일 이 조건문이 참이면 : 표시를 기준으로 앞에 있는 값을 리턴하고 거짓을 경우에는 뒤에 있는 값을 리턴.
 ```
 
 ### Local Storage
 
-Local Storage는 작은 정보를 유저 컴퓨터에 저장하는 방법중 하나이다.
+Local Storage는 정보를 유저 컴퓨터에 저장하는 방법 중 하나입니다.
 
-브라우저에서 F12키를 누르고 Application을 선택하면 확인할 수 있다.
+브라우저에서 F12키를 누르고 Application 탭을 선택하면 확인할 수 있습니다.
 
 ```javascript
-localStorage.setItem("nico", true); // 이렇게 코드를 작성하면 nico라는 키값에 true라는 value값이 설정된다. localStorage에 정보를 생선하는 방법.
-localStorage.getItem("nico"); // localStorage로부터 nico 키값에 해당하는 value값을 가져온다.
+localStorage.setItem("nico", true); // 이렇게 코드를 작성하면 nico라는 키값에 true라는 value값이 설정됩니다. localStorage에 정보를 생선하는 방법.
+localStorage.getItem("nico"); // localStorage로부터 nico 키값에 해당하는 value값을 가져오는 코드.
 ```
 
-Local Storage는 기본적으로 URLs 를 기초로 해서 동작한다. (해당 url의 localStorage에만 접근할 수 있다는 말)
+Local Storage는 URLs 를 기초로 동작합니다. (해당 url의 localStorage에만 접근 가능)
 
 ### 자바스크립트 객체 Local Storage에 저장하기
 
-local storage에는 자바스크립트 data를 저장할 수 없다. **local storage**에는 **오직 String형태**만 저정할 수 있다. 따라서 localstorage에 저장할 때는 문자화 시켜 저장해야 한다.
+local storage에는 자바스크립트 data를 저장할 수 없습니다. **local storage**에는 **오직 String형태**만 저장됩니다. 따라서 local storage 저장시에는 데이터를 String으로 변경 후 저장합니다.
 
 ```javascript
 function saveToDos() {
@@ -436,28 +436,26 @@ function saveToDos() {
 }
 ```
 
-이렇게 하면 toDos를 문자화 시켜 localStorage에 저장할 수 있다.
+`JSON.stringify()` 코드는 데이터를 JSON 문자열로 변경한 후 저장하는 코드입니다.
 
 ### Local Storage에서 불러온 데이터 파싱하기
 
-local Storage에서 데이터를 불러오면 문자열을 받아오는 것이다. 따라서 이를 자바스크립트 객체로 활용하기 위해서는 파싱을 해야한다.
+local Storage에서 불러오는 데이터는 문자열이므로, 이를 자바스크립트 객체로 활용하기 위해서는 파싱해야 합니다.
 
 ```javascript
 const loadedToDos = localStorage.getItem(TODO_LS);
-const parseToDos = JSON.parse(loadedToDos); // JSON이란 'JavaScript Object Notation'의 줄임말로 데이터를 전달할 때, 자바스크립트가 다룰 수 있도록 Object로 바꿔주는 기능을 의미한다.
+const parseToDos = JSON.parse(loadedToDos); // JSON이란 'JavaScript Object Notation'의 줄임말로 데이터 전송시, 자바스크립트가 다룰 수 있도록 Object로 바꿔주는 기능을 의미.
 ```
 
 ### 요소생성
 
-document.querySelector나 document.getElementById 등으로 존재하는 요소를 받아오기가 가능하다. 이외에도 다음의 코드를 활용하면 js에서 html요소를 생성할 수 있다.
+document.querySelector나 document.getElementById 등으로 DOM에 존재하는 요소를 가져올 수 있습니다. 이외에도 js에서 html요소를 생성할 수 있는 여러 방법이 존재합니다.
 
 ```javascript
 const li = document.createElement("li");
 const delBtn = document.createElement("button");
 const span = document.createElement("span");
 ```
-
-이런 방식으로 html 요소를 생성할 수 있다.
 
 ### Filter
 
@@ -467,24 +465,24 @@ const cleanToDos = toDos.filter(function(toDo) {
 });
 ```
 
-filter는 forEach처럼 각각의 item에 같은 행동을 취한다. filter가 하는 것은 함수가 true라고 return하는 아이템들이 들어가 있는 array를 return한다.
+filter method는 각각의 item에 대해 같은 코드를 수행합니다. 최종적으로 결과값이 true인 아이템들을 array에 담아 return합니다.
 
-=> 위 함수는 toDos에 있는 각각의 요소에 대해 toDo.id와 li.id가 같지 않은 요소들을 가지고 있는 array를 cleanToDos에 반환한다.
+=> toDo.id와 li.id가 다른 아이템들을 array에 담고 이를 cleanToDos에 반환합니다.
 
 ### Math Module
 
-JavaScript에는 Math라는 모듈이 존재한다.
+JavaScript에는 Math라는 모듈이 내장되어 있습니다.
 
 ```javascript
-Math.random(); // 0과 1사이의 숫자를 만든다.(실수 범위)
-Math.random() * 3; // 0과 3사이의 숫자를 생성.(실수 범위)
-Math.floor(Math.random() * 3); // 0과 3사이의 정수를 생성. (0포함 3 미포함) 소수점을 버린다.
-Math.ceil(Math.random() * 3); // 1과 4사이의 정수를 생성. (1포함 4 미포함) 소수점을 올린다.
+Math.random(); // 0과 1사이 숫자 생성.(실수 범위)
+Math.random() * 3; // 0과 3사이 숫자 생성.(실수 범위)
+Math.floor(Math.random() * 3); // 0과 3사이 정수 생성. (0포함 3 미포함) 소수점을 버림.
+Math.ceil(Math.random() * 3); // 1과 4사이 정수 생성. (1포함 4 미포함) 소수점을 올림.
 ```
 
 ### API(Application Programming Interface)
 
-API는 다른 서버로부터 손쉽게 데이터를 가져올 수 있는 수단이다. 디자인이나 다른 요소들은 가져오지 않고 오로지 데이터만을 가지고 온다.
+API를 통해 다른 요소들은 배제한 채 오직 데이터만을 가져올 수 있습니다.
 
 ```javascript
 const weatherContainer = document.querySelector(".js-weather");
@@ -497,11 +495,10 @@ function getWeather(lat, lon) {
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
   )
     .then(function(response) {
-      // then이 뜻하는 것은 이 API로 부터 데이터가 다 넘어오면 then이후를 실행하겠다는 뜻이다
-      // 이 API로부터 json 데이터를 받아온다.
+      // then은 해당 API로부터 응답이 오면 then이후를 실행하겠다는 뜻.
+      // 응답 Data 받음.
       // console.log(response.json());
-      // reponse를 console에 찍어 보면 network 정보만 보인다.
-      // 이렇게 찍어보면 실질적으로 필요한 데이터는 pending되고 있는 것으로 나온다. 따라서 다음 코드에 then을 한번 더 찍어준다.
+      // 콘솔창을 보면 앱에 필요한 데이터는 pending 상태입니다. 따라서 then 과정을 한번 더 작성해 필요한 데이터를 가져옵니다.
       return response.json();
     })
     .then(function(json) {
@@ -530,5 +527,3 @@ function handleGeoSuccess(position) {
   getWeather(lat, lon);
 }
 ```
-
-이런 API는 특정 웹사이트로부터 데이터를 얻고나 컴퓨터끼리 소통을 하기 위해 고안된 것이다.
